@@ -125,7 +125,7 @@ function App() {
 
         {/* Dynamic Sidebar showing Active Tour Steps */}
         <div className="hud-sidebar hud-interactive">
-          {STEPS.map((step, idx) => (
+          {STEPS.map((_, idx) => (
             <div 
               key={idx} 
               className={`sidebar-step ${activeIndex === idx ? 'active' : ''}`}
