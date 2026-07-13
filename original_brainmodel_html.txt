@@ -1,0 +1,90 @@
+      {/* Attach HTML Cards. Using standard DOM overlays perfectly tracking 3D coordinates. */}
+      {TOUR_NODES.map((node, index) => (
+        <Html 
+          key={node.id} 
+          position={node.pos} 
+          center 
+          zIndexRange={[100, 0]}
+        >
+          <div 
+            ref={(el) => {
+              if (el) htmlRefs.current[index] = el;
+            }}
+            className="hud-wrapper"
+          >
+            <div className="hud-border-glow"></div>
+            
+            <div className="hud-card">
+              <div className="hud-header">
+                <div className="hud-target-ring">
+                  <div className="hud-target-core"></div>
+                </div>
+                <div className="hud-header-text">
+                  <div className="hud-subtitle">{node.subtitle}</div>
+                  <div className="hud-title">{node.title}</div>
+                  <div className="hud-status">
+                    <span>NEURAL LINK ESTABLISHED</span>
+                    <span>98.7%</span>
+                  </div>
+                  <div className="hud-progress-bar">
+                    <div className="hud-progress-fill"></div>
+                  </div>
+                </div>
+                <div className="hud-sys-badge">SYS.0{index + 1} ///</div>
+              </div>
+              
+              <div className="hud-body">
+                <div className="hud-main-col">
+                  <p className="hud-description">
+                    {node.description}
+                  </p>
+                  <div className="hud-tags-grid">
+                    {node.tags.map((tag, i) => (
+                      <div key={i} className="hud-tag">
+                        <div className="hud-tag-num">0{i + 1}</div>
+                        <div className="hud-tag-text">{tag}</div>
+                        <Hexagon className="hud-tag-icon" size={14} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="hud-side-col">
+                  <div className="hud-telemetry">
+                    <div className="hud-tel-item">
+                      <span className="hud-tel-label">NEURAL ID</span>
+                      <span className="hud-tel-val">98.7%</span>
+                    </div>
+                    <div className="hud-tel-item">
+                      <span className="hud-tel-label">CREATIVE SYS</span>
+                      <span className="hud-tel-val">ONLINE</span>
+                    </div>
+                    <div className="hud-tel-item">
+                      <span className="hud-tel-label">AI LINK</span>
+                      <span className="hud-tel-val">SYNC</span>
+                    </div>
+                    <div className="hud-tel-item">
+                      <span className="hud-tel-label">WEBGL CORE</span>
+                      <span className="hud-tel-val">READY</span>
+                    </div>
+                  </div>
+                  
+                  <div className="hud-live-feed">
+                    <div className="hud-feed-label">+ LIVE FEED</div>
+                    <div className="hud-feed-box">
+                       <div className="radar-sweep"></div>
+                       <div className="radar-grid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="hud-footer">
+                <span>SYS://IDENT.001</span>
+                <span>NEURAL_LINK::ACTIVE</span>
+                <span>UTC 23:41:09</span>
+              </div>
+            </div>
+          </div>
+        </Html>
+      ))}
