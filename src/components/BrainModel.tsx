@@ -18,8 +18,8 @@ const TOUR_NODES = [
     pos: new THREE.Vector3(-0.6, 0.2, 0.4),
     title: "Cognitive Core",
     subtitle: "Skills & Stack",
-    description: "Full-stack developer leveraging AI for rapid iteration. Strong in Python and databases, I also build highly animated, modern web interfaces using React, Next.js, and TypeScript.",
-    tags: ["React & Next.js", "TypeScript", "Python", "AI Orchestration"]
+    description: "Extensive use of AI tools for code generation, debugging, and breaking systems into step-by-step components. Strong in Python (logic building, loops, problem solving), with AI-assisted Backend (FastAPI, Flask, Node.js), Databases (MongoDB, MySQL, SQLite), and Web Basics integration.",
+    tags: ["Python Programming", "AI-Assisted Backend", "DB Queries", "AI Iteration"]
   },
   {
     id: 2,
