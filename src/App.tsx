@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ContactShadows, Stars } from '@react-three/drei';
+import { ContactShadows } from '@react-three/drei';
 import { BrainModel } from './components/BrainModel';
 import './index.css';
 
