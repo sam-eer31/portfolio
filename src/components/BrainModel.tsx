@@ -49,9 +49,9 @@ const TOUR_NODES = [
     id: 5,
     pos: new THREE.Vector3(0.6, -0.6, -0.2),
     title: "Education",
-    subtitle: "B.Tech CSE",
-    description: "Completed B.Tech in Computer Science & Engineering at Khwaja Moinuddin Chishti Language University (2022-2026). Built a solid academic foundation in core CS principles and applied AI development.",
-    tags: ["B.Tech CSE", "Computer Science", "KMCLU"]
+    subtitle: "Academic History",
+    description: "B.Tech CSE (AI & Data Science) from Khwaja Moinuddin Chishti Language University (2022-2026). Intermediate (2022) and High School (2020) foundations completed at Kendriya Vidyalaya IIM, Lucknow.",
+    tags: ["B.Tech CS (AI&DS)", "KMCLU", "Kendriya Vidyalaya"]
   },
   {
     id: 6,
