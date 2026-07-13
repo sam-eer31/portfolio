@@ -86,7 +86,7 @@ function App() {
       
       // Map vertical drag to X tilt, horizontal drag to Y spin. Clamp to prevent breaking framing.
       currentRot.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, currentRot.x + deltaY * 0.008));
-      currentRot.y = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, currentRot.y + deltaX * 0.008));
+      currentRot.y = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, currentRot.y - deltaX * 0.008));
       
       setDragRotation({ ...currentRot });
       prev = { x: clientX, y: clientY };
