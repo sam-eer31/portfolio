@@ -65,26 +65,31 @@ function App() {
     let prev = { x: 0, y: 0 };
     const currentRot = { x: 0, y: 0 };
 
-    const onPointerDown = (e: PointerEvent) => {
+    const onPointerDown = (e: PointerEvent | TouchEvent) => {
       // Don't intercept clicks on buttons, links, or active HUD elements
       if ((e.target as HTMLElement).closest('a') || (e.target as HTMLElement).closest('.hud-interactive') || (e.target as HTMLElement).closest('.hud-launch-btn')) return;
       isDragging = true;
-      prev = { x: e.clientX, y: e.clientY };
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+      prev = { x: clientX, y: clientY };
       document.body.style.cursor = 'grabbing';
     };
 
-    const onPointerMove = (e: PointerEvent) => {
+    const onPointerMove = (e: PointerEvent | TouchEvent) => {
       if (!isDragging) return;
       
-      const deltaX = e.clientX - prev.x;
-      const deltaY = e.clientY - prev.y;
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+      const deltaX = clientX - prev.x;
+      const deltaY = clientY - prev.y;
       
       // Map vertical drag to X tilt, horizontal drag to Y spin. Clamp to prevent breaking framing.
-      currentRot.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, currentRot.x + deltaY * 0.005));
-      currentRot.y = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, currentRot.y + deltaX * 0.005));
+      currentRot.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, currentRot.x + deltaY * 0.008));
+      currentRot.y = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, currentRot.y + deltaX * 0.008));
       
       setDragRotation({ ...currentRot });
-      prev = { x: e.clientX, y: e.clientY };
+      prev = { x: clientX, y: clientY };
     };
 
     const onPointerUp = () => {
@@ -96,16 +101,25 @@ function App() {
       document.body.style.cursor = 'default';
     };
 
-    window.addEventListener('pointerdown', onPointerDown);
-    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerdown', onPointerDown as any);
+    window.addEventListener('pointermove', onPointerMove as any);
     window.addEventListener('pointerup', onPointerUp);
     window.addEventListener('pointercancel', onPointerUp);
     
+    // Explicit Mobile Touch Fallbacks (Crucial for iOS Safari)
+    window.addEventListener('touchstart', onPointerDown as any, { passive: true });
+    window.addEventListener('touchmove', onPointerMove as any, { passive: true });
+    window.addEventListener('touchend', onPointerUp);
+    
     return () => {
-      window.removeEventListener('pointerdown', onPointerDown);
-      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerdown', onPointerDown as any);
+      window.removeEventListener('pointermove', onPointerMove as any);
       window.removeEventListener('pointerup', onPointerUp);
       window.removeEventListener('pointercancel', onPointerUp);
+
+      window.removeEventListener('touchstart', onPointerDown as any);
+      window.removeEventListener('touchmove', onPointerMove as any);
+      window.removeEventListener('touchend', onPointerUp);
     };
   }, []);
 

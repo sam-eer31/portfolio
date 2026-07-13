@@ -83,10 +83,10 @@ body::-webkit-scrollbar {
 /* Scroll spacer to allow scroll interactions */
 .scroll-spacer {
   height: 500vh;
-  /* Extremely tall to allow smooth scrolling */
   position: relative;
   z-index: 2;
   cursor: grab;
+  touch-action: pan-y;
 }
 
 .scroll-spacer:active {
