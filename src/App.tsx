@@ -113,8 +113,8 @@ function App() {
         
         {/* Header */}
         <header className="hud-header hud-interactive">
-          <div className="hud-logo">
-            <span className="hud-logo-icon"></span>
+          <div className="hud-logo" style={{ display: 'flex', alignItems: 'center' }}>
+            <img src="/logo.png" alt="Logo" style={{ height: '28px', marginRight: '12px', filter: 'drop-shadow(0 0 8px var(--cyan-glow))' }} />
             <span>PORTFOLIO // SAMEER</span>
           </div>
           <div style={{ display: 'flex', gap: '1rem' }}>
