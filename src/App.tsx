@@ -136,7 +136,7 @@ function App() {
         </div>
 
         {/* Footer info panels */}
-        <footer className="hud-footer">
+        <footer className="app-footer">
           {/* Telemetry panel */}
           <div className="telemetry-panel">
             <div>SYS_SYS: SYNC_LEVEL_{Math.round(scrollProgress * 100)}%</div>
