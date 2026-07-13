@@ -101,6 +101,7 @@ body::-webkit-scrollbar {
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
+  box-sizing: border-box;
 }
 
 .hud-interactive {
