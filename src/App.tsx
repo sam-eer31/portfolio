@@ -7,9 +7,10 @@ import './index.css';
 const STEPS = [
   { label: "Identity" },
   { label: "Skills & Stack" },
-  { label: "Experience" },
-  { label: "Project: CEREBRAL" },
-  { label: "Project: NEON_CITY" },
+  { label: "Internships" },
+  { label: "Project: Codexa" },
+  { label: "Project: AI Chatbots" },
+  { label: "Project: GrooveBox" },
   { label: "Education" },
   { label: "Contact" }
 ];

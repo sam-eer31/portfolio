@@ -47,6 +47,15 @@ const TOUR_NODES = [
   },
   {
     id: 5,
+    pos: new THREE.Vector3(0.2, 0.7, -0.2),
+    title: "Project",
+    subtitle: "GrooveBox",
+    description: "A real-time synchronized media platform for music, movies, and YouTube. Features millisecond-precision playback, access-controlled rooms (locks/approvals), host privileges, and live chat with embedded playback commands.",
+    tags: ["Real-time Sync", "WebSockets", "Chat Commands"],
+    link: "https://grooveboxplayer.vercel.app/"
+  },
+  {
+    id: 6,
     pos: new THREE.Vector3(0.6, -0.6, -0.2),
     title: "Education",
     subtitle: "Academic History",
@@ -54,7 +63,7 @@ const TOUR_NODES = [
     tags: ["B.Tech CS (AI&DS)", "KMCLU", "Kendriya Vidyalaya"]
   },
   {
-    id: 6,
+    id: 7,
     pos: new THREE.Vector3(-0.5, -0.5, -0.5),
     title: "Transmit Signal",
     subtitle: "Contact & Network",
@@ -266,6 +275,13 @@ const PlexusNetwork = ({
                         </div>
                       ))}
                     </div>
+                    
+                    {/* @ts-ignore - Check if link exists */}
+                    {node.link && (
+                      <a href={node.link} target="_blank" rel="noopener noreferrer" className="hud-launch-btn" style={{ pointerEvents: 'auto' }}>
+                        LAUNCH_PROJECT <span style={{ marginLeft: '8px' }}>↗</span>
+                      </a>
+                    )}
                   </div>
 
                   {/* Right Col: Telemetry */}
