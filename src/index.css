@@ -650,6 +650,10 @@ body::-webkit-scrollbar {
     opacity: 0.8;
   }
 
+  .scroll-indicator {
+    bottom: 2.5rem;
+  }
+
   .scroll-mouse {
     display: none;
   }
