@@ -172,15 +172,15 @@ const PlexusNetwork = ({
       {/* Attach HTML Cards. Using standard DOM overlays perfectly tracking 3D coordinates. */}
       {TOUR_NODES.map((node, index) => {
         const cardWidth = isMobile ? 650 : 850;
-        let cardHeight = isMobile ? 420 : 520;
+        let cardHeight = isMobile ? 520 : 520;
         
-        // Dynamically expand height on mobile to prevent overflow on heavy cards
+        // Dynamically aggressively expand height on mobile to prevent any overflow
         if (isMobile) {
-          if (node.description.length > 300) {
-            cardHeight = 580; // Massive expansion for Skills
-          } else if (node.description.length > 200 || node.link) {
-            cardHeight = 500; // Moderate expansion for long text or buttons (e.g. GrooveBox)
-          }
+          if (index === 1) cardHeight = 720;      // Skills: Massive text + 4 tags
+          else if (index === 5) cardHeight = 680; // GrooveBox: Text + 3 tags + Button
+          else if (index === 2) cardHeight = 580; // Internships
+          else if (index === 6) cardHeight = 580; // Education
+          else cardHeight = 520;                  // Default safe margin
         }
         
         const cy = cardHeight / 2 + 40;
@@ -280,7 +280,7 @@ const PlexusNetwork = ({
                   </div>
 
                   {/* Glowing Vertical Divider */}
-                  <div style={{ width: '2px', background: 'var(--cyan-primary)', boxShadow: '0 0 10px var(--cyan-primary)', height: '230px', marginTop: '10px', marginBottom: '0' }}></div>
+                  <div style={{ width: '2px', background: 'var(--cyan-primary)', boxShadow: '0 0 10px var(--cyan-primary)', alignSelf: 'stretch', marginTop: '10px', marginBottom: '10px' }}></div>
 
                   {/* Center Col: Text & Tags */}
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
