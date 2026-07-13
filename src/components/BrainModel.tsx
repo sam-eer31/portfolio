@@ -172,7 +172,17 @@ const PlexusNetwork = ({
       {/* Attach HTML Cards. Using standard DOM overlays perfectly tracking 3D coordinates. */}
       {TOUR_NODES.map((node, index) => {
         const cardWidth = isMobile ? 650 : 850;
-        const cardHeight = isMobile ? 420 : 520;
+        let cardHeight = isMobile ? 420 : 520;
+        
+        // Dynamically expand height on mobile to prevent overflow on heavy cards
+        if (isMobile) {
+          if (node.description.length > 300) {
+            cardHeight = 580; // Massive expansion for Skills
+          } else if (node.description.length > 200 || node.link) {
+            cardHeight = 500; // Moderate expansion for long text or buttons (e.g. GrooveBox)
+          }
+        }
+        
         const cy = cardHeight / 2 + 40;
         
         // Dynamically calculate distanceFactor so the card visually occupies ~85% of the screen width.
