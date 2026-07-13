@@ -96,6 +96,161 @@ const BackgroundStars = ({ starsMatRef }: { starsMatRef: React.RefObject<THREE.P
   );
 };
 
+const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
+  const cardWidth = isMobile ? 650 : 850;
+  const [cardHeight, setCardHeight] = useState(isMobile ? 480 : 520);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        // Measure exact pixel height of the inner content + padding and snap the SVG frame to it!
+        setCardHeight(Math.max(entry.target.offsetHeight, isMobile ? 350 : 450));
+      }
+    });
+    observer.observe(contentRef.current);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  const cy = cardHeight / 2 + 40;
+  let dynamicDF = (viewportWidth * 4.25) / cardWidth;
+  dynamicDF = Math.max(1.5, Math.min(dynamicDF, 7));
+
+  return (
+    <Html
+      position={node.pos}
+      center
+      distanceFactor={dynamicDF}
+      zIndexRange={[100, 0]}
+    >
+      <div
+        ref={htmlRef}
+        className="hud-wrapper"
+        style={{ width: `${cardWidth}px`, height: `${cardHeight}px`, position: 'relative' }}
+      >
+        <svg
+          className="hud-svg-frame"
+          viewBox={`0 0 ${cardWidth} ${cardHeight}`}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none', overflow: 'visible' }}
+        >
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="rgba(2, 8, 19, 0.85)" stroke="rgba(0, 229, 255, 0.4)" strokeWidth="1" />
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="1" filter="drop-shadow(0 0 4px #00e5ff)" />
+          <path d="M 0 60 L 0 30 L 30 0 L 120 0" fill="none" stroke="#00e5ff" strokeWidth="3" filter="drop-shadow(0 0 6px #00e5ff)" />
+          <path d={`M ${cardWidth} ${cardHeight - 80} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L ${cardWidth - 120} ${cardHeight}`} fill="none" stroke="#00e5ff" strokeWidth="3" filter="drop-shadow(0 0 6px #00e5ff)" />
+          <path d="M 150 0 L 150 6 M 160 0 L 160 6 M 170 0 L 170 6" stroke="#00e5ff" strokeWidth="2" />
+          <path d={`M ${cardWidth - 170} ${cardHeight} L ${cardWidth - 170} ${cardHeight - 6} M ${cardWidth - 160} ${cardHeight} L ${cardWidth - 160} ${cardHeight - 6} M ${cardWidth - 150} ${cardHeight} L ${cardWidth - 150} ${cardHeight - 6}`} stroke="#00e5ff" strokeWidth="2" />
+          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+            <line x1="-10" y1="-10" x2="-2" y2="-10" />
+            <line x1="-6" y1="-14" x2="-6" y2="-6" />
+          </g>
+          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+            <line x1={cardWidth + 2} y1={cardHeight + 10} x2={cardWidth + 10} y2={cardHeight + 10} />
+            <line x1={cardWidth + 6} y1={cardHeight + 6} x2={cardWidth + 6} y2={cardHeight + 14} />
+          </g>
+          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+            <line x1="-10" y1={cardHeight + 10} x2="-2" y2={cardHeight + 10} />
+            <line x1="-6" y1={cardHeight + 6} x2="-6" y2={cardHeight + 14} />
+          </g>
+          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+            <line x1={cardWidth + 2} y1="-10" x2={cardWidth + 10} y2="-10" />
+            <line x1={cardWidth + 6} y1="-14" x2={cardWidth + 6} y2="-6" />
+          </g>
+        </svg>
+
+        <div
+          ref={contentRef}
+          className="hud-card"
+          style={{ position: 'relative', zIndex: 1, padding: isMobile ? '1.5rem' : '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+        >
+          <div style={{ display: 'flex', gap: isMobile ? '1rem' : '1.5rem', flexDirection: 'row', width: '100%' }}>
+            {/* Left Col: Target Ring */}
+            <div style={{ width: isMobile ? '40px' : '70px', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+              <div className="hud-target-ring">
+                <div className="hud-target-core"></div>
+              </div>
+            </div>
+
+            {/* Glowing Vertical Divider */}
+            <div style={{ width: '2px', background: 'var(--cyan-primary)', boxShadow: '0 0 10px var(--cyan-primary)', alignSelf: 'stretch', marginTop: '10px', marginBottom: '10px' }}></div>
+
+            {/* Center Col: Text & Tags */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <div className="hud-header-text">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="hud-subtitle">{node.title}</div>
+                  <div className="hud-sys-badge">SYS.0{index + 1} ///</div>
+                </div>
+                <div className="hud-title">{node.subtitle}</div>
+              </div>
+
+              <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(0,229,255,0.8) 0%, transparent 100%)', margin: '0.5rem 0' }}></div>
+
+              <p className="hud-description">
+                <strong style={{ color: '#fff' }}>{node.description.split('.')[0]}.</strong>
+                {node.description.substring(node.description.indexOf('.') + 1)}
+              </p>
+
+              <div className="hud-tags-grid">
+                {node.tags.map((tag: string, i: number) => (
+                  <div key={i} className="hud-tag">
+                    <div className="hud-tag-num">0{i + 1}</div>
+                    <div className="hud-tag-text">{tag}</div>
+                    <Hexagon className="hud-tag-icon" size={14} />
+                    <div className="hud-tag-waveform"></div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* @ts-ignore */}
+              {node.link && (
+                <a href={node.link} target="_blank" rel="noopener noreferrer" className="hud-launch-btn" style={{ pointerEvents: 'auto' }}>
+                  LAUNCH_PROJECT <span style={{ marginLeft: '8px' }}>↗</span>
+                </a>
+              )}
+            </div>
+
+            {/* Right Col: Telemetry */}
+            <div style={{ width: isMobile ? '120px' : '160px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: isMobile ? '1rem' : '2rem' }}>
+              <div className="hud-telemetry">
+                <div className="hud-tel-item">
+                  <span className="hud-tel-label">NEURAL ID</span>
+                  <span className="hud-tel-val">98.7%</span>
+                </div>
+                <div className="hud-tel-item">
+                  <span className="hud-tel-label">CREATIVE SYS</span>
+                  <span className="hud-tel-val">ONLINE</span>
+                </div>
+                <div className="hud-tel-item">
+                  <span className="hud-tel-label">AI LINK</span>
+                  <span className="hud-tel-val">SYNC</span>
+                </div>
+                <div className="hud-tel-item">
+                  <span className="hud-tel-label">WEBGL CORE</span>
+                  <span className="hud-tel-val">READY</span>
+                </div>
+              </div>
+
+              <div className="hud-live-feed">
+                <div className="hud-feed-label">+ LIVE FEED</div>
+                <div className="hud-feed-box">
+                  <div className="radar-sweep"></div>
+                  <div className="radar-grid"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="hud-footer">
+            <span>NEURAL_LINK::ACTIVE</span>
+          </div>
+        </div>
+      </div>
+    </Html>
+  );
+};
+
 const PlexusNetwork = ({
   pointsMatRef,
   linesMatRef,
@@ -170,194 +325,16 @@ const PlexusNetwork = ({
       </lineSegments>
 
       {/* Attach HTML Cards. Using standard DOM overlays perfectly tracking 3D coordinates. */}
-      {TOUR_NODES.map((node, index) => {
-        const cardWidth = isMobile ? 650 : 850;
-        let cardHeight = isMobile ? 520 : 520;
-        
-        // Dynamically aggressively expand height on mobile to prevent any overflow
-        if (isMobile) {
-          if (index === 1) cardHeight = 720;      // Skills: Massive text + 4 tags
-          else if (index === 5) cardHeight = 680; // GrooveBox: Text + 3 tags + Button
-          else if (index === 2) cardHeight = 580; // Internships
-          else if (index === 6) cardHeight = 580; // Education
-          else cardHeight = 520;                  // Default safe margin
-        }
-        
-        const cy = cardHeight / 2 + 40;
-        
-        // Dynamically calculate distanceFactor so the card visually occupies ~85% of the screen width.
-        // The constant 4.25 is derived from the desktop reference (W=1200, C=850, DF=6).
-        let dynamicDF = (viewportWidth * 4.25) / cardWidth;
-        dynamicDF = Math.max(1.5, Math.min(dynamicDF, 7)); // Clamp min/max zoom
-
-        return (
-          <Html
-            key={node.id}
-            position={node.pos}
-            center
-            distanceFactor={dynamicDF}
-            zIndexRange={[100, 0]}
-          >
-            <div
-              ref={(el) => {
-                if (el) htmlRefs.current[index] = el;
-              }}
-              className="hud-wrapper"
-              style={{ width: `${cardWidth}px`, height: `${cardHeight}px`, position: 'relative' }}
-            >
-              <svg
-                className="hud-svg-frame"
-                viewBox={`0 0 ${cardWidth} ${cardHeight}`}
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none', overflow: 'visible' }}
-              >
-                {/* Main Card Background with Inner Shadow Effect */}
-                <path
-                  d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`}
-                  fill="rgba(2, 8, 19, 0.85)"
-                  stroke="rgba(0, 229, 255, 0.4)"
-                  strokeWidth="1"
-                />
-
-                {/* Bright Outer Glow Border */}
-                <path
-                  d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`}
-                  fill="none"
-                  stroke="#00e5ff"
-                  strokeWidth="1"
-                  filter="drop-shadow(0 0 4px #00e5ff)"
-                />
-
-                {/* Top-Left Thick Bracket */}
-                <path
-                  d="M 0 60 L 0 30 L 30 0 L 120 0"
-                  fill="none"
-                  stroke="#00e5ff"
-                  strokeWidth="3"
-                  filter="drop-shadow(0 0 6px #00e5ff)"
-                />
-
-                {/* Bottom-Right Thick Bracket */}
-                <path
-                  d={`M ${cardWidth} ${cardHeight - 80} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L ${cardWidth - 120} ${cardHeight}`}
-                  fill="none"
-                  stroke="#00e5ff"
-                  strokeWidth="3"
-                  filter="drop-shadow(0 0 6px #00e5ff)"
-                />
-
-                {/* Edge Ticks */}
-                <path d="M 150 0 L 150 6 M 160 0 L 160 6 M 170 0 L 170 6" stroke="#00e5ff" strokeWidth="2" />
-                <path d={`M ${cardWidth - 170} ${cardHeight} L ${cardWidth - 170} ${cardHeight - 6} M ${cardWidth - 160} ${cardHeight} L ${cardWidth - 160} ${cardHeight - 6} M ${cardWidth - 150} ${cardHeight} L ${cardWidth - 150} ${cardHeight - 6}`} stroke="#00e5ff" strokeWidth="2" />
-
-                {/* Corner Crosshairs */}
-                <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
-                  <line x1="-10" y1="-10" x2="-2" y2="-10" />
-                  <line x1="-6" y1="-14" x2="-6" y2="-6" />
-                </g>
-                <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
-                  <line x1={cardWidth + 2} y1={cardHeight + 10} x2={cardWidth + 10} y2={cardHeight + 10} />
-                  <line x1={cardWidth + 6} y1={cardHeight + 6} x2={cardWidth + 6} y2={cardHeight + 14} />
-                </g>
-                <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
-                  <line x1="-10" y1={cardHeight + 10} x2="-2" y2={cardHeight + 10} />
-                  <line x1="-6" y1={cardHeight + 6} x2="-6" y2={cardHeight + 14} />
-                </g>
-                <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
-                  <line x1={cardWidth + 2} y1="-10" x2={cardWidth + 10} y2="-10" />
-                  <line x1={cardWidth + 6} y1="-14" x2={cardWidth + 6} y2="-6" />
-                </g>
-              </svg>
-
-              <div className="hud-card" style={{ position: 'relative', zIndex: 1, padding: isMobile ? '1.5rem' : '2.5rem', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-
-                <div style={{ display: 'flex', gap: isMobile ? '1rem' : '1.5rem', flex: 1, flexDirection: 'row' }}>
-
-                  {/* Left Col: Target Ring */}
-                  <div style={{ width: isMobile ? '50px' : '70px', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
-                    <div className="hud-target-ring">
-                      <div className="hud-target-core"></div>
-                    </div>
-                  </div>
-
-                  {/* Glowing Vertical Divider */}
-                  <div style={{ width: '2px', background: 'var(--cyan-primary)', boxShadow: '0 0 10px var(--cyan-primary)', alignSelf: 'stretch', marginTop: '10px', marginBottom: '10px' }}></div>
-
-                  {/* Center Col: Text & Tags */}
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <div className="hud-header-text">
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div className="hud-subtitle">{node.title}</div>
-                        <div className="hud-sys-badge">SYS.0{index + 1} ///</div>
-                      </div>
-                      <div className="hud-title">{node.subtitle}</div>
-                    </div>
-
-                    <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(0,229,255,0.8) 0%, transparent 100%)', margin: '0.5rem 0' }}></div>
-
-                    <p className="hud-description">
-                      <strong style={{ color: '#fff' }}>{node.description.split('.')[0]}.</strong>
-                      {node.description.substring(node.description.indexOf('.') + 1)}
-                    </p>
-
-                    <div className="hud-tags-grid">
-                      {node.tags.map((tag, i) => (
-                        <div key={i} className="hud-tag">
-                          <div className="hud-tag-num">0{i + 1}</div>
-                          <div className="hud-tag-text">{tag}</div>
-                          <Hexagon className="hud-tag-icon" size={14} />
-                          <div className="hud-tag-waveform"></div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    {/* @ts-ignore - Check if link exists */}
-                    {node.link && (
-                      <a href={node.link} target="_blank" rel="noopener noreferrer" className="hud-launch-btn" style={{ pointerEvents: 'auto' }}>
-                        LAUNCH_PROJECT <span style={{ marginLeft: '8px' }}>↗</span>
-                      </a>
-                    )}
-                  </div>
-
-                  {/* Right Col: Telemetry */}
-                  <div style={{ width: isMobile ? '140px' : '160px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: isMobile ? '1rem' : '2rem' }}>
-                    <div className="hud-telemetry">
-                      <div className="hud-tel-item">
-                        <span className="hud-tel-label">NEURAL ID</span>
-                        <span className="hud-tel-val">98.7%</span>
-                      </div>
-                      <div className="hud-tel-item">
-                        <span className="hud-tel-label">CREATIVE SYS</span>
-                        <span className="hud-tel-val">ONLINE</span>
-                      </div>
-                      <div className="hud-tel-item">
-                        <span className="hud-tel-label">AI LINK</span>
-                        <span className="hud-tel-val">SYNC</span>
-                      </div>
-                      <div className="hud-tel-item">
-                        <span className="hud-tel-label">WEBGL CORE</span>
-                        <span className="hud-tel-val">READY</span>
-                      </div>
-                    </div>
-
-                    <div className="hud-live-feed">
-                      <div className="hud-feed-label">+ LIVE FEED</div>
-                      <div className="hud-feed-box">
-                        <div className="radar-sweep"></div>
-                        <div className="radar-grid"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Footer */}
-                <div className="hud-footer">
-                  <span>NEURAL_LINK::ACTIVE</span>
-                </div>
-              </div>
-            </div>
-          </Html>
-        );
-      })}
+      {TOUR_NODES.map((node, index) => (
+        <HudCard
+          key={node.id}
+          node={node}
+          index={index}
+          isMobile={isMobile}
+          viewportWidth={viewportWidth}
+          htmlRef={(el: any) => { if (el) htmlRefs.current[index] = el; }}
+        />
+      ))}
     </group>
   );
 };
