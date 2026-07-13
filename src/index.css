@@ -86,6 +86,11 @@ body::-webkit-scrollbar {
   /* Extremely tall to allow smooth scrolling */
   position: relative;
   z-index: 2;
+  cursor: grab;
+}
+
+.scroll-spacer:active {
+  cursor: grabbing;
 }
 
 /* HUD elements that sit on top of 3D canvas */

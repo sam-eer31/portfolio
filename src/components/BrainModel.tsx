@@ -72,6 +72,30 @@ const TOUR_NODES = [
   }
 ];
 
+const BackgroundStars = ({ starsMatRef }: { starsMatRef: React.RefObject<THREE.PointsMaterial | null> }) => {
+  const points = useMemo(() => {
+    const count = 3000;
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 30 + Math.random() * 50; 
+      const theta = Math.random() * 2 * Math.PI;
+      const phi = Math.acos(2 * Math.random() - 1);
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    return geo;
+  }, []);
+
+  return (
+    <points geometry={points}>
+      <pointsMaterial ref={starsMatRef} color="#ffffff" size={0.08} transparent opacity={0} sizeAttenuation={true} depthWrite={false} />
+    </points>
+  );
+};
+
 const PlexusNetwork = ({
   pointsMatRef,
   linesMatRef,
@@ -328,7 +352,7 @@ const PlexusNetwork = ({
   );
 };
 
-export const BrainModel = ({ progress = 0 }: { progress?: number }) => {
+export const BrainModel = ({ progress = 0, dragRotation = { x: 0, y: 0 } }: { progress?: number, dragRotation?: { x: number, y: number } }) => {
   const { scene } = useGLTF('/brain.glb');
 
   const [baseScale, setBaseScale] = useState(1);
@@ -352,9 +376,11 @@ export const BrainModel = ({ progress = 0 }: { progress?: number }) => {
 
   // A single unified group so the Brain and Plexus move as one entity during the dive
   const mainGroupRef = useRef<THREE.Group>(null);
+  const manualRotationGroupRef = useRef<THREE.Group>(null);
   const outerBrainMatRef = useRef<THREE.LineBasicMaterial>(null);
   const pointsMatRef = useRef<THREE.PointsMaterial>(null);
   const linesMatRef = useRef<THREE.LineBasicMaterial>(null);
+  const bgStarsMatRef = useRef<THREE.PointsMaterial>(null);
   const htmlRefs = useRef<HTMLDivElement[]>([]);
 
   const smoothProgress = useRef(0);
@@ -435,6 +461,21 @@ export const BrainModel = ({ progress = 0 }: { progress?: number }) => {
       mainGroupRef.current.position.lerpVectors(divePos, tourFramingPos, transitionToTour);
     }
 
+    if (manualRotationGroupRef.current) {
+      // Local X is screen vertical tilt
+      manualRotationGroupRef.current.rotation.x = THREE.MathUtils.lerp(
+        manualRotationGroupRef.current.rotation.x,
+        dragRotation.x,
+        8.0 * delta
+      );
+      // Local Z is screen horizontal spin (because parent rotates -90 X, 180 Z)
+      manualRotationGroupRef.current.rotation.z = THREE.MathUtils.lerp(
+        manualRotationGroupRef.current.rotation.z,
+        dragRotation.y,
+        8.0 * delta
+      );
+    }
+
     // Fade out outer brain
     if (outerBrainMatRef.current) {
       outerBrainMatRef.current.opacity = THREE.MathUtils.clamp(0.3 - diveProgress * 0.6, 0, 0.3);
@@ -450,6 +491,10 @@ export const BrainModel = ({ progress = 0 }: { progress?: number }) => {
       if (mainGroupRef.current) {
         pointsMatRef.current.size = 0.03 * mainGroupRef.current.scale.x;
       }
+    }
+
+    if (bgStarsMatRef.current) {
+      bgStarsMatRef.current.opacity = THREE.MathUtils.clamp((diveProgress - 0.4) * 2.0, 0, 0.6);
     }
 
     // Sequential Card Fading Logic
@@ -484,31 +529,38 @@ export const BrainModel = ({ progress = 0 }: { progress?: number }) => {
       <group rotation={[-Math.PI / 2, 0, Math.PI]}>
 
         {/* Unified group: The Brain and Neural Network share identical physics */}
-        <group ref={mainGroupRef}>
+        
+        {/* Render stars OUTSIDE the main scaling group so they stay locked in background space */}
+        <BackgroundStars starsMatRef={bgStarsMatRef} />
 
-          {/* Outer Brain Shell (Fades away during dive) */}
-          {edgeMeshes.map((meshData, index) => (
-            <lineSegments key={index} geometry={meshData.edges}>
-              <lineBasicMaterial
-                ref={index === 0 ? outerBrainMatRef : null}
-                color="#1a4dff"
-                transparent={true}
-                opacity={0.3}
-                blending={THREE.AdditiveBlending}
-                depthWrite={false}
-              />
-            </lineSegments>
-          ))}
+        {/* Rubber-band manual rotation wrapper */}
+        <group ref={manualRotationGroupRef}>
+          <group ref={mainGroupRef}>
 
-          {/* Inner Neural Network (Revealed during dive) */}
-          <PlexusNetwork
-            pointsMatRef={pointsMatRef}
-            linesMatRef={linesMatRef}
-            htmlRefs={htmlRefs}
-            isMobile={baseScale <= 0.5}
-            viewportWidth={viewportWidth}
-          />
+            {/* Outer Brain Shell (Fades away during dive) */}
+            {edgeMeshes.map((meshData, index) => (
+              <lineSegments key={index} geometry={meshData.edges}>
+                <lineBasicMaterial
+                  ref={index === 0 ? outerBrainMatRef : null}
+                  color="#1a4dff"
+                  transparent={true}
+                  opacity={0.3}
+                  blending={THREE.AdditiveBlending}
+                  depthWrite={false}
+                />
+              </lineSegments>
+            ))}
 
+            {/* Inner Neural Network (Revealed during dive) */}
+            <PlexusNetwork
+              pointsMatRef={pointsMatRef}
+              linesMatRef={linesMatRef}
+              htmlRefs={htmlRefs}
+              isMobile={baseScale <= 0.5}
+              viewportWidth={viewportWidth}
+            />
+
+          </group>
         </group>
       </group>
     </group>

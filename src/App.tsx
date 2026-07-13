@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ContactShadows } from '@react-three/drei';
+import { ContactShadows, Stars } from '@react-three/drei';
 import { BrainModel } from './components/BrainModel';
 import './index.css';
 
@@ -17,6 +17,7 @@ const STEPS = [
 
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [dragRotation, setDragRotation] = useState({ x: 0, y: 0 });
 
   // Capture window scrolling and map it to 0.0 - 1.0 progress
   useEffect(() => {
@@ -58,6 +59,56 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // 2. Interactive Drag Rotation Logic (Rubber-band physics)
+    let isDragging = false;
+    let prev = { x: 0, y: 0 };
+    const currentRot = { x: 0, y: 0 };
+
+    const onPointerDown = (e: PointerEvent) => {
+      // Don't intercept clicks on buttons, links, or active HUD elements
+      if ((e.target as HTMLElement).closest('a') || (e.target as HTMLElement).closest('.hud-interactive') || (e.target as HTMLElement).closest('.hud-launch-btn')) return;
+      isDragging = true;
+      prev = { x: e.clientX, y: e.clientY };
+      document.body.style.cursor = 'grabbing';
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging) return;
+      
+      const deltaX = e.clientX - prev.x;
+      const deltaY = e.clientY - prev.y;
+      
+      // Map vertical drag to X tilt, horizontal drag to Y spin. Clamp to prevent breaking framing.
+      currentRot.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, currentRot.x + deltaY * 0.005));
+      currentRot.y = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, currentRot.y + deltaX * 0.005));
+      
+      setDragRotation({ ...currentRot });
+      prev = { x: e.clientX, y: e.clientY };
+    };
+
+    const onPointerUp = () => {
+      isDragging = false;
+      // Spring back to dead center instantly on release
+      currentRot.x = 0;
+      currentRot.y = 0;
+      setDragRotation({ x: 0, y: 0 });
+      document.body.style.cursor = 'default';
+    };
+
+    window.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
+    
+    return () => {
+      window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
+    };
+  }, []);
+
   // Determine active step based on scroll progress
   const getActiveStepIndex = () => {
     const targetY = scrollProgress * 7;
@@ -91,7 +142,7 @@ function App() {
           
           <Suspense fallback={null}>
             <group position={[0, -0.2, 0]}>
-              <BrainModel progress={scrollProgress} />
+              <BrainModel progress={scrollProgress} dragRotation={dragRotation} />
               <ContactShadows 
                 position={[0, -2.5, 0]} 
                 opacity={0.4} 
