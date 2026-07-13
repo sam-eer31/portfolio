@@ -8,58 +8,58 @@ const TOUR_NODES = [
   {
     id: 0,
     pos: new THREE.Vector3(0.5, 0.5, 0.5),
-    title: "System Initialization",
-    subtitle: "Identity & Origin",
-    description: "Alex Vance. Senior Creative Technologist specializing in the intersection of neural interfaces, WebGL, and generative AI. Booting up sequence complete.",
-    tags: ["Creative Technologist", "Full-Stack", "AI Integration"]
+    title: "Identity",
+    subtitle: "Sameer Siddiqui",
+    description: "AI-based application developer. I specialize in turning ideas into fully working web applications by orchestrating AI tools to generate, modify, debug, and deploy code step-by-step.",
+    tags: ["AI-Assisted Dev", "Full-Stack", "Problem Solver"]
   },
   {
     id: 1,
     pos: new THREE.Vector3(-0.6, 0.2, 0.4),
     title: "Cognitive Core",
     subtitle: "Skills & Stack",
-    description: "Fluent in processing complex logic and rendering high-fidelity graphics. Core competencies include modern web frameworks, 3D pipelines, and realtime data processing.",
-    tags: ["React", "Three.js", "Node.js", "TypeScript"]
+    description: "Strong in Python logic building. I utilize AI assistance to integrate APIs, design databases (MongoDB, MySQL), and build backends (FastAPI, Flask, Node.js) while breaking complex systems into manageable components.",
+    tags: ["Python", "FastAPI", "MongoDB", "AI Prompting"]
   },
   {
     id: 2,
     pos: new THREE.Vector3(0.0, -0.4, 0.6),
     title: "Synaptic Pathways",
-    subtitle: "Professional Experience",
-    description: "Lead Developer at CyberDyne Systems (2022-Present). Architected distributed systems handling millions of concurrent neural-link connections.",
-    tags: ["Leadership", "Architecture", "Mentorship"]
+    subtitle: "Internships",
+    description: "Python & Data Science Intern at Eisystems Services. Focused on core Python logic, debugging, problem-solving, and data preprocessing. Gained hands-on experience building foundational programs and data pipelines.",
+    tags: ["Eisystems", "Python Intern", "Data Science"]
   },
   {
     id: 3,
     pos: new THREE.Vector3(0.4, -0.2, -0.5),
-    title: "Memory Engram 01",
-    subtitle: "Project: CEREBRAL",
-    description: "A fully immersive, WebGL-powered interactive portfolio journey mapped to the anatomical structures of a 3D neural network. Built with React Three Fiber.",
-    tags: ["WebGL", "R3F", "Cyberpunk UI"]
+    title: "Project",
+    subtitle: "Codexa AI Suite",
+    description: "A full-stack AI platform built with FastAPI, MongoDB, and WebSockets. Integrated both local and cloud LLMs to feature document generation, code analysis, and an interactive AI Teacher System.",
+    tags: ["FastAPI", "WebSockets", "LLMs", "MongoDB"]
   },
   {
     id: 4,
     pos: new THREE.Vector3(-0.3, 0.6, -0.4),
-    title: "Memory Engram 02",
-    subtitle: "Project: NEON_CITY",
-    description: "Procedural city generator utilizing WebGPU for real-time raytraced reflections and traffic simulation. Featured on Awwwards.",
-    tags: ["WebGPU", "Procedural", "GLSL"]
+    title: "Project",
+    subtitle: "AI Chatbot Suite",
+    description: "Developed a ChatGPT-like interface utilizing Python (Quart) and local LLMs with a 'DeepThink Toggle'. Designed a modern UI capable of multi-bot interactions for advanced workflows.",
+    tags: ["Quart", "Local LLMs", "UI Design"]
   },
   {
     id: 5,
     pos: new THREE.Vector3(0.6, -0.6, -0.2),
-    title: "Deep Learning",
-    subtitle: "Education",
-    description: "M.S. in Human-Computer Interaction, MIT Media Lab. Focus on spatial computing and brain-computer interfaces.",
-    tags: ["HCI", "Spatial Computing", "Research"]
+    title: "Education",
+    subtitle: "B.Tech CS (AI & DS)",
+    description: "Pursuing B.Tech in Computer Science & Engineering (AI & Data Science) at Khwaja Moinuddin Chishti Language University (2022-2026). Solidifying the academic foundation for applied AI development.",
+    tags: ["B.Tech CS", "AI & Data Science", "KMCLU"]
   },
   {
     id: 6,
     pos: new THREE.Vector3(-0.5, -0.5, -0.5),
     title: "Transmit Signal",
     subtitle: "Contact & Network",
-    description: "Ready to establish a new synaptic connection? Open to visionary projects and bleeding-edge tech roles.",
-    tags: ["alex@vance.net", "github.com/vance", "LinkedIn"]
+    description: "Ready to orchestrate AI tools for your next big idea. Open to internships and visionary projects. Email: sameershahidsiddiqui365@gmail.com | Phone: 9335847773",
+    tags: ["sameershahidsiddiqui365@gmail.com", "9335847773", "github.com/sam-eer31"]
   }
 ];
 
