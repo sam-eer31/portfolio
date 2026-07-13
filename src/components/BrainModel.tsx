@@ -9,7 +9,7 @@ const TOUR_NODES = [
     id: 0,
     pos: new THREE.Vector3(0.5, 0.5, 0.5),
     title: "Identity",
-    subtitle: "Sameer Siddiqui",
+    subtitle: "Sameer Shahid Siddiqui",
     description: "AI-based application developer. I specialize in turning ideas into fully working web applications by orchestrating AI tools to generate, modify, debug, and deploy code step-by-step.",
     tags: ["AI-Assisted Dev", "Full-Stack", "Problem Solver"]
   },
@@ -49,9 +49,9 @@ const TOUR_NODES = [
     id: 5,
     pos: new THREE.Vector3(0.6, -0.6, -0.2),
     title: "Education",
-    subtitle: "B.Tech CS (AI & DS)",
-    description: "Pursuing B.Tech in Computer Science & Engineering (AI & Data Science) at Khwaja Moinuddin Chishti Language University (2022-2026). Solidifying the academic foundation for applied AI development.",
-    tags: ["B.Tech CS", "AI & Data Science", "KMCLU"]
+    subtitle: "B.Tech CSE",
+    description: "Completed B.Tech in Computer Science & Engineering at Khwaja Moinuddin Chishti Language University (2022-2026). Built a solid academic foundation in core CS principles and applied AI development.",
+    tags: ["B.Tech CSE", "Computer Science", "KMCLU"]
   },
   {
     id: 6,
