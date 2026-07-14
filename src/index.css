@@ -334,6 +334,7 @@ body::-webkit-scrollbar {
   transform: scale(0.8) translateY(20px);
   transition: opacity 0.1s ease-out, transform 0.1s ease-out;
   filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.1));
+  will-change: transform, opacity;
 }
 
 .hud-card {
@@ -844,6 +845,8 @@ body::-webkit-scrollbar {
     transform: rotateX(75deg) rotateZ(360deg);
   }
 }
+
+
 
 /* Footer */
 .hud-footer {
