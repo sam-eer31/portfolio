@@ -332,7 +332,6 @@ body::-webkit-scrollbar {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.8) translateY(20px);
-  transition: opacity 0.1s ease-out, transform 0.1s ease-out;
   filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.1));
   will-change: transform, opacity;
 }
@@ -846,7 +845,16 @@ body::-webkit-scrollbar {
   }
 }
 
-
+/* ----------------------------------------- */
+/* 2. HUD CARDS */
+/* ----------------------------------------- */
+.hud-wrapper {
+  position: relative;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease-out;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.1));
+}
 
 /* Footer */
 .hud-footer {

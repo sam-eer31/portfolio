@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, useRef, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { ContactShadows } from '@react-three/drei';
 import { BrainModel } from './components/BrainModel';
@@ -18,6 +18,8 @@ const STEPS = [
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [dragRotation, setDragRotation] = useState({ x: 0, y: 0 });
+  const scrollProgressRef = useRef(0);
+  const dragRotationRef = useRef({ x: 0, y: 0 });
 
   // Capture window scrolling and map it to 0.0 - 1.0 progress
   useEffect(() => {
@@ -49,7 +51,9 @@ function App() {
         return Math.min(1, Math.max(0, smoothedY / segments));
       };
 
-      setScrollProgress(easeScroll(rawPct));
+      const val = easeScroll(rawPct);
+      setScrollProgress(val);
+      scrollProgressRef.current = val;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -89,6 +93,7 @@ function App() {
       currentRot.y = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, currentRot.y - deltaX * 0.008));
       
       setDragRotation({ ...currentRot });
+      dragRotationRef.current = { ...currentRot };
       prev = { x: clientX, y: clientY };
     };
 
@@ -98,6 +103,7 @@ function App() {
       currentRot.x = 0;
       currentRot.y = 0;
       setDragRotation({ x: 0, y: 0 });
+      dragRotationRef.current = { x: 0, y: 0 };
       document.body.style.cursor = 'default';
     };
 
@@ -141,6 +147,20 @@ function App() {
 
   const activeIndex = getActiveStepIndex();
 
+  const canvasContent = useMemo(() => (
+    <group position={[0, -0.2, 0]}>
+      <BrainModel progressRef={scrollProgressRef} dragRotationRef={dragRotationRef} />
+      <ContactShadows 
+        position={[0, -2.5, 0]} 
+        opacity={0.4} 
+        scale={15} 
+        blur={2} 
+        far={4} 
+        color="#9900ff" 
+      />
+    </group>
+  ), []);
+
   return (
     <div className="app-container">
       {/* Background Cyber Grid */}
@@ -155,17 +175,7 @@ function App() {
           <pointLight position={[0, 5, 5]} intensity={0.8} />
           
           <Suspense fallback={null}>
-            <group position={[0, -0.2, 0]}>
-              <BrainModel progress={scrollProgress} dragRotation={dragRotation} />
-              <ContactShadows 
-                position={[0, -2.5, 0]} 
-                opacity={0.4} 
-                scale={15} 
-                blur={2} 
-                far={4} 
-                color="#9900ff" 
-              />
-            </group>
+            {canvasContent}
           </Suspense>
         </Canvas>
       </div>

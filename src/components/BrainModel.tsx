@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState, useEffect } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -127,16 +127,22 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
       <div
         ref={htmlRef}
         className="hud-wrapper"
-        style={{ width: `${cardWidth}px`, height: `${cardHeight}px`, position: 'relative' }}
+        style={{ 
+          width: `${cardWidth}px`, 
+          height: `${cardHeight}px`, 
+          position: 'relative',
+          willChange: 'opacity, transform, visibility',
+          visibility: 'hidden'
+        }}
       >
         <svg
           className="hud-svg-frame"
           viewBox={`0 0 ${cardWidth} ${cardHeight}`}
-          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none', overflow: 'visible', willChange: 'transform, opacity', transform: 'translateZ(0)' }}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none', overflow: 'visible' }}
         >
           <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="rgba(2, 8, 19, 0.85)" stroke="rgba(0, 229, 255, 0.4)" strokeWidth="1" />
-          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="1" filter="drop-shadow(0 0 4px #00e5ff)" />
-          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="3" filter="drop-shadow(0 0 8px #00e5ff)" pathLength="100" className="edge-tracer" />
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="1" />
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="3" pathLength="100" className="edge-tracer" />
           <path d="M 150 0 L 150 6 M 160 0 L 160 6 M 170 0 L 170 6" stroke="#00e5ff" strokeWidth="2" />
           <path d={`M ${cardWidth - 170} ${cardHeight} L ${cardWidth - 170} ${cardHeight - 6} M ${cardWidth - 160} ${cardHeight} L ${cardWidth - 160} ${cardHeight - 6} M ${cardWidth - 150} ${cardHeight} L ${cardWidth - 150} ${cardHeight - 6}`} stroke="#00e5ff" strokeWidth="2" />
           <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
@@ -378,7 +384,7 @@ const PlexusNetwork = ({
   );
 };
 
-export const BrainModel = ({ progress = 0, dragRotation = { x: 0, y: 0 } }: { progress?: number, dragRotation?: { x: number, y: number } }) => {
+export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progressRef?: React.MutableRefObject<number>, dragRotationRef?: React.MutableRefObject<{ x: number, y: number }> }) => {
   const { scene } = useGLTF('/brain.glb');
 
   const [baseScale, setBaseScale] = useState(1);
@@ -439,7 +445,10 @@ export const BrainModel = ({ progress = 0, dragRotation = { x: 0, y: 0 } }: { pr
   }, [scene]);
 
   useFrame((state, delta) => {
-    smoothProgress.current = THREE.MathUtils.lerp(smoothProgress.current, progress, 5.0 * delta);
+    const currentProgress = progressRef?.current ?? 0;
+    const currentDrag = dragRotationRef?.current ?? { x: 0, y: 0 };
+
+    smoothProgress.current = THREE.MathUtils.lerp(smoothProgress.current, currentProgress, 5.0 * delta);
     const sp = smoothProgress.current;
 
     const diveProgress = THREE.MathUtils.clamp(sp / (1 / 7), 0, 1);
@@ -491,13 +500,13 @@ export const BrainModel = ({ progress = 0, dragRotation = { x: 0, y: 0 } }: { pr
       // Local X is screen vertical tilt
       manualRotationGroupRef.current.rotation.x = THREE.MathUtils.lerp(
         manualRotationGroupRef.current.rotation.x,
-        dragRotation.x,
+        currentDrag.x,
         8.0 * delta
       );
       // Local Z is screen horizontal spin (because parent rotates -90 X, 180 Z)
       manualRotationGroupRef.current.rotation.z = THREE.MathUtils.lerp(
         manualRotationGroupRef.current.rotation.z,
-        dragRotation.y,
+        currentDrag.y,
         8.0 * delta
       );
     }
@@ -537,11 +546,29 @@ export const BrainModel = ({ progress = 0, dragRotation = { x: 0, y: 0 } }: { pr
       if (htmlRefs.current[index]) {
         // Only start showing cards AFTER we have finished diving into the brain
         const finalOpacity = diveProgress > 0.9 ? cardOpacity : 0;
-        htmlRefs.current[index].style.opacity = finalOpacity.toString();
-        htmlRefs.current[index].style.pointerEvents = finalOpacity > 0.5 ? 'auto' : 'none';
+        
+        const el = htmlRefs.current[index];
+        const newOpacityStr = finalOpacity.toFixed(3);
+        const newPointerEvents = finalOpacity > 0.5 ? 'auto' : 'none';
+        const newTransform = `scale(${(0.8 + finalOpacity * 0.2).toFixed(3)})`;
+        const newVisibility = finalOpacity > 0.01 ? 'visible' : 'hidden';
 
-        // Add a slight popup animation as it comes into focus
-        htmlRefs.current[index].style.transform = `scale(${0.8 + finalOpacity * 0.2})`;
+        if (el.dataset.opacity !== newOpacityStr) {
+          el.style.opacity = newOpacityStr;
+          el.dataset.opacity = newOpacityStr;
+        }
+        if (el.dataset.pointerEvents !== newPointerEvents) {
+          el.style.pointerEvents = newPointerEvents;
+          el.dataset.pointerEvents = newPointerEvents;
+        }
+        if (el.dataset.transform !== newTransform) {
+          el.style.transform = newTransform;
+          el.dataset.transform = newTransform;
+        }
+        if (el.dataset.visibility !== newVisibility) {
+          el.style.visibility = newVisibility;
+          el.dataset.visibility = newVisibility;
+        }
       }
     });
   });
@@ -591,4 +618,4 @@ export const BrainModel = ({ progress = 0, dragRotation = { x: 0, y: 0 } }: { pr
       </group>
     </group>
   );
-};
+});
