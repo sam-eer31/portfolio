@@ -60,7 +60,7 @@ const TOUR_NODES = [
     title: "Education",
     subtitle: "Academic History",
     description: "B.Tech CSE (AI & Data Science) from Khwaja Moinuddin Chishti Language University (2022-2026). Intermediate (2022) and High School (2020) foundations completed at Kendriya Vidyalaya IIM, Lucknow.",
-    tags: ["B.Tech CS (AI&DS)", "KMCLU", "Kendriya Vidyalaya"]
+    tags: ["B.Tech CSE (AI&DS)", "KMCLU", "Kendriya Vidyalaya"]
   },
   {
     id: 7,
@@ -77,7 +77,7 @@ const BackgroundStars = ({ starsMatRef }: { starsMatRef: React.RefObject<THREE.P
     const count = 3000;
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const r = 30 + Math.random() * 50; 
+      const r = 30 + Math.random() * 50;
       const theta = Math.random() * 2 * Math.PI;
       const phi = Math.acos(2 * Math.random() - 1);
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
@@ -136,8 +136,7 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
         >
           <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="rgba(2, 8, 19, 0.85)" stroke="rgba(0, 229, 255, 0.4)" strokeWidth="1" />
           <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="1" filter="drop-shadow(0 0 4px #00e5ff)" />
-          <path d="M 0 60 L 0 30 L 30 0 L 120 0" fill="none" stroke="#00e5ff" strokeWidth="3" filter="drop-shadow(0 0 6px #00e5ff)" />
-          <path d={`M ${cardWidth} ${cardHeight - 80} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L ${cardWidth - 120} ${cardHeight}`} fill="none" stroke="#00e5ff" strokeWidth="3" filter="drop-shadow(0 0 6px #00e5ff)" />
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="3" filter="drop-shadow(0 0 8px #00e5ff)" pathLength="100" className="edge-tracer" />
           <path d="M 150 0 L 150 6 M 160 0 L 160 6 M 170 0 L 170 6" stroke="#00e5ff" strokeWidth="2" />
           <path d={`M ${cardWidth - 170} ${cardHeight} L ${cardWidth - 170} ${cardHeight - 6} M ${cardWidth - 160} ${cardHeight} L ${cardWidth - 160} ${cardHeight - 6} M ${cardWidth - 150} ${cardHeight} L ${cardWidth - 150} ${cardHeight - 6}`} stroke="#00e5ff" strokeWidth="2" />
           <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
@@ -166,8 +165,12 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
           <div style={{ display: 'flex', gap: isMobile ? '1rem' : '1.5rem', flexDirection: 'row', width: '100%' }}>
             {/* Left Col: Target Ring */}
             <div style={{ width: isMobile ? '40px' : '70px', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
-              <div className="hud-target-ring">
-                <div className="hud-target-core"></div>
+              <div className="holo-ring-container">
+                <div className="holo-ring-outer"></div>
+                <div className="holo-ring-arc"></div>
+                <div className="holo-ring-inner"></div>
+                <div className="holo-crosshair"></div>
+                <div className="holo-core"></div>
               </div>
             </div>
 
@@ -201,7 +204,7 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
                   </div>
                 ))}
               </div>
-              
+
               {/* @ts-ignore */}
               {node.link && (
                 <a href={node.link} target="_blank" rel="noopener noreferrer" className="hud-launch-btn" style={{ pointerEvents: 'auto' }}>
@@ -232,10 +235,32 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
               </div>
 
               <div className="hud-live-feed">
-                <div className="hud-feed-label">+ LIVE FEED</div>
-                <div className="hud-feed-box">
-                  <div className="radar-sweep"></div>
-                  <div className="radar-grid"></div>
+                <div className="hud-feed-label">LIVE FEED</div>
+                <div className="holo-globe-box">
+                  <div className="globe-corner top-left"></div>
+                  <div className="globe-corner top-right"></div>
+                  <div className="globe-corner bottom-left"></div>
+                  <div className="globe-corner bottom-right"></div>
+
+                  {/* Base Radar Rings */}
+                  <div className="globe-base-ring outer"></div>
+                  <div className="globe-base-ring inner"></div>
+                  <div className="globe-base-ring center"></div>
+
+                  <div className="holo-globe">
+                    <div className="globe-ring lon-1"></div>
+                    <div className="globe-ring lon-2"></div>
+                    <div className="globe-ring lon-3"></div>
+                    <div className="globe-ring lon-4"></div>
+                    <div className="globe-ring lon-5"></div>
+                    <div className="globe-ring lon-6"></div>
+                    <div className="globe-ring lat-1"></div>
+                    <div className="globe-ring lat-2"></div>
+                    <div className="globe-ring lat-3"></div>
+                    <div className="globe-ring lat-4"></div>
+                    <div className="globe-ring lat-5"></div>
+                  </div>
+                  <div className="globe-orbit"></div>
                 </div>
               </div>
             </div>
@@ -264,6 +289,20 @@ const PlexusNetwork = ({
   isMobile: boolean,
   viewportWidth: number
 }) => {
+  const circleTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const context = canvas.getContext('2d');
+    if (context) {
+      context.beginPath();
+      context.arc(32, 32, 30, 0, 2 * Math.PI, false);
+      context.fillStyle = '#ffffff';
+      context.fill();
+    }
+    return new THREE.CanvasTexture(canvas);
+  }, []);
+
   const { points, lines } = useMemo(() => {
     const randomCount = 145;
     const totalCount = randomCount + TOUR_NODES.length;
@@ -318,7 +357,7 @@ const PlexusNetwork = ({
   return (
     <group>
       <points geometry={points}>
-        <pointsMaterial ref={pointsMatRef} color="#00ffff" size={0.04} transparent opacity={0} sizeAttenuation={true} />
+        <pointsMaterial ref={pointsMatRef} map={circleTexture} alphaTest={0.5} color="#00ffff" size={0.04} transparent opacity={0} sizeAttenuation={true} />
       </points>
       <lineSegments geometry={lines}>
         <lineBasicMaterial ref={linesMatRef} color="#0088ff" transparent opacity={0} blending={THREE.AdditiveBlending} depthWrite={false} />
@@ -516,7 +555,7 @@ export const BrainModel = ({ progress = 0, dragRotation = { x: 0, y: 0 } }: { pr
       <group rotation={[-Math.PI / 2, 0, Math.PI]}>
 
         {/* Unified group: The Brain and Neural Network share identical physics */}
-        
+
         {/* Render stars OUTSIDE the main scaling group so they stay locked in background space */}
         <BackgroundStars starsMatRef={bgStarsMatRef} />
 
