@@ -451,8 +451,9 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
     smoothProgress.current = THREE.MathUtils.lerp(smoothProgress.current, currentProgress, 5.0 * delta);
     const sp = smoothProgress.current;
 
-    const diveProgress = THREE.MathUtils.clamp(sp / (1 / 7), 0, 1);
-    const tourProgress = THREE.MathUtils.clamp((sp - (1 / 7)) / (6 / 7), 0, 1);
+    const diveProgress = THREE.MathUtils.clamp(sp * 8.0, 0, 1);
+    const nodeIndexFloat = THREE.MathUtils.clamp(sp * 8.0 - 1.0, 0, 7);
+    const tourProgress = nodeIndexFloat / 7.0;
 
     if (mainGroupRef.current) {
       // Scale up massively to 20x so we physically fly inside the brain space
@@ -471,7 +472,6 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
       const divePos = new THREE.Vector3(0, diveProgress * 4.0, 0);
 
       // 2. Tour Translation: Frame specific nodes
-      const nodeIndexFloat = tourProgress * (TOUR_NODES.length - 1);
       const idx1 = Math.floor(nodeIndexFloat);
       const idx2 = Math.min(TOUR_NODES.length - 1, idx1 + 1);
       const fraction = nodeIndexFloat - idx1;
@@ -534,14 +534,11 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
 
     // Sequential Card Fading Logic
     TOUR_NODES.forEach((_, index) => {
-      // Each card represents a stop on the tour (0, 0.25, 0.5, 0.75, 1.0)
-      const segmentCenter = index * (1 / (TOUR_NODES.length - 1));
+      // Calculate how far we are from this card's exact node index
+      const dist = Math.abs(nodeIndexFloat - index);
 
-      // Calculate how close we are to this card's segment
-      const dist = Math.abs(tourProgress - segmentCenter);
-
-      // Fade in sharply and stay fully visible during the slowdown plateau (dist < 0.05)
-      const cardOpacity = THREE.MathUtils.clamp(1.5 - dist * 10.0, 0, 1);
+      // Fade in sharply, stay fully visible while near the center plateau
+      const cardOpacity = THREE.MathUtils.clamp(2.0 - dist * 2.5, 0, 1);
 
       if (htmlRefs.current[index]) {
         // Only start showing cards AFTER we have finished diving into the brain

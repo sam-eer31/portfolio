@@ -31,22 +31,28 @@ function App() {
       
       const rawPct = window.scrollY / totalScrollable;
       
-      // Magnetic slow-mo easing around target points (0.0, 1/7, 2/7, ..., 7/7)
+      // Strict magnetic scroll pause around target points
       const easeScroll = (raw: number) => {
-        const segments = 7;
+        const segments = 8;
         const y = raw * segments;
         const integerPart = Math.floor(y);
-        const fractionalPart = y - integerPart;
+        const x = y - integerPart;
         
-        // Smootherstep interpolation: 6x^5 - 15x^4 + 10x^3
-        const x = fractionalPart;
-        const smoother = 6 * Math.pow(x, 5) - 15 * Math.pow(x, 4) + 10 * Math.pow(x, 3);
+        let mappedX = 0;
+        const pauseSize = 0.22; // 44% of scroll distance around nodes is a dead-frozen pause
         
-        // Blend linear scrolling with the flat plateaus
-        const plateauStrength = 0.85; 
-        const smoothedFraction = x * (1 - plateauStrength) + smoother * plateauStrength;
+        if (x < pauseSize) {
+          mappedX = 0;
+        } else if (x > 1 - pauseSize) {
+          mappedX = 1;
+        } else {
+          // Normalize to 0-1
+          const t = (x - pauseSize) / (1 - 2 * pauseSize);
+          // Smootherstep for buttery smooth acceleration and deceleration between pauses
+          mappedX = t * t * t * (t * (t * 6 - 15) + 10);
+        }
         
-        const smoothedY = integerPart + smoothedFraction;
+        const smoothedY = integerPart + mappedX;
         return Math.min(1, Math.max(0, smoothedY / segments));
       };
 
@@ -128,15 +134,15 @@ function App() {
 
   // Determine active step based on scroll progress
   const getActiveStepIndex = () => {
-    const targetY = scrollProgress * 7;
+    const targetY = scrollProgressRef.current * 8;
     if (targetY < 0.5) return -1; // Still in the "Dive" phase
     
     const nearestStep = Math.round(targetY);
     const distanceToCenter = Math.abs(targetY - nearestStep);
     
-    // Only open the dot when the card is perfectly resting in the center plateau
-    if (distanceToCenter < 0.05) {
-      return Math.max(0, Math.min(6, nearestStep - 1));
+    // Open the dot when the card is in the pause plateau
+    if (distanceToCenter < 0.25) {
+      return Math.max(0, Math.min(7, nearestStep - 1));
     }
     
     return -1;
