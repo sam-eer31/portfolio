@@ -17,7 +17,6 @@ const STEPS = [
 
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [dragRotation, setDragRotation] = useState({ x: 0, y: 0 });
   const scrollProgressRef = useRef(0);
   const dragRotationRef = useRef({ x: 0, y: 0 });
 
@@ -92,7 +91,6 @@ function App() {
       currentRot.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, currentRot.x + deltaY * 0.008));
       currentRot.y = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, currentRot.y - deltaX * 0.008));
       
-      setDragRotation({ ...currentRot });
       dragRotationRef.current = { ...currentRot };
       prev = { x: clientX, y: clientY };
     };
@@ -102,7 +100,6 @@ function App() {
       // Spring back to dead center instantly on release
       currentRot.x = 0;
       currentRot.y = 0;
-      setDragRotation({ x: 0, y: 0 });
       dragRotationRef.current = { x: 0, y: 0 };
       document.body.style.cursor = 'default';
     };
