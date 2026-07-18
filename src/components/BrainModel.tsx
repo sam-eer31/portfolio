@@ -10,7 +10,7 @@ const TOUR_NODES = [
     pos: new THREE.Vector3(0.5, 0.5, 0.5),
     title: "Identity",
     subtitle: "Sameer Shahid Siddiqui",
-    description: "AI-based application developer. I specialize in turning ideas into fully working web applications by orchestrating AI tools to generate, modify, debug, and deploy code step-by-step.",
+    description: "AI-based application developer with experience building complete web projects using AI tools. I use AI to generate, modify, debug, and deploy backend and frontend code, and focus on turning ideas into fully working applications. Familiar with APIs, databases, and AI integrations through hands-on project development.",
     tags: ["AI-Assisted Dev", "Full-Stack", "Problem Solver"]
   },
   {
@@ -18,15 +18,56 @@ const TOUR_NODES = [
     pos: new THREE.Vector3(-0.6, 0.2, 0.4),
     title: "Cognitive Core",
     subtitle: "Skills & Stack",
-    description: "Strong in Python (logic building, loops, problem solving). I utilize AI for rapid code generation and debugging across Backends (FastAPI, Flask, Node.js) and Databases (MongoDB, MySQL, SQLite). I also leverage AI to build modern, highly animated web interfaces using React, Next.js, TypeScript, and core web basics.",
-    tags: ["Python Programming", "React & Next.js", "AI-Assisted Backend", "AI Code Generation"]
+    description: "Skills and Stack overview.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.75em', lineHeight: '1.4' }}>
+        <div>
+          <strong style={{ color: '#fff', fontSize: '1.1em' }}>Core Tech Stack</strong>
+          <div style={{ margin: '0.3rem 0 0 0.5rem', opacity: 0.9, paddingLeft: '0.5rem', borderLeft: '2px solid rgba(0, 229, 255, 0.4)' }}>
+            <strong>Programming:</strong> Python (strong logic building & problem solving)<br />
+            <strong>Frontend:</strong> HTML, CSS, JS, React, Next.js, Tailwind CSS<br />
+            <strong>Backend:</strong> FastAPI, Flask, Node.js<br />
+            <strong>Databases:</strong> MongoDB, MySQL, SQLite
+          </div>
+        </div>
+        <div>
+          <strong style={{ color: '#fff', fontSize: '1.1em' }}>AI-Assisted Development</strong>
+          <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
+            <li style={{ marginBottom: '0.2rem' }}>Extensive AI usage for code generation, debugging, and iteration</li>
+            <li style={{ marginBottom: '0.2rem' }}>Experienced in full-stack creation from planning to deployment</li>
+            <li style={{ marginBottom: '0' }}>Skilled at componentizing projects and building systems step-by-step</li>
+          </ul>
+        </div>
+      </div>
+    ),
+    tags: ["Python Core", "Full-Stack Web", "AI-Assisted"]
   },
   {
     id: 2,
     pos: new THREE.Vector3(0.0, -0.4, 0.6),
     title: "Synaptic Pathways",
     subtitle: "Internships",
-    description: "Python & Data Science Intern at Eisystems Services. Focused on core Python logic, debugging, problem-solving, and data preprocessing. Gained hands-on experience building foundational programs and data pipelines.",
+    description: "Internships completed at Eisystems Services.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+        <div>
+          <strong style={{ color: '#fff' }}>Python Programming Intern</strong><br />
+          <span style={{ opacity: 0.8 }}>Eisystems Services | Feb 2026 – Apr 2026</span>
+          <ul style={{ margin: '0.25rem 0 0 1.2rem', opacity: 0.9 }}>
+            <li>Learned core Python concepts and problem-solving</li>
+            <li>Practiced building small programs and debugging logic</li>
+          </ul>
+        </div>
+        <div>
+          <strong style={{ color: '#fff' }}>Data Science Intern</strong><br />
+          <span style={{ opacity: 0.8 }}>Eisystems Services | Aug 2025 – Sep 2025</span>
+          <ul style={{ margin: '0.25rem 0 0 1.2rem', opacity: 0.9 }}>
+            <li>Learned basics of data analysis and preprocessing using Python</li>
+            <li>Worked on simple data science tasks and report submission</li>
+          </ul>
+        </div>
+      </div>
+    ),
     tags: ["Eisystems", "Python Intern", "Data Science"]
   },
   {
@@ -34,41 +75,156 @@ const TOUR_NODES = [
     pos: new THREE.Vector3(0.4, -0.2, -0.5),
     title: "Project",
     subtitle: "Codexa AI Suite",
-    description: "A full-stack AI platform built with FastAPI, MongoDB, and WebSockets. Integrated both local and cloud LLMs to feature document generation, code analysis, and an interactive AI Teacher System.",
-    tags: ["FastAPI", "WebSockets", "LLMs", "MongoDB"]
+    description: "Codexa AI Suite Overview.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.85em', lineHeight: '1.4' }}>
+        <p style={{ margin: 0, fontStyle: 'italic', opacity: 0.9 }}>
+          An integrated AI-powered productivity suite designed to provide a unified, flexible, and privacy-aware solution.
+        </p>
+        <div>
+          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
+            <li style={{ marginBottom: '0.2rem' }}><strong>4-in-1 AI Modules:</strong> Document Generator, Code Generator, Document Analyzer, and an interactive AI Teacher.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong>Hybrid LLM Inference:</strong> Seamlessly switch between local processing (via <span style={{ color: '#fff' }}>Ollama</span> for privacy) and Cloud processing for performance.</li>
+            <li style={{ marginBottom: '0' }}><strong>Advanced Architecture:</strong> Built on <span style={{ color: '#fff' }}>FastAPI</span> & <span style={{ color: '#fff' }}>MongoDB</span> with real-time WebSocket streaming, sandboxed execution, and TTS.</li>
+          </ul>
+        </div>
+      </div>
+    ),
+    tags: ["FastAPI", "WebSockets", "Hybrid LLMs", "MongoDB"]
   },
   {
     id: 4,
     pos: new THREE.Vector3(-0.3, 0.6, -0.4),
     title: "Project",
-    subtitle: "AI Chatbot Suite",
-    description: "Developed a ChatGPT-like interface utilizing Python (Quart) and local LLMs with a 'DeepThink Toggle'. Designed a modern UI capable of multi-bot interactions for advanced workflows.",
-    tags: ["Quart", "Local LLMs", "UI Design"]
+    subtitle: "FeedBack Analyzer",
+    description: "FeedBack Analyzer Project Overview.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.85em', lineHeight: '1.4' }}>
+        <p style={{ margin: 0, fontStyle: 'italic', opacity: 0.9 }}>
+          FeedBack Analyzer is an end-to-end web application that turns raw textual feedback into actionable insights. It lets you upload feedback files (CSV, JSON, TXT), runs local transformer-based sentiment analysis, generates AI summaries (Gemini / Ollama), builds word clouds, and exports results as CSV and PDF reports – all wrapped in a clean, modern UI.
+        </p>
+        <div>
+          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
+            <li style={{ marginBottom: '0.2rem' }}><strong>NLP Pipelines:</strong> Sentiment analysis via <span style={{ color: '#fff' }}>Transformers (RoBERTa, DistilBERT)</span>.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong>AI Summaries:</strong> Contextual summaries using local/cloud LLMs (<span style={{ color: '#fff' }}>Gemini/Ollama</span>).</li>
+            <li style={{ marginBottom: '0' }}><strong>Data Visualization:</strong> Interactive dashboards, word clouds, and CSV/PDF reports.</li>
+          </ul>
+        </div>
+      </div>
+    ),
+    tags: ["FastAPI", "NLP", "Transformers", "Ollama"],
+    link: "https://github.com/sam-eer31/FeedBack_Analyzer"
   },
   {
     id: 5,
     pos: new THREE.Vector3(0.2, 0.7, -0.2),
     title: "Project",
     subtitle: "GrooveBox",
-    description: "A real-time synchronized media platform for music, movies, and YouTube. Features millisecond-precision playback, access-controlled rooms (locks/approvals), host privileges, and live chat with embedded playback commands.",
+    description: "GrooveBox Project Overview.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.85em', lineHeight: '1.4' }}>
+        <p style={{ margin: 0, fontStyle: 'italic', opacity: 0.9 }}>
+          A real-time synchronized media platform for listening to music and watching YouTube videos together.
+        </p>
+        <div>
+          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
+            <li style={{ marginBottom: '0.2rem' }}><strong>Precision Sync:</strong> Millisecond-accurate synchronized playback across all connected clients via <span style={{ color: '#fff' }}>WebSockets</span>.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong>Room Management:</strong> Access-controlled rooms with locking, user approvals, and strict host privileges.</li>
+            <li style={{ marginBottom: '0' }}><strong>Interactive Chat:</strong> Live messaging integrated seamlessly with embedded chat-based playback commands.</li>
+          </ul>
+        </div>
+      </div>
+    ),
     tags: ["Real-time Sync", "WebSockets", "Chat Commands"],
     link: "https://grooveboxplayer.vercel.app/"
   },
   {
     id: 6,
-    pos: new THREE.Vector3(0.6, -0.6, -0.2),
-    title: "Education",
-    subtitle: "Academic History",
-    description: "B.Tech CSE (AI & Data Science) from Khwaja Moinuddin Chishti Language University (2022-2026). Intermediate (2022) and High School (2020) foundations completed at Kendriya Vidyalaya IIM, Lucknow.",
-    tags: ["B.Tech CSE (AI&DS)", "KMCLU", "Kendriya Vidyalaya"]
+    pos: new THREE.Vector3(-0.4, -0.2, 0.5),
+    title: "Project",
+    subtitle: "Audio Visualizer",
+    description: "Audio Visualizer Project Overview.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.85em', lineHeight: '1.4' }}>
+        <p style={{ margin: 0, fontStyle: 'italic', opacity: 0.9 }}>
+          A high-performance, browser-based engine for rendering stunning 3D audio visualizations in real-time.
+        </p>
+        <div>
+          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
+            <li style={{ marginBottom: '0.2rem' }}><strong>Live 3D Rendering:</strong> 20 distinct dynamic visualizer effects powered by <span style={{ color: '#fff' }}>Three.js</span>.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong>Audio Processing:</strong> Real-time frequency analysis via the native <span style={{ color: '#fff' }}>Web Audio API</span>.</li>
+            <li style={{ marginBottom: '0' }}><strong>Studio Export:</strong> Built-in <span style={{ color: '#fff' }}>MediaRecorder</span> integration for exporting high-quality videos instantly.</li>
+          </ul>
+        </div>
+      </div>
+    ),
+    tags: ["Web Audio API", "Three.js", "MediaRecorder API"],
+    link: "https://audrix.vercel.app/"
   },
   {
     id: 7,
+    pos: new THREE.Vector3(0.6, -0.6, -0.2),
+    title: "Education",
+    subtitle: "Academic History",
+    description: "Academic history and education.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.85em', lineHeight: '1.4' }}>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--cyan-primary)' }}>2022-2026</div>
+          <div style={{ flex: 1 }}>
+            <strong style={{ color: '#fff' }}>Computer Science and Engineering | Bachelor of Technology</strong><br />
+            <span style={{ opacity: 0.8, fontStyle: 'italic' }}>Khwaja Moinuddin Chishti Language University, Lucknow</span><br />
+            <span style={{ opacity: 0.9 }}>B.Tech in Computer Science & Engineering (AI & Data Science)</span>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--cyan-primary)' }}>2022</div>
+          <div style={{ flex: 1 }}>
+            <strong style={{ color: '#fff' }}>Intermediate</strong><br />
+            <span style={{ opacity: 0.8, fontStyle: 'italic' }}>Kendriya Vidyalaya IIM, Lucknow</span>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--cyan-primary)' }}>2020</div>
+          <div style={{ flex: 1 }}>
+            <strong style={{ color: '#fff' }}>High school</strong><br />
+            <span style={{ opacity: 0.8, fontStyle: 'italic' }}>Kendriya Vidyalaya IIM, Lucknow</span>
+          </div>
+        </div>
+      </div>
+    ),
+    tags: ["B.Tech CSE (AI&DS)", "KMCLU", "Kendriya Vidyalaya"]
+  },
+  {
+    id: 8,
     pos: new THREE.Vector3(-0.5, -0.5, -0.5),
     title: "Transmit Signal",
     subtitle: "Contact & Network",
-    description: "Ready to orchestrate AI tools for your next big idea. Open to internships and visionary projects. Email: sameershahidsiddiqui365@gmail.com | Phone: 9335847773",
-    tags: ["sameershahidsiddiqui365@gmail.com", "9335847773", "github.com/sam-eer31"]
+    description: "Contact & Network details.",
+    customDescription: (
+      <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.85em', lineHeight: '1.4' }}>
+        <p style={{ margin: 0, fontStyle: 'italic', opacity: 0.9 }}>
+          Ready to orchestrate AI tools for your next big idea. Open to internships, collaborations, and visionary software engineering projects.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '0.5rem', alignItems: 'center', background: 'rgba(0, 229, 255, 0.05)', padding: '1rem', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: '4px' }}>
+          <strong style={{ color: 'var(--cyan-primary)' }}>EMAIL:</strong>
+          <span style={{ color: '#fff', userSelect: 'all', pointerEvents: 'auto' }}>sameershahidsiddiqui365@gmail.com</span>
+
+          <strong style={{ color: 'var(--cyan-primary)' }}>PHONE:</strong>
+          <span style={{ color: '#fff', userSelect: 'all', pointerEvents: 'auto' }}>+91 9335847773</span>
+
+          <strong style={{ color: 'var(--cyan-primary)' }}>GITHUB:</strong>
+          <a href="https://github.com/sam-eer31" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', pointerEvents: 'auto', textDecoration: 'none' }}>
+            github.com/sam-eer31 <span style={{ color: 'var(--cyan-primary)', marginLeft: '4px' }}>↗</span>
+          </a>
+        </div>
+      </div>
+    ),
+    tags: ["Open to Work", "Available for Hire", "Collaborations"],
   }
 ];
 
@@ -95,8 +251,96 @@ const BackgroundStars = ({ starsMatRef }: { starsMatRef: React.RefObject<THREE.P
     </points>
   );
 };
+const getGPUName = () => {
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (gl) {
+      const debugInfo = (gl as any).getExtension('WEBGL_debug_renderer_info');
+      if (debugInfo) {
+        const renderer = (gl as any).getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        let shortName = renderer.replace(/ANGLE \([^,]+,\s*([^,]+),.*\)/, '$1').trim();
+        shortName = shortName.split('Direct3D')[0].split('OpenGL')[0].trim();
+        shortName = shortName.replace(/\s*\([^)]*\)/g, '').trim();
+        return shortName.toUpperCase();
+      }
+    }
+  } catch (e) { }
+  return 'GENERIC GPU';
+};
+const gpuName = getGPUName();
+const connType = ((navigator as any).connection?.effectiveType || '4G').toUpperCase();
 
-const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
+const LiveTelemetryPanel = () => {
+  const fpsRef = useRef<HTMLSpanElement>(null);
+  const coordsRef = useRef<HTMLSpanElement>(null);
+  const networkRef = useRef<HTMLSpanElement>(null);
+  const frameCount = useRef(0);
+  const lastTime = useRef(performance.now());
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    window.addEventListener('mousemove', onMove);
+
+    let animId: number;
+    const updateLoop = () => {
+      const now = performance.now();
+      const delta = now - lastTime.current;
+      frameCount.current++;
+
+      if (delta >= 500) {
+        const fps = Math.round((frameCount.current * 1000) / delta);
+        if (fpsRef.current) fpsRef.current.innerText = `${fps} FPS`;
+        frameCount.current = 0;
+        lastTime.current = now;
+
+        const ping = Math.floor(Math.random() * 8 + 12);
+        if (networkRef.current) networkRef.current.innerText = `SYNC (${connType}) ${ping}ms`;
+      }
+
+      if (coordsRef.current) {
+        const rx = mouseRef.current.x.toFixed(2);
+        const ry = mouseRef.current.y.toFixed(2);
+        coordsRef.current.innerText = `X:${rx} Y:${ry}`;
+      }
+
+      animId = requestAnimationFrame(updateLoop);
+    };
+
+    animId = requestAnimationFrame(updateLoop);
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMove);
+    };
+  }, []);
+
+  return (
+    <div className="hud-telemetry">
+      <div className="hud-tel-item">
+        <span className="hud-tel-label">SYS_FPS (PERF)</span>
+        <span className="hud-tel-val" ref={fpsRef}>-- FPS</span>
+      </div>
+      <div className="hud-tel-item">
+        <span className="hud-tel-label">SENSOR VEC</span>
+        <span className="hud-tel-val" ref={coordsRef}>X:0.00 Y:0.00</span>
+      </div>
+      <div className="hud-tel-item">
+        <span className="hud-tel-label">WEBGL CORE</span>
+        <span className="hud-tel-val" title={gpuName} style={{ whiteSpace: 'normal', wordBreak: 'break-word', lineHeight: '1.3' }}>{gpuName}</span>
+      </div>
+      <div className="hud-tel-item">
+        <span className="hud-tel-label">AI LINK</span>
+        <span className="hud-tel-val" ref={networkRef}>SYNC</span>
+      </div>
+    </div>
+  );
+};
+
+const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef, dragRotationRef }: any) => {
   const cardWidth = isMobile ? 650 : 850;
   const [cardHeight, setCardHeight] = useState(isMobile ? 480 : 520);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -126,13 +370,14 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
     >
       <div
         ref={htmlRef}
-        className="hud-wrapper"
-        style={{ 
-          width: `${cardWidth}px`, 
-          height: `${cardHeight}px`, 
+        className="hud-wrapper hud-interactive"
+        style={{
+          width: `${cardWidth}px`,
+          height: `${cardHeight}px`,
           position: 'relative',
           willChange: 'opacity, transform, visibility',
-          visibility: 'hidden'
+          visibility: 'hidden',
+          cursor: 'default'
         }}
       >
         <svg
@@ -195,18 +440,19 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
 
               <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(0,229,255,0.8) 0%, transparent 100%)', margin: '0.5rem 0' }}></div>
 
-              <p className="hud-description">
-                <strong style={{ color: '#fff' }}>{node.description.split('.')[0]}.</strong>
-                {node.description.substring(node.description.indexOf('.') + 1)}
-              </p>
+              {node.customDescription ? (
+                node.customDescription
+              ) : (
+                <p className="hud-description">
+                  <strong style={{ color: '#fff' }}>{node.description.split('.')[0]}.</strong>
+                  {node.description.substring(node.description.indexOf('.') + 1)}
+                </p>
+              )}
 
-              <div className="hud-tags-grid">
+              <div className="hud-tags-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: '0.5rem' }}>
                 {node.tags.map((tag: string, i: number) => (
-                  <div key={i} className="hud-tag">
-                    <div className="hud-tag-num">0{i + 1}</div>
-                    <div className="hud-tag-text">{tag}</div>
-                    <Hexagon className="hud-tag-icon" size={14} />
-                    <div className="hud-tag-waveform"></div>
+                  <div key={i} className="hud-badge-tag">
+                    {tag}
                   </div>
                 ))}
               </div>
@@ -214,31 +460,14 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
               {/* @ts-ignore */}
               {node.link && (
                 <a href={node.link} target="_blank" rel="noopener noreferrer" className="hud-launch-btn" style={{ pointerEvents: 'auto' }}>
-                  LAUNCH_PROJECT <span style={{ marginLeft: '8px' }}>↗</span>
+                  {node.link.includes('github.com') ? 'VIEW_SOURCE' : 'LAUNCH_PROJECT'} <span style={{ marginLeft: '8px' }}>↗</span>
                 </a>
               )}
             </div>
 
             {/* Right Col: Telemetry */}
             <div style={{ width: isMobile ? '120px' : '160px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: isMobile ? '1rem' : '2rem' }}>
-              <div className="hud-telemetry">
-                <div className="hud-tel-item">
-                  <span className="hud-tel-label">NEURAL ID</span>
-                  <span className="hud-tel-val">98.7%</span>
-                </div>
-                <div className="hud-tel-item">
-                  <span className="hud-tel-label">CREATIVE SYS</span>
-                  <span className="hud-tel-val">ONLINE</span>
-                </div>
-                <div className="hud-tel-item">
-                  <span className="hud-tel-label">AI LINK</span>
-                  <span className="hud-tel-val">SYNC</span>
-                </div>
-                <div className="hud-tel-item">
-                  <span className="hud-tel-label">WEBGL CORE</span>
-                  <span className="hud-tel-val">READY</span>
-                </div>
-              </div>
+              <LiveTelemetryPanel />
 
               <div className="hud-live-feed">
                 <div className="hud-feed-label">LIVE FEED</div>
@@ -287,13 +516,15 @@ const PlexusNetwork = ({
   linesMatRef,
   htmlRefs,
   isMobile,
-  viewportWidth
+  viewportWidth,
+  dragRotationRef
 }: {
   pointsMatRef: React.RefObject<THREE.PointsMaterial | null>,
   linesMatRef: React.RefObject<THREE.LineBasicMaterial | null>,
   htmlRefs: React.MutableRefObject<HTMLDivElement[]>,
   isMobile: boolean,
-  viewportWidth: number
+  viewportWidth: number,
+  dragRotationRef?: React.MutableRefObject<{ x: number, y: number }>
 }) => {
   const circleTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
@@ -378,6 +609,7 @@ const PlexusNetwork = ({
           isMobile={isMobile}
           viewportWidth={viewportWidth}
           htmlRef={(el: any) => { if (el) htmlRefs.current[index] = el; }}
+          dragRotationRef={dragRotationRef}
         />
       ))}
     </group>
@@ -451,9 +683,10 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
     smoothProgress.current = THREE.MathUtils.lerp(smoothProgress.current, currentProgress, 5.0 * delta);
     const sp = smoothProgress.current;
 
-    const diveProgress = THREE.MathUtils.clamp(sp * 8.0, 0, 1);
-    const nodeIndexFloat = THREE.MathUtils.clamp(sp * 8.0 - 1.0, 0, 7);
-    const tourProgress = nodeIndexFloat / 7.0;
+    const nodesCount = TOUR_NODES.length;
+    const diveProgress = THREE.MathUtils.clamp(sp * nodesCount, 0, 1);
+    const nodeIndexFloat = THREE.MathUtils.clamp(sp * nodesCount - 1.0, 0, nodesCount - 1);
+    const tourProgress = nodeIndexFloat / Math.max(1, nodesCount - 1);
 
     if (mainGroupRef.current) {
       // Scale up massively to 20x so we physically fly inside the brain space
@@ -543,7 +776,7 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
       if (htmlRefs.current[index]) {
         // Only start showing cards AFTER we have finished diving into the brain
         const finalOpacity = diveProgress > 0.9 ? cardOpacity : 0;
-        
+
         const el = htmlRefs.current[index];
         const newOpacityStr = finalOpacity.toFixed(3);
         const newPointerEvents = finalOpacity > 0.5 ? 'auto' : 'none';
@@ -608,6 +841,7 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
               htmlRefs={htmlRefs}
               isMobile={baseScale <= 0.5}
               viewportWidth={viewportWidth}
+              dragRotationRef={dragRotationRef}
             />
 
           </group>

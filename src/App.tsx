@@ -2,6 +2,7 @@ import { Suspense, useEffect, useState, useRef, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { ContactShadows } from '@react-three/drei';
 import { BrainModel } from './components/BrainModel';
+import { Loader } from './components/Loader';
 import './index.css';
 
 const STEPS = [
@@ -9,14 +10,16 @@ const STEPS = [
   { label: "Skills & Stack" },
   { label: "Internships" },
   { label: "Project: Codexa" },
-  { label: "Project: AI Chatbots" },
+  { label: "Project: FeedBack Analyzer" },
   { label: "Project: GrooveBox" },
+  { label: "Project: Audio Vis" },
   { label: "Education" },
   { label: "Contact" }
 ];
 
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isAppLoaded, setIsAppLoaded] = useState(false);
   const scrollProgressRef = useRef(0);
   const dragRotationRef = useRef({ x: 0, y: 0 });
 
@@ -33,7 +36,7 @@ function App() {
       
       // Strict magnetic scroll pause around target points
       const easeScroll = (raw: number) => {
-        const segments = 8;
+        const segments = 9;
         const y = raw * segments;
         const integerPart = Math.floor(y);
         const x = y - integerPart;
@@ -134,7 +137,8 @@ function App() {
 
   // Determine active step based on scroll progress
   const getActiveStepIndex = () => {
-    const targetY = scrollProgressRef.current * 8;
+    const stepsCount = STEPS.length;
+    const targetY = scrollProgressRef.current * stepsCount;
     if (targetY < 0.5) return -1; // Still in the "Dive" phase
     
     const nearestStep = Math.round(targetY);
@@ -142,7 +146,7 @@ function App() {
     
     // Open the dot when the card is in the pause plateau
     if (distanceToCenter < 0.25) {
-      return Math.max(0, Math.min(7, nearestStep - 1));
+      return Math.max(0, Math.min(stepsCount - 1, nearestStep - 1));
     }
     
     return -1;
@@ -160,12 +164,16 @@ function App() {
         blur={2} 
         far={4} 
         color="#9900ff" 
+        frames={1}
+        resolution={512}
       />
     </group>
   ), []);
 
   return (
-    <div className="app-container">
+    <>
+      {!isAppLoaded && <Loader onComplete={() => setIsAppLoaded(true)} />}
+      <div className="app-container">
       {/* Background Cyber Grid */}
       <div className="cyber-grid" />
 
@@ -238,6 +246,7 @@ function App() {
 
       </div>
     </div>
+    </>
   );
 }
 
