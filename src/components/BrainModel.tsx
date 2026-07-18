@@ -350,7 +350,8 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
     const observer = new ResizeObserver((entries) => {
       for (let entry of entries) {
         // Measure exact pixel height of the inner content + padding and snap the SVG frame to it!
-        setCardHeight(Math.max((entry.target as HTMLElement).offsetHeight, isMobile ? 350 : 450));
+        const nextHeight = Math.max((entry.target as HTMLElement).offsetHeight, isMobile ? 350 : 450);
+        setCardHeight(prev => Math.abs(prev - nextHeight) > 2 ? nextHeight : prev);
       }
     });
     observer.observe(contentRef.current);
@@ -375,7 +376,7 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
           width: `${cardWidth}px`,
           height: `${cardHeight}px`,
           position: 'relative',
-          willChange: 'opacity, transform, visibility',
+          willChange: 'opacity, visibility',
           visibility: 'hidden',
           cursor: 'default'
         }}
