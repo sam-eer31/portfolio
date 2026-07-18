@@ -4,14 +4,11 @@
   --font-sans: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --bg-dark: #01060e;
-  --bg-grid: rgba(0, 229, 255, 0.03);
-  --cyan-primary: #00e5ff;
-  --cyan-glow: rgba(0, 229, 255, 0.3);
-  --blue-glow: rgba(0, 136, 255, 0.2);
-
-  --glass-bg: rgba(10, 15, 30, 0.65);
-  --glass-border: rgba(100, 180, 255, 0.2);
+  --bg-dark: var(--theme-bg-dark);
+  --bg-grid: var(--theme-bg-grid);
+      
+  --glass-bg: rgba(0, 0, 0, 0.20);
+  --glass-border: var(--theme-glass-border);
   --glass-blur: blur(16px);
 }
 
@@ -126,15 +123,15 @@ body::-webkit-scrollbar {
   letter-spacing: 0.2em;
   font-size: 1.1rem;
   color: #ffffff;
-  text-shadow: 0 0 10px var(--cyan-glow);
+  text-shadow: 0 0 10px var(--theme-glow-primary);
 }
 
 .hud-logo-icon {
   width: 10px;
   height: 10px;
-  background: var(--cyan-primary);
+  background: var(--theme-primary);
   border-radius: 50%;
-  box-shadow: 0 0 15px var(--cyan-primary);
+  box-shadow: 0 0 15px var(--theme-primary);
   animation: pulse-glow 2s infinite alternate;
 }
 
@@ -146,7 +143,7 @@ body::-webkit-scrollbar {
   backdrop-filter: var(--glass-blur);
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--cyan-primary);
+  color: var(--theme-primary);
   letter-spacing: 0.05em;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   text-decoration: none;
@@ -155,10 +152,10 @@ body::-webkit-scrollbar {
 }
 
 .hud-badge:hover {
-  background: rgba(0, 229, 255, 0.15);
-  border-color: var(--cyan-primary);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3) inset, 0 4px 20px rgba(0, 0, 0, 0.4);
-  text-shadow: 0 0 8px var(--cyan-glow);
+  background: var(--theme-glow-primary);
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 15px var(--theme-glow-primary) inset, 0 4px 20px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 8px var(--theme-glow-primary);
 }
 
 /* Step tracker on the side */
@@ -193,7 +190,7 @@ body::-webkit-scrollbar {
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #aabbee;
+  color: var(--theme-text-muted);
   max-width: 0;
   overflow: hidden;
   opacity: 0;
@@ -202,8 +199,8 @@ body::-webkit-scrollbar {
 }
 
 .sidebar-step.active .step-label {
-  color: var(--cyan-primary);
-  text-shadow: 0 0 8px var(--cyan-glow);
+  color: var(--theme-primary);
+  text-shadow: 0 0 8px var(--theme-glow-primary);
   max-width: 250px;
   opacity: 1;
   margin-right: 0.5rem;
@@ -218,9 +215,9 @@ body::-webkit-scrollbar {
 }
 
 .sidebar-step.active .step-dot {
-  background: var(--cyan-primary);
-  border-color: var(--cyan-primary);
-  box-shadow: 0 0 10px var(--cyan-primary);
+  background: var(--theme-primary);
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 10px var(--theme-primary);
   transform: scale(1.3);
 }
 
@@ -240,8 +237,8 @@ body::-webkit-scrollbar {
 .telemetry-panel {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #aabbee;
-  text-shadow: 0 0 5px rgba(170, 187, 238, 0.5);
+  color: var(--theme-text-muted);
+  text-shadow: 0 0 5px rgba(148, 163, 184, 0.5);
 }
 
 .scroll-indicator {
@@ -260,13 +257,13 @@ body::-webkit-scrollbar {
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: #7788aa;
+  color: var(--theme-text-muted);
 }
 
 .scroll-mouse {
   width: 18px;
   height: 30px;
-  border: 2px solid #556688;
+  border: 2px solid var(--theme-text-muted);
   border-radius: 12px;
   position: relative;
 }
@@ -274,7 +271,7 @@ body::-webkit-scrollbar {
 .scroll-wheel {
   width: 2px;
   height: 6px;
-  background: var(--cyan-primary);
+  background: var(--theme-primary);
   border-radius: 1px;
   position: absolute;
   top: 6px;
@@ -286,7 +283,7 @@ body::-webkit-scrollbar {
 .telemetry-panel {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: #556688;
+  color: var(--theme-text-muted);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -296,12 +293,12 @@ body::-webkit-scrollbar {
 @keyframes pulse-glow {
   0% {
     opacity: 0.6;
-    box-shadow: 0 0 5px var(--cyan-primary);
+    box-shadow: 0 0 5px var(--theme-primary);
   }
 
   100% {
     opacity: 1;
-    box-shadow: 0 0 20px var(--cyan-primary);
+    box-shadow: 0 0 20px var(--theme-primary);
   }
 }
 
@@ -328,7 +325,7 @@ body::-webkit-scrollbar {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.8) translateY(20px);
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.1));
+  filter: drop-shadow(0 0 10px var(--theme-glow-primary));
   will-change: transform, opacity;
 }
 
@@ -351,14 +348,14 @@ body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.4));
+  filter: drop-shadow(0 0 8px var(--theme-glow-primary));
 }
 
 .holo-ring-outer {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px dashed rgba(0, 229, 255, 0.3);
+  border: 1px dashed var(--theme-glow-primary);
   animation: spin 12s linear infinite;
 }
 
@@ -367,7 +364,7 @@ body::-webkit-scrollbar {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 1px dotted rgba(0, 229, 255, 0.6);
+  border: 1px dotted var(--theme-glow-primary);
   animation: spin 20s linear infinite reverse;
 }
 
@@ -376,9 +373,9 @@ body::-webkit-scrollbar {
   inset: 12%;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-left-color: var(--cyan-primary);
-  border-top-color: var(--cyan-primary);
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4) inset;
+  border-left-color: var(--theme-primary);
+  border-top-color: var(--theme-primary);
+  box-shadow: 0 0 10px var(--theme-glow-primary) inset;
   animation: spin 6s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
 }
 
@@ -388,8 +385,8 @@ body::-webkit-scrollbar {
   inset: -6px;
   border-radius: 50%;
   border: 2px solid transparent;
-  border-right-color: var(--cyan-primary);
-  border-bottom-color: rgba(0, 229, 255, 0.5);
+  border-right-color: var(--theme-primary);
+  border-bottom-color: var(--theme-glow-primary);
   animation: spin 4s linear infinite reverse;
 }
 
@@ -397,7 +394,7 @@ body::-webkit-scrollbar {
   position: absolute;
   inset: 28%;
   border-radius: 50%;
-  border: 1px dashed var(--cyan-primary);
+  border: 1px dashed var(--theme-primary);
   opacity: 0.8;
   animation: spin 15s linear infinite;
 }
@@ -406,14 +403,14 @@ body::-webkit-scrollbar {
   position: absolute;
   inset: 40%;
   border-radius: 50%;
-  border: 1px solid rgba(0, 229, 255, 0.2);
+  border: 1px solid var(--theme-glow-primary);
 }
 
 .holo-crosshair::before,
 .holo-crosshair::after {
   content: '';
   position: absolute;
-  background: rgba(0, 229, 255, 0.4);
+  background: var(--theme-glow-primary);
 }
 
 .holo-crosshair::before {
@@ -435,9 +432,9 @@ body::-webkit-scrollbar {
 .holo-core {
   width: 12%;
   height: 12%;
-  background: var(--cyan-primary);
+  background: var(--theme-primary);
   border-radius: 50%;
-  box-shadow: 0 0 15px var(--cyan-primary);
+  box-shadow: 0 0 15px var(--theme-primary);
   animation: pulse-glow 1.5s infinite alternate;
   position: relative;
   z-index: 2;
@@ -452,7 +449,7 @@ body::-webkit-scrollbar {
 .hud-subtitle {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: var(--cyan-primary);
+  color: var(--theme-primary);
   letter-spacing: 0.15em;
   margin-bottom: 0.2rem;
   text-transform: uppercase;
@@ -464,7 +461,7 @@ body::-webkit-scrollbar {
   letter-spacing: 0.1em;
   line-height: 1.1;
   color: #ffffff;
-  text-shadow: 0 0 15px rgba(0, 229, 255, 0.8), 0 0 5px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 15px var(--theme-glow-primary), 0 0 5px rgba(255, 255, 255, 0.5);
   margin-bottom: 0.2rem;
   text-transform: uppercase;
 }
@@ -474,7 +471,7 @@ body::-webkit-scrollbar {
   justify-content: space-between;
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--cyan-primary);
+  color: var(--theme-primary);
   margin-bottom: 0.25rem;
   text-transform: uppercase;
 }
@@ -482,7 +479,7 @@ body::-webkit-scrollbar {
 .hud-progress-bar {
   width: 100%;
   height: 4px;
-  background: rgba(0, 255, 255, 0.1);
+  background: var(--theme-glow-primary);
   position: relative;
   overflow: hidden;
   margin-top: 4px;
@@ -495,18 +492,18 @@ body::-webkit-scrollbar {
   height: 100%;
   width: 98.7%;
   background: repeating-linear-gradient(to right,
-      var(--cyan-primary),
-      var(--cyan-primary) 6px,
+      var(--theme-primary),
+      var(--theme-primary) 6px,
       transparent 6px,
       transparent 10px);
-  box-shadow: 0 0 8px var(--cyan-primary);
+  box-shadow: 0 0 8px var(--theme-primary);
 }
 
 .hud-sys-badge {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: var(--cyan-primary);
-  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: var(--theme-primary);
+  border: 1px solid var(--theme-glow-primary);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
 }
@@ -521,38 +518,39 @@ body::-webkit-scrollbar {
 .hud-description {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #88b8cb;
+  color: var(--theme-text-muted);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
 /* Tags Container */
 .hud-badge-tag {
-  background: rgba(0, 229, 255, 0.08);
-  border: 1px solid rgba(0, 229, 255, 0.3);
+  background: var(--theme-glow-primary);
+  border: 1px solid var(--theme-glow-primary);
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--cyan-primary);
+  color: var(--theme-primary);
   letter-spacing: 0.05em;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(16px);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
+  text-shadow: 0 0 5px var(--theme-glow-primary);
   white-space: nowrap;
 }
 
 .hud-badge-tag:hover {
-  background: rgba(0, 229, 255, 0.2);
-  border-color: var(--cyan-primary);
+  background: var(--theme-glow-primary);
+  border-color: var(--theme-primary);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.4);
-  text-shadow: 0 0 8px var(--cyan-primary);
+  box-shadow: 0 4px 12px var(--theme-glow-primary);
+  text-shadow: 0 0 8px var(--theme-primary);
 }
 /* Sidebar Telemetry */
 .hud-telemetry {
@@ -567,7 +565,7 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  border-bottom: 1px solid var(--theme-glow-primary);
   padding-bottom: 0.5rem;
 }
 
@@ -578,7 +576,7 @@ body::-webkit-scrollbar {
 
 .hud-tel-val {
   font-size: 0.75rem;
-  color: var(--cyan-primary);
+  color: var(--theme-primary);
 }
 
 /* Live Feed Radar */
@@ -610,7 +608,7 @@ body::-webkit-scrollbar {
   position: absolute;
   width: 12px;
   height: 12px;
-  border: 2px solid var(--cyan-primary);
+  border: 2px solid var(--theme-primary);
   opacity: 0.8;
 }
 
@@ -647,7 +645,7 @@ body::-webkit-scrollbar {
   position: absolute;
   bottom: 15px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 229, 255, 0.3);
+  border: 1px solid var(--theme-glow-primary);
   transform: rotateX(75deg);
 }
 
@@ -683,7 +681,7 @@ body::-webkit-scrollbar {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px solid rgba(0, 229, 255, 0.4);
+  border: 1px solid var(--theme-glow-primary);
 }
 
 /* Longitudes (Vertical) */
@@ -738,10 +736,10 @@ body::-webkit-scrollbar {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 229, 255, 0.8);
+  border: 1px solid var(--theme-glow-primary);
   transform: rotateX(75deg);
   animation: orbit-spin 8s linear infinite;
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  box-shadow: 0 0 10px var(--theme-glow-primary);
   z-index: 3;
   margin-bottom: 25px;
 }
@@ -755,7 +753,7 @@ body::-webkit-scrollbar {
   height: 3px;
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0 0 8px #fff, 0 0 15px var(--cyan-primary);
+  box-shadow: 0 0 8px #fff, 0 0 15px var(--theme-primary);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -796,7 +794,7 @@ body::-webkit-scrollbar {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.1s ease-out;
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.1));
+  filter: drop-shadow(0 0 10px var(--theme-glow-primary));
 }
 
 /* Footer */
@@ -823,9 +821,9 @@ body::-webkit-scrollbar {
   align-items: center;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
-  background: rgba(0, 229, 255, 0.1);
-  border: 1px solid var(--cyan-primary);
-  color: var(--cyan-primary);
+  background: var(--theme-glow-primary);
+  border: 1px solid var(--theme-primary);
+  color: var(--theme-primary);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -837,9 +835,9 @@ body::-webkit-scrollbar {
 }
 
 .hud-launch-btn:hover {
-  background: var(--cyan-primary);
+  background: var(--theme-primary);
   color: #000;
-  box-shadow: 0 0 15px var(--cyan-glow);
+  box-shadow: 0 0 15px var(--theme-glow-primary);
 }
 
 /* Mobile Overrides for App UI */
@@ -888,4 +886,9 @@ body::-webkit-scrollbar {
 .edge-tracer {
   stroke-dasharray: 15 35;
   animation: trace-edge 17s linear infinite reverse;
+}
+
+.hud-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }

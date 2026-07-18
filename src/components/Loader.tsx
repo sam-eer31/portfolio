@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import './Loader.css';
+import { useTheme } from '../theme/ThemeContext';
 
 const BOOT_LOGS = [
   "[SYS] Kernel bootstrap initiated...",
@@ -37,9 +38,11 @@ function ProgressiveWireframeSphere({ progressRef }: { progressRef: React.Mutabl
     }
   });
 
+  const { colors } = useTheme();
+
   return (
     <lineSegments ref={lineRef} geometry={geometry}>
-      <lineBasicMaterial color="#00e5ff" transparent opacity={0.8} />
+      <lineBasicMaterial color={colors.primary} transparent opacity={0.8} />
     </lineSegments>
   );
 }
@@ -195,8 +198,8 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
           {/* Logs are injected here purely via DOM manipulation to prevent Layout Thrashing */}
         </div>
         
-        {/* Interactive Enter Button Overlay */}
-        <div className={`loader-enter-overlay ${isReadyToEnter ? 'visible' : ''}`}>
+        {/* Interactive Enter Button Inline */}
+        <div className={`loader-enter-inline ${isReadyToEnter ? 'visible' : ''}`}>
           <button className="cyber-enter-btn" onClick={handleEnter}>
             <span className="btn-glitch-layer"></span>
             INITIALIZE LINK

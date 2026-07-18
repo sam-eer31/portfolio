@@ -3,6 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import EdgesWorker from './EdgesWorker?worker';
+import { useTheme } from '../theme/ThemeContext';
 
 const TOUR_NODES = [
   {
@@ -23,7 +24,7 @@ const TOUR_NODES = [
       <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.75em', lineHeight: '1.4' }}>
         <div>
           <strong style={{ color: '#fff', fontSize: '1.1em' }}>Core Tech Stack</strong>
-          <div style={{ margin: '0.3rem 0 0 0.5rem', opacity: 0.9, paddingLeft: '0.5rem', borderLeft: '2px solid rgba(0, 229, 255, 0.4)' }}>
+          <div style={{ margin: '0.3rem 0 0 0.5rem', opacity: 0.9, paddingLeft: '0.5rem', borderLeft: '2px solid var(--theme-glow-primary)' }}>
             <strong>Programming:</strong> Python (strong logic building & problem solving)<br />
             <strong>Frontend:</strong> HTML, CSS, JS, React, Next.js, Tailwind CSS<br />
             <strong>Backend:</strong> FastAPI, Flask, Node.js<br />
@@ -82,7 +83,7 @@ const TOUR_NODES = [
           An integrated AI-powered productivity suite designed to provide a unified, flexible, and privacy-aware solution.
         </p>
         <div>
-          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <strong style={{ color: 'var(--theme-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>4-in-1 AI Modules:</span></strong> Document Generator, Code Generator, Document Analyzer, and an interactive AI Teacher.</li>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Hybrid LLM Inference:</span></strong> Seamlessly switch between local processing (via Ollama for privacy) and Cloud processing for performance.</li>
@@ -105,7 +106,7 @@ const TOUR_NODES = [
           Feedback Analyzer turns text feedback into insights with sentiment analysis, AI summaries, word clouds, and CSV/PDF exports in a modern web app.
         </p>
         <div>
-          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <strong style={{ color: 'var(--theme-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>NLP Pipelines:</span></strong> Sentiment analysis via Transformers (RoBERTa, DistilBERT).</li>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>AI Summaries:</span></strong> Contextual summaries using local/cloud LLMs (Gemini/Ollama).</li>
@@ -129,7 +130,7 @@ const TOUR_NODES = [
           A real-time synchronized media platform for listening to music and watching YouTube videos together.
         </p>
         <div>
-          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <strong style={{ color: 'var(--theme-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Precision Sync:</span></strong> Millisecond-accurate synchronized playback across all connected clients via WebSockets.</li>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Room Management:</span></strong> Access-controlled rooms with locking, user approvals, and strict host privileges.</li>
@@ -153,7 +154,7 @@ const TOUR_NODES = [
           A high-performance, browser-based engine for rendering stunning 3D audio visualizations in real-time.
         </p>
         <div>
-          <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
+          <strong style={{ color: 'var(--theme-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Live 3D Rendering:</span></strong> 20 distinct dynamic visualizer effects powered by Three.js.</li>
             <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Audio Processing:</span></strong> Real-time frequency analysis via the native Web Audio API.</li>
@@ -174,7 +175,7 @@ const TOUR_NODES = [
     customDescription: (
       <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.85em', lineHeight: '1.4' }}>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--cyan-primary)' }}>2022-2026</div>
+          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--theme-primary)' }}>2022-2026</div>
           <div style={{ flex: 1 }}>
             <strong style={{ color: '#fff' }}>Computer Science and Engineering | Bachelor of Technology</strong><br />
             <span style={{ opacity: 0.8, fontStyle: 'italic' }}>Khwaja Moinuddin Chishti Language University, Lucknow</span><br />
@@ -182,14 +183,14 @@ const TOUR_NODES = [
           </div>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--cyan-primary)' }}>2022</div>
+          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--theme-primary)' }}>2022</div>
           <div style={{ flex: 1 }}>
             <strong style={{ color: '#fff' }}>Intermediate</strong><br />
             <span style={{ opacity: 0.8, fontStyle: 'italic' }}>Kendriya Vidyalaya IIM, Lucknow</span>
           </div>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--cyan-primary)' }}>2020</div>
+          <div style={{ width: '80px', flexShrink: 0, fontWeight: 'bold', color: 'var(--theme-primary)' }}>2020</div>
           <div style={{ flex: 1 }}>
             <strong style={{ color: '#fff' }}>High school</strong><br />
             <span style={{ opacity: 0.8, fontStyle: 'italic' }}>Kendriya Vidyalaya IIM, Lucknow</span>
@@ -210,16 +211,16 @@ const TOUR_NODES = [
         <p style={{ margin: 0, fontStyle: 'italic', opacity: 0.9 }}>
           Ready to orchestrate AI tools for your next big idea. Open to internships, collaborations, and visionary software engineering projects.
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '0.5rem', alignItems: 'center', background: 'rgba(0, 229, 255, 0.05)', padding: '1rem', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: '4px' }}>
-          <strong style={{ color: 'var(--cyan-primary)' }}>EMAIL:</strong>
+        <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '0.5rem', alignItems: 'center', background: 'var(--theme-glow-primary)', padding: '1rem', border: '1px solid var(--theme-glow-primary)', borderRadius: '4px' }}>
+          <strong style={{ color: 'var(--theme-primary)' }}>EMAIL:</strong>
           <span style={{ color: '#fff', userSelect: 'all', pointerEvents: 'auto' }}>sameershahidsiddiqui365@gmail.com</span>
 
-          <strong style={{ color: 'var(--cyan-primary)' }}>PHONE:</strong>
+          <strong style={{ color: 'var(--theme-primary)' }}>PHONE:</strong>
           <span style={{ color: '#fff', userSelect: 'all', pointerEvents: 'auto' }}>+91 9335847773</span>
 
-          <strong style={{ color: 'var(--cyan-primary)' }}>GITHUB:</strong>
+          <strong style={{ color: 'var(--theme-primary)' }}>GITHUB:</strong>
           <a href="https://github.com/sam-eer31" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', pointerEvents: 'auto', textDecoration: 'none' }}>
-            github.com/sam-eer31 <span style={{ color: 'var(--cyan-primary)', marginLeft: '4px' }}>↗</span>
+            github.com/sam-eer31 <span style={{ color: 'var(--theme-primary)', marginLeft: '4px' }}>↗</span>
           </a>
         </div>
       </div>
@@ -359,6 +360,24 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
   }, [isMobile]);
 
   const cy = cardHeight / 2 + 40;
+  const clipPathStr = `polygon(
+    30px 0px,
+    ${cardWidth - 30}px 0px,
+    ${cardWidth}px 30px,
+    ${cardWidth}px ${cy}px,
+    ${cardWidth - 15}px ${cy + 15}px,
+    ${cardWidth - 15}px ${cy + 80}px,
+    ${cardWidth}px ${cy + 95}px,
+    ${cardWidth}px ${cardHeight - 30}px,
+    ${cardWidth - 30}px ${cardHeight}px,
+    30px ${cardHeight}px,
+    0px ${cardHeight - 30}px,
+    0px ${cy + 95}px,
+    15px ${cy + 80}px,
+    15px ${cy + 15}px,
+    0px ${cy}px,
+    0px 30px
+  )`;
   let dynamicDF = (viewportWidth * 4.25) / cardWidth;
   dynamicDF = Math.max(1.5, Math.min(dynamicDF, 7));
 
@@ -386,24 +405,24 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
           viewBox={`0 0 ${cardWidth} ${cardHeight}`}
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none', overflow: 'visible' }}
         >
-          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="rgba(2, 8, 19, 0.85)" stroke="rgba(0, 229, 255, 0.4)" strokeWidth="1" />
-          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="1" />
-          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="#00e5ff" strokeWidth="3" pathLength="100" className="edge-tracer" />
-          <path d="M 150 0 L 150 6 M 160 0 L 160 6 M 170 0 L 170 6" stroke="#00e5ff" strokeWidth="2" />
-          <path d={`M ${cardWidth - 170} ${cardHeight} L ${cardWidth - 170} ${cardHeight - 6} M ${cardWidth - 160} ${cardHeight} L ${cardWidth - 160} ${cardHeight - 6} M ${cardWidth - 150} ${cardHeight} L ${cardWidth - 150} ${cardHeight - 6}`} stroke="#00e5ff" strokeWidth="2" />
-          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="var(--glass-bg)" stroke="var(--theme-glow-primary)" strokeWidth="1" />
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="var(--theme-primary)" strokeWidth="1" />
+          <path d={`M 30 0 L ${cardWidth - 30} 0 L ${cardWidth} 30 L ${cardWidth} ${cy} L ${cardWidth - 15} ${cy + 15} L ${cardWidth - 15} ${cy + 80} L ${cardWidth} ${cy + 95} L ${cardWidth} ${cardHeight - 30} L ${cardWidth - 30} ${cardHeight} L 30 ${cardHeight} L 0 ${cardHeight - 30} L 0 ${cy + 95} L 15 ${cy + 80} L 15 ${cy + 15} L 0 ${cy} L 0 30 Z`} fill="none" stroke="var(--theme-primary)" strokeWidth="3" pathLength="100" className="edge-tracer" />
+          <path d="M 150 0 L 150 6 M 160 0 L 160 6 M 170 0 L 170 6" stroke="var(--theme-primary)" strokeWidth="2" />
+          <path d={`M ${cardWidth - 170} ${cardHeight} L ${cardWidth - 170} ${cardHeight - 6} M ${cardWidth - 160} ${cardHeight} L ${cardWidth - 160} ${cardHeight - 6} M ${cardWidth - 150} ${cardHeight} L ${cardWidth - 150} ${cardHeight - 6}`} stroke="var(--theme-primary)" strokeWidth="2" />
+          <g stroke="var(--theme-primary)" strokeWidth="1" opacity="0.8">
             <line x1="-10" y1="-10" x2="-2" y2="-10" />
             <line x1="-6" y1="-14" x2="-6" y2="-6" />
           </g>
-          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+          <g stroke="var(--theme-primary)" strokeWidth="1" opacity="0.8">
             <line x1={cardWidth + 2} y1={cardHeight + 10} x2={cardWidth + 10} y2={cardHeight + 10} />
             <line x1={cardWidth + 6} y1={cardHeight + 6} x2={cardWidth + 6} y2={cardHeight + 14} />
           </g>
-          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+          <g stroke="var(--theme-primary)" strokeWidth="1" opacity="0.8">
             <line x1="-10" y1={cardHeight + 10} x2="-2" y2={cardHeight + 10} />
             <line x1="-6" y1={cardHeight + 6} x2="-6" y2={cardHeight + 14} />
           </g>
-          <g stroke="#00e5ff" strokeWidth="1" opacity="0.8">
+          <g stroke="var(--theme-primary)" strokeWidth="1" opacity="0.8">
             <line x1={cardWidth + 2} y1="-10" x2={cardWidth + 10} y2="-10" />
             <line x1={cardWidth + 6} y1="-14" x2={cardWidth + 6} y2="-6" />
           </g>
@@ -412,7 +431,18 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
         <div
           ref={contentRef}
           className="hud-card"
-          style={{ position: 'relative', zIndex: 1, padding: isMobile ? '1.5rem' : '2.5rem', width: '100%', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            padding: isMobile ? '1.5rem' : '2.5rem',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem',
+            clipPath: clipPathStr,
+            WebkitClipPath: clipPathStr
+          }}
         >
           <div style={{ display: 'flex', gap: isMobile ? '1rem' : '1.5rem', flexDirection: 'row', width: '100%' }}>
             {/* Left Col: Target Ring */}
@@ -427,7 +457,7 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
             </div>
 
             {/* Glowing Vertical Divider */}
-            <div style={{ width: '2px', background: 'var(--cyan-primary)', boxShadow: '0 0 10px var(--cyan-primary)', alignSelf: 'stretch', marginTop: '10px', marginBottom: '10px' }}></div>
+            <div style={{ width: '2px', background: 'var(--theme-primary)', boxShadow: '0 0 10px var(--theme-primary)', alignSelf: 'stretch', marginTop: '10px', marginBottom: '10px' }}></div>
 
             {/* Center Col: Text & Tags */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -439,7 +469,7 @@ const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
                 <div className="hud-title">{node.subtitle}</div>
               </div>
 
-              <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, rgba(0,229,255,0.8) 0%, transparent 100%)', margin: '0.5rem 0' }}></div>
+              <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, var(--theme-primary) 0%, transparent 100%)', margin: '0.5rem 0' }}></div>
 
               {node.customDescription ? (
                 node.customDescription
@@ -592,13 +622,14 @@ const PlexusNetwork = ({
     return { points: geoPoints, lines: geoLines };
   }, []);
 
+  const { colors } = useTheme();
   return (
     <group>
       <points geometry={points}>
-        <pointsMaterial ref={pointsMatRef} map={circleTexture} alphaTest={0.5} color="#00ffff" size={0.04} transparent opacity={0} sizeAttenuation={true} />
+        <pointsMaterial ref={pointsMatRef} map={circleTexture} alphaTest={0.5} color={colors.brainPrimaryLight} size={0.04} transparent opacity={0} sizeAttenuation={true} />
       </points>
       <lineSegments geometry={lines}>
-        <lineBasicMaterial ref={linesMatRef} color="#0088ff" transparent opacity={0} blending={THREE.AdditiveBlending} depthWrite={false} />
+        <lineBasicMaterial ref={linesMatRef} color={colors.brainPrimaryDark} transparent opacity={0} blending={THREE.AdditiveBlending} depthWrite={false} />
       </lineSegments>
 
       {/* Attach HTML Cards. Using standard DOM overlays perfectly tracking 3D coordinates. */}
@@ -618,6 +649,7 @@ const PlexusNetwork = ({
 };
 
 export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progressRef?: React.MutableRefObject<number>, dragRotationRef?: React.MutableRefObject<{ x: number, y: number }> }) => {
+  const { colors } = useTheme();
   const { scene } = useGLTF('/brain.glb');
 
   const [baseScale, setBaseScale] = useState(1);
@@ -859,7 +891,7 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
               <lineSegments key={index} geometry={meshData.edges}>
                 <lineBasicMaterial
                   ref={index === 0 ? outerBrainMatRef : null}
-                  color="#1a4dff"
+                  color={colors.brainPrimary}
                   transparent={true}
                   opacity={0.3}
                   blending={THREE.AdditiveBlending}

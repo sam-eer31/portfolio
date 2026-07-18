@@ -3,6 +3,8 @@ import { Canvas } from '@react-three/fiber';
 import { ContactShadows } from '@react-three/drei';
 import { BrainModel } from './components/BrainModel';
 import { Loader } from './components/Loader';
+import { ThemeSwitcher } from './components/ThemeSwitcher';
+import { useTheme } from './theme/ThemeContext';
 import './index.css';
 
 // Silently fetch the 5MB brain model into the browser cache.
@@ -10,23 +12,6 @@ import './index.css';
 // By natively fetching it, we get the network speed benefit WITHOUT the parser freeze during the loader!
 fetch('/brain.glb').catch(() => {});
 
-// Add an icon for the audio toggle button
-const AudioIcon = ({ isPlaying }: { isPlaying: boolean }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    {isPlaying ? (
-      <>
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-      </>
-    ) : (
-      <>
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <line x1="23" y1="9" x2="17" y2="15"></line>
-        <line x1="17" y1="9" x2="23" y2="15"></line>
-      </>
-    )}
-  </svg>
-);
 
 const STEPS = [
   { label: "Identity" },
@@ -41,6 +26,7 @@ const STEPS = [
 ];
 
 export default function App() {
+  const { colors } = useTheme();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const scrollProgressRef = useRef(0);
@@ -212,7 +198,7 @@ export default function App() {
         scale={15} 
         blur={2} 
         far={4} 
-        color="#9900ff" 
+        color={colors.primary} 
         frames={1}
         resolution={512}
       />
@@ -252,10 +238,50 @@ export default function App() {
         {/* Header */}
         <header className="hud-header hud-interactive">
           <div className="hud-logo" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/logo.png" alt="Logo" style={{ height: '28px', marginRight: '12px', filter: 'drop-shadow(0 0 8px var(--cyan-glow))' }} />
+            <img src="/logo.png" alt="Logo" style={{ height: '28px', marginRight: '12px', filter: 'drop-shadow(0 0 8px var(--theme-glow-primary))' }} />
             <span>PORTFOLIO // SAMEER</span>
           </div>
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <button 
+              onClick={toggleAudio} 
+              className="hud-badge hud-interactive" 
+              style={{ 
+                background: 'var(--glass-bg)', 
+                border: '1px solid var(--theme-glass-border)', 
+                color: 'var(--theme-primary)', 
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '0.5rem 1rem',
+                borderRadius: '999px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem',
+                letterSpacing: '0.05em',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--theme-glow-secondary)';
+                e.currentTarget.style.borderColor = 'var(--theme-primary)';
+                e.currentTarget.style.boxShadow = '0 0 15px var(--theme-glow-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'var(--glass-bg)';
+                e.currentTarget.style.borderColor = 'var(--theme-glass-border)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <span style={{
+                display: 'inline-block',
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: isAudioPlaying ? 'var(--theme-primary)' : 'rgba(255,255,255,0.2)',
+                boxShadow: isAudioPlaying ? '0 0 8px var(--theme-primary)' : 'none',
+                transition: 'all 0.3s ease'
+              }}/>
+              AUDIO: {isAudioPlaying ? 'ON' : 'OFF'}
+            </button>
             <a href="https://github.com/sam-eer31/portfolio" target="_blank" rel="noopener noreferrer" className="hud-badge">
               GITHUB
             </a>
@@ -299,44 +325,8 @@ export default function App() {
       </div>
 
       {/* Audio Toggle Button */}
-      {isAppLoaded && (
-        <button
-          onClick={toggleAudio}
-          className="hud-interactive"
-          style={{
-            position: 'fixed',
-            bottom: '90px',
-            right: '30px',
-            zIndex: 9000,
-            background: 'rgba(2, 8, 19, 0.6)',
-            border: '1px solid rgba(0, 229, 255, 0.3)',
-            borderRadius: '50%',
-            width: '45px',
-            height: '45px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--cyan-primary)',
-            cursor: 'pointer',
-            backdropFilter: 'blur(5px)',
-            transition: 'all 0.3s ease',
-            boxShadow: '0 0 10px rgba(0, 229, 255, 0.1)'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(0, 229, 255, 0.15)';
-            e.currentTarget.style.borderColor = 'var(--cyan-primary)';
-            e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 229, 255, 0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(2, 8, 19, 0.6)';
-            e.currentTarget.style.borderColor = 'rgba(0, 229, 255, 0.3)';
-            e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 229, 255, 0.1)';
-          }}
-          title={isAudioPlaying ? "Mute Background Music" : "Play Background Music"}
-        >
-          <AudioIcon isPlaying={isAudioPlaying} />
-        </button>
-      )}
+      {isAppLoaded && <ThemeSwitcher />}
+      
 
     </div>
     </>
