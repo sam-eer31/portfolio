@@ -13,5 +13,5 @@ self.onmessage = (e) => {
   const edgesPosition = edges.attributes.position.array as Float32Array;
   
   // Transfer the buffer back to main thread to avoid copy overhead
-  self.postMessage({ edgesPosition }, [edgesPosition.buffer]);
+  (self as any).postMessage({ edgesPosition }, [edgesPosition.buffer]);
 };

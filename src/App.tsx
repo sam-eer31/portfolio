@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState, useRef, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ContactShadows, useGLTF } from '@react-three/drei';
+import { ContactShadows } from '@react-three/drei';
 import { BrainModel } from './components/BrainModel';
 import { Loader } from './components/Loader';
 import './index.css';
