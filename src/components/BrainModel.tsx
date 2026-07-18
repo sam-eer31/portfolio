@@ -2,7 +2,6 @@ import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
-import { Hexagon } from 'lucide-react';
 
 const TOUR_NODES = [
   {
@@ -340,7 +339,7 @@ const LiveTelemetryPanel = () => {
   );
 };
 
-const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef, dragRotationRef }: any) => {
+const HudCard = ({ node, index, isMobile, viewportWidth, htmlRef }: any) => {
   const cardWidth = isMobile ? 650 : 850;
   const [cardHeight, setCardHeight] = useState(isMobile ? 480 : 520);
   const contentRef = useRef<HTMLDivElement>(null);

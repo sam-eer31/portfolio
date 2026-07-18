@@ -27,7 +27,7 @@ function ProgressiveWireframeSphere({ progress }: { progress: number }) {
     return new THREE.WireframeGeometry(baseGeom);
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (lineRef.current) {
       lineRef.current.rotation.x += delta * 0.15;
       lineRef.current.rotation.y += delta * 0.2;
@@ -51,7 +51,6 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
   const [displayProgress, setDisplayProgress] = useState(0);
   const [text, setText] = useState('SYSTEM BOOT');
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const [hasCompleted, setHasCompleted] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
   
   const logsEndRef = useRef<HTMLDivElement>(null);
@@ -101,7 +100,6 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
         
         if (!hasCompletedRef.current) {
           hasCompletedRef.current = true;
-          setHasCompleted(true);
           setLogs(prev => [...prev.slice(-4), "[SYS] Neural link established. Enjoy."]);
           setTimeout(() => {
             setIsFadingOut(true);
