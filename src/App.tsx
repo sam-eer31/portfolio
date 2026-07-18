@@ -1,9 +1,32 @@
 import { Suspense, useEffect, useState, useRef, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ContactShadows } from '@react-three/drei';
+import { ContactShadows, useGLTF } from '@react-three/drei';
 import { BrainModel } from './components/BrainModel';
 import { Loader } from './components/Loader';
 import './index.css';
+
+// Silently fetch the 5MB brain model into the browser cache.
+// We DO NOT use useGLTF.preload() here because parsing the GLTF JSON locks the main thread for ~500ms.
+// By natively fetching it, we get the network speed benefit WITHOUT the parser freeze during the loader!
+fetch('/brain.glb').catch(() => {});
+
+// Add an icon for the audio toggle button
+const AudioIcon = ({ isPlaying }: { isPlaying: boolean }) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    {isPlaying ? (
+      <>
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </>
+    ) : (
+      <>
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </>
+    )}
+  </svg>
+);
 
 const STEPS = [
   { label: "Identity" },
@@ -17,11 +40,37 @@ const STEPS = [
   { label: "Contact" }
 ];
 
-function App() {
+export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const scrollProgressRef = useRef(0);
   const dragRotationRef = useRef({ x: 0, y: 0 });
+  
+  // Audio state
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
+  // When loader completes, play the music (triggered by user click)
+  const handleLoaderComplete = () => {
+    setIsAppLoaded(true);
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5;
+      audioRef.current.play().then(() => {
+        setIsAudioPlaying(true);
+      }).catch(e => console.log('Audio playback failed', e));
+    }
+  };
+
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isAudioPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsAudioPlaying(!isAudioPlaying);
+    }
+  };
 
   // Capture window scrolling and map it to 0.0 - 1.0 progress
   useEffect(() => {
@@ -172,8 +221,11 @@ function App() {
 
   return (
     <>
-      {!isAppLoaded && <Loader onComplete={() => setIsAppLoaded(true)} />}
-      <div className="app-container">
+      {!isAppLoaded && <Loader onComplete={handleLoaderComplete} />}
+
+      <audio ref={audioRef} src="/bgm.mp3" loop preload="auto" />
+
+      <div className="app-container" style={{ visibility: isAppLoaded ? 'visible' : 'hidden' }}>
       {/* Background Cyber Grid */}
       <div className="cyber-grid" />
 
@@ -245,9 +297,48 @@ function App() {
         </footer>
 
       </div>
+
+      {/* Audio Toggle Button */}
+      {isAppLoaded && (
+        <button
+          onClick={toggleAudio}
+          className="hud-interactive"
+          style={{
+            position: 'fixed',
+            bottom: '90px',
+            right: '30px',
+            zIndex: 9000,
+            background: 'rgba(2, 8, 19, 0.6)',
+            border: '1px solid rgba(0, 229, 255, 0.3)',
+            borderRadius: '50%',
+            width: '45px',
+            height: '45px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--cyan-primary)',
+            cursor: 'pointer',
+            backdropFilter: 'blur(5px)',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 0 10px rgba(0, 229, 255, 0.1)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(0, 229, 255, 0.15)';
+            e.currentTarget.style.borderColor = 'var(--cyan-primary)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 229, 255, 0.3)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(2, 8, 19, 0.6)';
+            e.currentTarget.style.borderColor = 'rgba(0, 229, 255, 0.3)';
+            e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 229, 255, 0.1)';
+          }}
+          title={isAudioPlaying ? "Mute Background Music" : "Play Background Music"}
+        >
+          <AudioIcon isPlaying={isAudioPlaying} />
+        </button>
+      )}
+
     </div>
     </>
   );
 }
-
-export default App;

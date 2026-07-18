@@ -2,6 +2,7 @@ import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
+import EdgesWorker from './EdgesWorker?worker';
 
 const TOUR_NODES = [
   {
@@ -101,7 +102,7 @@ const TOUR_NODES = [
     customDescription: (
       <div className="hud-description" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '0.85em', lineHeight: '1.4' }}>
         <p style={{ margin: 0, fontStyle: 'italic', opacity: 0.9 }}>
-          FeedBack Analyzer is an end-to-end web application that turns raw textual feedback into actionable insights. It lets you upload feedback files (CSV, JSON, TXT), runs local transformer-based sentiment analysis, generates AI summaries (Gemini / Ollama), builds word clouds, and exports results as CSV and PDF reports – all wrapped in a clean, modern UI.
+          Feedback Analyzer turns text feedback into insights with sentiment analysis, AI summaries, word clouds, and CSV/PDF exports in a modern web app.
         </p>
         <div>
           <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
@@ -648,9 +649,14 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
 
   const smoothProgress = useRef(0);
 
-  const edgeMeshes = useMemo(() => {
-    const extracted: { edges: THREE.EdgesGeometry }[] = [];
-    if (scene) {
+  const [edgeMeshes, setEdgeMeshes] = useState<{ edges: THREE.EdgesGeometry }[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const computeEdges = async () => {
+      if (!scene) return;
+
       const tempMeshes: THREE.Mesh[] = [];
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
@@ -663,16 +669,44 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
 
-      tempMeshes.forEach(mesh => {
-        const geo = mesh.geometry.clone();
-        geo.translate(-center.x, -center.y, -center.z);
-        geo.scale(4 / maxDim, 4 / maxDim, 4 / maxDim);
-
-        const edges = new THREE.EdgesGeometry(geo, 6);
-        extracted.push({ edges });
+      const promises = tempMeshes.map((mesh) => {
+        return new Promise<{ edges: THREE.EdgesGeometry }>((resolve) => {
+          const geo = mesh.geometry.clone();
+          geo.translate(-center.x, -center.y, -center.z);
+          geo.scale(4 / maxDim, 4 / maxDim, 4 / maxDim);
+          
+          // Clone arrays because transferring buffer detaches them
+          const positionArray = geo.attributes.position.array.slice();
+          const indexArray = geo.index ? geo.index.array.slice() : undefined;
+          
+          const worker = new EdgesWorker();
+          worker.onmessage = (e) => {
+            const { edgesPosition } = e.data;
+            const edgesGeo = new THREE.BufferGeometry();
+            edgesGeo.setAttribute('position', new THREE.BufferAttribute(edgesPosition, 3));
+            
+            // Resolve with the mocked EdgesGeometry
+            resolve({ edges: edgesGeo as unknown as THREE.EdgesGeometry });
+            worker.terminate();
+          };
+          
+          const transferrables = [positionArray.buffer];
+          if (indexArray) transferrables.push(indexArray.buffer);
+          
+          worker.postMessage({ positionArray, indexArray }, transferrables);
+        });
       });
-    }
-    return extracted;
+
+      const extracted = await Promise.all(promises);
+
+      if (!cancelled) {
+        setEdgeMeshes(extracted);
+      }
+    };
+
+    computeEdges();
+
+    return () => { cancelled = true; };
   }, [scene]);
 
   useFrame((state, delta) => {

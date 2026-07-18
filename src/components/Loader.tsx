@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useProgress } from '@react-three/drei';
 import * as THREE from 'three';
 import './Loader.css';
 
@@ -19,7 +18,7 @@ const BOOT_LOGS = [
   "[SYS] Boot sequence complete."
 ];
 
-function ProgressiveWireframeSphere({ progress }: { progress: number }) {
+function ProgressiveWireframeSphere({ progressRef }: { progressRef: React.MutableRefObject<number> }) {
   const lineRef = useRef<THREE.LineSegments>(null);
   
   const geometry = useMemo(() => {
@@ -33,8 +32,7 @@ function ProgressiveWireframeSphere({ progress }: { progress: number }) {
       lineRef.current.rotation.y += delta * 0.2;
       
       const totalCount = geometry.attributes.position.count;
-      // Animate the amount of lines drawn based on loading progress
-      const drawCount = Math.floor(totalCount * (progress / 100));
+      const drawCount = Math.floor(totalCount * (progressRef.current / 100));
       geometry.setDrawRange(0, drawCount);
     }
   });
@@ -47,89 +45,125 @@ function ProgressiveWireframeSphere({ progress }: { progress: number }) {
 }
 
 export function Loader({ onComplete }: { onComplete: () => void }) {
-  const { progress, active } = useProgress();
-  const [displayProgress, setDisplayProgress] = useState(0);
-  const [text, setText] = useState('SYSTEM BOOT');
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const [logs, setLogs] = useState<string[]>([]);
+  const [isReadyToEnter, setIsReadyToEnter] = useState(false);
   
-  const logsEndRef = useRef<HTMLDivElement>(null);
-  const hasCompletedRef = useRef(false);
-
-  // References to keep track of the latest progress values inside our single interval
-  const progressRef = useRef(progress);
-  const activeRef = useRef(active);
-
-  // Keep refs updated without triggering re-renders of the interval
-  useEffect(() => {
-    progressRef.current = progress;
-    activeRef.current = active;
-  }, [progress, active]);
+  // DOM refs to update UI WITHOUT React re-renders!
+  const currentProgressRef = useRef(0);
+  const laserBarRef = useRef<HTMLDivElement>(null);
+  const statusTextRef = useRef<HTMLDivElement>(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let current = 0;
+    let animationFrameId: number;
     let logIndex = 0;
     
-    // Terminal log simulator
-    const logInterval = setInterval(() => {
-      if (logIndex < BOOT_LOGS.length && current > (logIndex * 8)) {
-        setLogs(prev => [...prev.slice(-4), BOOT_LOGS[logIndex]]);
-        logIndex++;
+    // Exactly 5 seconds duration
+    const DURATION_MS = 5000;
+    const startTime = performance.now();
+    let isFinished = false;
+    
+    // Create an array to hold the DOM elements for the terminal logs
+    const logNodes: HTMLDivElement[] = [];
+    if (terminalRef.current) {
+      terminalRef.current.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const div = document.createElement('div');
+        div.className = 'terminal-line';
+        div.style.display = 'none'; // hidden initially
+        terminalRef.current.appendChild(div);
+        logNodes.push(div);
       }
-    }, 150);
+    }
 
-    const interval = setInterval(() => {
-      const p = progressRef.current;
-      const a = activeRef.current;
-      
-      // Ease towards actual progress (prevents the jumping/resetting issue)
-      if (current < p) {
-         current += Math.max(1, (p - current) * 0.1);
-      } else if (current < 100 && !a && p === 100) {
-         current += 5; // Finish up quickly
-      } else if (current < 99) {
-         current += 0.5; // Artificial slow progress
-         if (current > 90 && a) current = 90;
+    const pushLog = (text: string) => {
+      // Shift texts up
+      for (let i = 0; i < logNodes.length - 1; i++) {
+        logNodes[i].innerText = logNodes[i + 1].innerText;
+        logNodes[i].style.display = logNodes[i + 1].style.display;
       }
+      // Set bottom text
+      const bottomNode = logNodes[logNodes.length - 1];
+      bottomNode.innerText = text;
+      bottomNode.style.display = 'block';
+    };
+    
+    const updateLoop = (time: number) => {
+      if (isFinished) return;
+
+      const elapsed = time - startTime;
+      
+      // Calculate purely time-based progress (0 to 100)
+      let current = Math.min(100, (elapsed / DURATION_MS) * 100);
 
       if (current >= 100) {
         current = 100;
-        clearInterval(interval);
-        clearInterval(logInterval);
-        setText('SYSTEM READY');
+        isFinished = true;
         
-        if (!hasCompletedRef.current) {
-          hasCompletedRef.current = true;
-          setLogs(prev => [...prev.slice(-4), "[SYS] Neural link established. Enjoy."]);
-          setTimeout(() => {
-            setIsFadingOut(true);
-            setTimeout(() => {
-              onComplete();
-            }, 1000); 
-          }, 1200); 
+        if (statusTextRef.current) {
+          statusTextRef.current.innerText = 'SYSTEM READY';
+          statusTextRef.current.setAttribute('data-text', 'SYSTEM READY');
         }
+        
+        if (laserBarRef.current) {
+          laserBarRef.current.style.transform = `scaleX(1)`;
+        }
+        
+        pushLog("[SYS] Neural link established. Awaiting manual override...");
+        
+        // Instead of auto-fading out, we show the interactive Enter button
+        // Since the 5s loop is completely finished, this state update is perfectly safe and won't cause lag.
+        setIsReadyToEnter(true);
       } else {
-        if (current > 20 && current < 40) setText('LOADING ASSETS');
-        if (current >= 40 && current < 60) setText('ESTABLISHING LINK');
-        if (current >= 60 && current < 80) setText('CALIBRATING HUD');
-        if (current >= 80 && current < 95) setText('FINALIZING BOOT');
-        if (current >= 95) setText('ALIGNING SYNAPSES');
+        // Update text efficiently via DOM
+        if (statusTextRef.current) {
+          let newText = 'SYSTEM BOOT';
+          if (current > 20 && current < 40) newText = 'LOADING ASSETS';
+          else if (current >= 40 && current < 60) newText = 'ESTABLISHING LINK';
+          else if (current >= 60 && current < 80) newText = 'CALIBRATING HUD';
+          else if (current >= 80 && current < 95) newText = 'FINALIZING BOOT';
+          else if (current >= 95) newText = 'ALIGNING SYNAPSES';
+          
+          if (statusTextRef.current.innerText !== newText) {
+            statusTextRef.current.innerText = newText;
+            statusTextRef.current.setAttribute('data-text', newText);
+          }
+        }
       }
       
-      setDisplayProgress(current);
-    }, 50);
+      currentProgressRef.current = current;
+      
+      // Update DOM directly to avoid React layout thrashing
+      if (laserBarRef.current) {
+        // Use scaleX for hardware-accelerated CSS rendering on the compositor thread
+        laserBarRef.current.style.transform = `scaleX(${current / 100})`;
+      }
+      
+      // Log logic - distribute evenly across the 5 seconds without React state updates
+      const expectedLogs = Math.floor((elapsed / DURATION_MS) * BOOT_LOGS.length);
+      if (logIndex < BOOT_LOGS.length && expectedLogs > logIndex) {
+        pushLog(BOOT_LOGS[logIndex]);
+        logIndex++;
+      }
+      
+      if (!isFinished) {
+        animationFrameId = requestAnimationFrame(updateLoop);
+      }
+    };
+    
+    animationFrameId = requestAnimationFrame(updateLoop);
     
     return () => {
-      clearInterval(interval);
-      clearInterval(logInterval);
+      cancelAnimationFrame(animationFrameId);
     };
-  }, [onComplete]); // Empty dependency array ensures interval only starts once
+  }, []);
 
-  useEffect(() => {
-    if (logsEndRef.current) {
-      logsEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [logs]);
+  const handleEnter = () => {
+    setIsFadingOut(true);
+    setTimeout(() => {
+      onComplete();
+    }, 1000);
+  };
 
   return (
     <div className={`loader-container ${isFadingOut ? 'fade-out' : ''}`}>
@@ -139,28 +173,34 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
         {/* Intricate Geometric Core */}
         <div className="loader-core">
           <Canvas camera={{ position: [0, 0, 8], fov: 45 }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-            <ProgressiveWireframeSphere progress={displayProgress} />
+            {/* Pass ref instead of state to prevent R3F canvas reconciliations */}
+            <ProgressiveWireframeSphere progressRef={currentProgressRef} />
           </Canvas>
         </div>
         
         {/* Main Status Text */}
         <div className="loader-status-container">
-          <div className="loader-status glitch" data-text={text}>{text}</div>
+          <div className="loader-status glitch" ref={statusTextRef} data-text="SYSTEM BOOT">SYSTEM BOOT</div>
         </div>
         
         {/* Laser Progress Bar */}
         <div className="loader-laser-container">
-          <div className="loader-laser-bar" style={{ width: `${displayProgress}%` }}>
+          <div className="loader-laser-bar" ref={laserBarRef}>
             <div className="loader-laser-flare"></div>
           </div>
         </div>
 
         {/* Terminal Boot Logs */}
-        <div className="loader-terminal">
-          {logs.map((log, index) => (
-            <div key={index} className="terminal-line">{log}</div>
-          ))}
-          <div ref={logsEndRef} />
+        <div className="loader-terminal" ref={terminalRef}>
+          {/* Logs are injected here purely via DOM manipulation to prevent Layout Thrashing */}
+        </div>
+        
+        {/* Interactive Enter Button Overlay */}
+        <div className={`loader-enter-overlay ${isReadyToEnter ? 'visible' : ''}`}>
+          <button className="cyber-enter-btn" onClick={handleEnter}>
+            <span className="btn-glitch-layer"></span>
+            INITIALIZE LINK
+          </button>
         </div>
 
       </div>

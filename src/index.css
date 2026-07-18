@@ -164,7 +164,7 @@ body::-webkit-scrollbar {
 /* Step tracker on the side */
 .hud-sidebar {
   position: fixed;
-  right: 2.5rem;
+  left: 2.5rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -177,9 +177,9 @@ body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   gap: 1rem;
-  justify-content: flex-end;
+  justify-content: flex-start;
   opacity: 0.3;
-  transform: translateX(10px);
+  transform: translateX(-10px);
   transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
