@@ -84,9 +84,9 @@ const TOUR_NODES = [
         <div>
           <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
-            <li style={{ marginBottom: '0.2rem' }}><strong>4-in-1 AI Modules:</strong> Document Generator, Code Generator, Document Analyzer, and an interactive AI Teacher.</li>
-            <li style={{ marginBottom: '0.2rem' }}><strong>Hybrid LLM Inference:</strong> Seamlessly switch between local processing (via <span style={{ color: '#fff' }}>Ollama</span> for privacy) and Cloud processing for performance.</li>
-            <li style={{ marginBottom: '0' }}><strong>Advanced Architecture:</strong> Built on <span style={{ color: '#fff' }}>FastAPI</span> & <span style={{ color: '#fff' }}>MongoDB</span> with real-time WebSocket streaming, sandboxed execution, and TTS.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>4-in-1 AI Modules:</span></strong> Document Generator, Code Generator, Document Analyzer, and an interactive AI Teacher.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Hybrid LLM Inference:</span></strong> Seamlessly switch between local processing (via Ollama for privacy) and Cloud processing for performance.</li>
+            <li style={{ marginBottom: '0' }}><strong><span style={{ color: '#fff' }}>Advanced Architecture:</span></strong> Built on FastAPI & MongoDB with real-time WebSocket streaming, sandboxed execution, and TTS.</li>
           </ul>
         </div>
       </div>
@@ -107,9 +107,9 @@ const TOUR_NODES = [
         <div>
           <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
-            <li style={{ marginBottom: '0.2rem' }}><strong>NLP Pipelines:</strong> Sentiment analysis via <span style={{ color: '#fff' }}>Transformers (RoBERTa, DistilBERT)</span>.</li>
-            <li style={{ marginBottom: '0.2rem' }}><strong>AI Summaries:</strong> Contextual summaries using local/cloud LLMs (<span style={{ color: '#fff' }}>Gemini/Ollama</span>).</li>
-            <li style={{ marginBottom: '0' }}><strong>Data Visualization:</strong> Interactive dashboards, word clouds, and CSV/PDF reports.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>NLP Pipelines:</span></strong> Sentiment analysis via Transformers (RoBERTa, DistilBERT).</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>AI Summaries:</span></strong> Contextual summaries using local/cloud LLMs (Gemini/Ollama).</li>
+            <li style={{ marginBottom: '0' }}><strong><span style={{ color: '#fff' }}>Data Visualization:</span></strong> Interactive dashboards, word clouds, and CSV/PDF reports.</li>
           </ul>
         </div>
       </div>
@@ -131,9 +131,9 @@ const TOUR_NODES = [
         <div>
           <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
-            <li style={{ marginBottom: '0.2rem' }}><strong>Precision Sync:</strong> Millisecond-accurate synchronized playback across all connected clients via <span style={{ color: '#fff' }}>WebSockets</span>.</li>
-            <li style={{ marginBottom: '0.2rem' }}><strong>Room Management:</strong> Access-controlled rooms with locking, user approvals, and strict host privileges.</li>
-            <li style={{ marginBottom: '0' }}><strong>Interactive Chat:</strong> Live messaging integrated seamlessly with embedded chat-based playback commands.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Precision Sync:</span></strong> Millisecond-accurate synchronized playback across all connected clients via WebSockets.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Room Management:</span></strong> Access-controlled rooms with locking, user approvals, and strict host privileges.</li>
+            <li style={{ marginBottom: '0' }}><strong><span style={{ color: '#fff' }}>Interactive Chat:</span></strong> Live messaging integrated seamlessly with embedded chat-based playback commands.</li>
           </ul>
         </div>
       </div>
@@ -155,9 +155,9 @@ const TOUR_NODES = [
         <div>
           <strong style={{ color: 'var(--cyan-primary)', fontSize: '1.05em' }}>CORE CAPABILITIES</strong>
           <ul style={{ margin: '0.3rem 0 0 1.2rem', opacity: 0.9, padding: 0 }}>
-            <li style={{ marginBottom: '0.2rem' }}><strong>Live 3D Rendering:</strong> 20 distinct dynamic visualizer effects powered by <span style={{ color: '#fff' }}>Three.js</span>.</li>
-            <li style={{ marginBottom: '0.2rem' }}><strong>Audio Processing:</strong> Real-time frequency analysis via the native <span style={{ color: '#fff' }}>Web Audio API</span>.</li>
-            <li style={{ marginBottom: '0' }}><strong>Studio Export:</strong> Built-in <span style={{ color: '#fff' }}>MediaRecorder</span> integration for exporting high-quality videos instantly.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Live 3D Rendering:</span></strong> 20 distinct dynamic visualizer effects powered by Three.js.</li>
+            <li style={{ marginBottom: '0.2rem' }}><strong><span style={{ color: '#fff' }}>Audio Processing:</span></strong> Real-time frequency analysis via the native Web Audio API.</li>
+            <li style={{ marginBottom: '0' }}><strong><span style={{ color: '#fff' }}>Studio Export:</span></strong> Built-in MediaRecorder integration for exporting high-quality videos instantly.</li>
           </ul>
         </div>
       </div>
@@ -675,25 +675,25 @@ export const BrainModel = React.memo(({ progressRef, dragRotationRef }: { progre
           const geo = mesh.geometry.clone();
           geo.translate(-center.x, -center.y, -center.z);
           geo.scale(4 / maxDim, 4 / maxDim, 4 / maxDim);
-          
+
           // Clone arrays because transferring buffer detaches them
           const positionArray = geo.attributes.position.array.slice();
           const indexArray = geo.index ? geo.index.array.slice() : undefined;
-          
+
           const worker = new EdgesWorker();
           worker.onmessage = (e) => {
             const { edgesPosition } = e.data;
             const edgesGeo = new THREE.BufferGeometry();
             edgesGeo.setAttribute('position', new THREE.BufferAttribute(edgesPosition, 3));
-            
+
             // Resolve with the mocked EdgesGeometry
             resolve({ edges: edgesGeo as unknown as THREE.EdgesGeometry });
             worker.terminate();
           };
-          
+
           const transferrables = [positionArray.buffer];
           if (indexArray) transferrables.push(indexArray.buffer);
-          
+
           worker.postMessage({ positionArray, indexArray }, transferrables);
         });
       });
