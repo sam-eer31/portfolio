@@ -25,14 +25,14 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
     primaryDark: '#2563EB',
     bgDark: '#000000',
     bgGrid: 'rgba(59, 130, 246, 0.05)',
-    glowPrimary: 'rgba(59, 130, 246, 0.3)',
-    glowSecondary: 'rgba(37, 99, 235, 0.2)',
-    glassBg: 'rgba(0, 0, 0, 0.20)',
-    glassBorder: 'rgba(96, 165, 250, 0.2)',
-    textMuted: '#94A3B8',
-    brainPrimary: '#3B82F6',
+    glowPrimary: 'rgba(59, 130, 246, 0.35)',
+    glowSecondary: 'rgba(37, 99, 235, 0.25)',
+    glassBg: 'rgba(0, 0, 0, 0.25)',
+    glassBorder: 'rgba(96, 165, 250, 0.25)',
+    textMuted: '#93C5FD',
+    brainPrimary: '#2563EB',
     brainPrimaryLight: '#60A5FA',
-    brainPrimaryDark: '#2563EB'
+    brainPrimaryDark: '#1E3A8A'
   },
   red: {
     primary: '#EF4444',
@@ -50,19 +50,19 @@ export const THEMES: Record<ThemeName, ThemeColors> = {
     brainPrimaryDark: '#A8201A'
   },
   green: {
-    primary: '#10B981',
-    primaryLight: '#34D399',
-    primaryDark: '#059669',
+    primary: '#22C55E',
+    primaryLight: '#4ADE80',
+    primaryDark: '#16A34A',
     bgDark: '#000000',
-    bgGrid: 'rgba(16, 185, 129, 0.05)',
-    glowPrimary: 'rgba(16, 185, 129, 0.3)',
-    glowSecondary: 'rgba(5, 150, 105, 0.2)',
-    glassBg: 'rgba(0, 0, 0, 0.20)',
-    glassBorder: 'rgba(52, 211, 153, 0.2)',
-    textMuted: '#6EE7B7',
-    brainPrimary: '#10B981',
-    brainPrimaryLight: '#34D399',
-    brainPrimaryDark: '#059669'
+    bgGrid: 'rgba(34, 197, 94, 0.05)',
+    glowPrimary: 'rgba(34, 197, 94, 0.35)',
+    glowSecondary: 'rgba(22, 163, 74, 0.25)',
+    glassBg: 'rgba(0, 0, 0, 0.25)',
+    glassBorder: 'rgba(74, 222, 128, 0.25)',
+    textMuted: '#86EFAC',
+    brainPrimary: '#16A34A',
+    brainPrimaryLight: '#4ADE80',
+    brainPrimaryDark: '#14532D'
   },
   yellow: {
     primary: '#F59E0B',

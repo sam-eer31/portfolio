@@ -26,9 +26,10 @@ const STEPS = [
 ];
 
 export default function App() {
-  const { colors } = useTheme();
+  const { colors, themeName, setTheme } = useTheme();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isAppLoaded, setIsAppLoaded] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const scrollProgressRef = useRef(0);
   const dragRotationRef = useRef({ x: 0, y: 0 });
   
@@ -241,7 +242,9 @@ export default function App() {
             <img src="/logo.png" alt="Logo" style={{ height: '28px', marginRight: '12px', filter: 'drop-shadow(0 0 8px var(--theme-glow-primary))' }} />
             <span>PORTFOLIO // SAMEER</span>
           </div>
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          
+          {/* Desktop Buttons */}
+          <div className="desktop-only" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <button 
               onClick={toggleAudio} 
               className="hud-badge hud-interactive" 
@@ -286,7 +289,70 @@ export default function App() {
               GITHUB
             </a>
           </div>
+
+          {/* Mobile Hamburger Button */}
+          <button 
+            className={`mobile-only hud-badge hud-interactive hamburger-btn ${isMobileMenuOpen ? 'menu-open' : ''}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            style={{ padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '5px', background: 'var(--glass-bg)', border: '1px solid var(--theme-glass-border)', borderRadius: '4px', cursor: 'pointer', zIndex: 10001 }}
+          >
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+          </button>
         </header>
+
+        {/* Mobile Dropdown Menu */}
+        {isMobileMenuOpen && (
+          <div className="mobile-only mobile-menu-panel hud-interactive">
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--theme-text-muted)', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>
+              SYSTEM CONTROLS
+            </div>
+            
+            <button 
+              onClick={toggleAudio} 
+              className="hud-badge" 
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', width: '100%' }}
+            >
+              <span style={{
+                display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%',
+                background: isAudioPlaying ? 'var(--theme-primary)' : 'rgba(255,255,255,0.2)',
+                boxShadow: isAudioPlaying ? '0 0 8px var(--theme-primary)' : 'none',
+              }}/>
+              AUDIO: {isAudioPlaying ? 'ON' : 'OFF'}
+            </button>
+            
+            <a href="https://github.com/sam-eer31/portfolio" target="_blank" rel="noopener noreferrer" className="hud-badge" style={{ textAlign: 'center' }}>
+              GITHUB REPO
+            </a>
+
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--theme-text-muted)', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem', marginTop: '1rem', marginBottom: '0.5rem' }}>
+              THEME OVERRIDE
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {(['blue', 'red', 'green', 'yellow', 'purple'] as const).map(name => (
+                <button
+                  key={name}
+                  onClick={() => { setTheme(name); setIsMobileMenuOpen(false); }}
+                  style={{
+                    flex: '1 1 calc(50% - 4px)',
+                    padding: '8px',
+                    background: themeName === name ? 'var(--theme-glow-primary)' : 'rgba(255,255,255,0.05)',
+                    border: themeName === name ? '1px solid var(--theme-primary)' : '1px solid rgba(255,255,255,0.1)',
+                    color: themeName === name ? '#fff' : 'var(--theme-text-muted)',
+                    borderRadius: '4px',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.65rem',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Dynamic Sidebar showing Active Tour Steps */}
         <div className="hud-sidebar hud-interactive">
@@ -324,8 +390,10 @@ export default function App() {
 
       </div>
 
-      {/* Audio Toggle Button */}
-      {isAppLoaded && <ThemeSwitcher />}
+      {/* Theme Switcher Toggle Button (Desktop Only) */}
+      <div className="desktop-only">
+        {isAppLoaded && <ThemeSwitcher />}
+      </div>
       
 
     </div>
