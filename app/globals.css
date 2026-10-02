@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  /* Define custom variables via inline theme */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --font-sans: var(--font-serif), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  /* Using the exact Black Slate colors */
+  --background: #040506;
+  /* The bottom-right stop */
+  --foreground: #f8fafc;
+
+  --primary: #ffffff;
+  /* Sleek monochrome primary */
+  --primary-foreground: #040506;
+
+  --muted: #181B1E;
+  /* Top-left stop for muted elements */
+  --muted-foreground: #94a3b8;
+
+  --border: #282C30;
+  /* The exact border color from the spec */
+
+  --card: #040506;
+  --card-foreground: #f8fafc;
+
+  /* Turquoise Accent */
+  --accent: #078C8C;
+  --accent-foreground: #ffffff;
+  --accent-gradient-start: #073B3C;
+  --accent-gradient-end: #060F10;
+
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* The exact gradient specification from the image */
+    background: linear-gradient(135deg, #181B1E 0%, #040506 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}

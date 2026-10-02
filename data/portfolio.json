@@ -1,0 +1,234 @@
+{
+  "personalInfo": {
+    "name": "Sameer Shahid Siddiqui",
+    "title": "Frontend Developer | AI-Assisted Development | Python",
+    "email": "sameershahidsiddiqui365@gmail.com",
+    "github": "https://github.com/sameershahidsiddiqui365",
+    "linkedin": "https://linkedin.com/in/sameershahidsiddiqui/"
+  },
+  "hero": {
+    "role": "FRONTEND DEVELOPER",
+    "greeting": "Hi, I'm",
+    "name": "Sameer",
+    "description": "Frontend Developer focused on building modern, responsive, and interactive web interfaces. Experienced in creating polished UI experiences with animations, responsive layouts, and real-time interactions.",
+    "buttons": {
+      "primary": {
+        "text": "View My Work",
+        "link": "#projects"
+      },
+      "secondary": {
+        "text": "About Me",
+        "link": "#about"
+      }
+    },
+    "stats": [
+      {
+        "value": "9.02",
+        "label": "CGPA"
+      },
+      {
+        "value": "2+",
+        "label": "Major Projects"
+      }
+    ]
+  },
+  "about": [
+    "I am a Frontend Developer focused on building modern, responsive, and interactive web interfaces with React, Next.js, TypeScript, and Tailwind CSS.",
+    "Experienced in creating polished UI experiences with animations, responsive layouts, rich components, and real-time interactions using AI-assisted development for faster implementation and iteration."
+  ],
+  "projects": [
+    {
+      "title": "TrackDaily",
+      "description": "AI-powered nutrition and health journal that turns natural language and food photos into structured meal logs and personalized health insights.",
+      "link": "",
+      "image": "",
+      "tags": []
+    },
+    {
+      "title": "ShadowxAI",
+      "description": "Built a modern, responsive AI chat interface with dark/light themes, smooth animations, responsive sidebar, and adaptive layouts across desktop and mobile. Designed rich chat experiences with Markdown, syntax-highlighted code, LaTeX rendering, streaming responses, image previews, tool states, and interactive message actions.",
+      "link": "https://shadowxai.vercel.app",
+      "image": "/shadowxai.png",
+      "tags": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Zustand"
+      ]
+    },
+    {
+      "title": "Crisper",
+      "description": "Built a modern, responsive music interface with track search, YouTube link preview, interactive audio visualizer, animated 5-stage processing UI, and polished result cards. Designed smooth search, loading, progress, and download interactions, with automatic scrolling and real-time SSE updates.",
+      "link": "https://crisperstudio.vercel.app",
+      "image": "/crisper.png",
+      "tags": [
+        "Next.js",
+        "React",
+        "TypeScript"
+      ]
+    },
+    {
+      "title": "PlanetZero",
+      "description": "Interactive 3D solar system experience with stunning graphics, smooth animations, and a premium web interface.",
+      "link": "",
+      "image": "",
+      "tags": []
+    },
+    {
+      "title": "GrooveBox",
+      "description": "Real-time shared music and watch rooms for synchronized listening and viewing.",
+      "link": "",
+      "image": "",
+      "tags": []
+    },
+    {
+      "title": "Codexa",
+      "description": "AI-powered platform for generating and analyzing documents and code, with built-in AI tutoring and support for local and cloud LLMs.",
+      "link": "",
+      "image": "",
+      "tags": []
+    },
+    {
+      "title": "Audrix",
+      "description": "Client-side 3D audio visualization engine with 20 immersive environments, MP4 export, and a Developer Embed API.",
+      "link": "",
+      "image": "",
+      "tags": []
+    },
+    {
+      "title": "FeedBack Analyzer",
+      "description": "Self-hosted NLP platform that turns user feedback into insights with sentiment analysis, AI summaries, dashboards, and data exports.",
+      "link": "",
+      "image": "",
+      "tags": []
+    }
+  ],
+  "skills": [
+    {
+      "name": "JavaScript",
+      "description": "Core language for the web.",
+      "proficiency": 5,
+      "projects": 8,
+      "color": "#F7DF1E"
+    },
+    {
+      "name": "TypeScript",
+      "description": "Type safety at scale.",
+      "proficiency": 4,
+      "projects": 5,
+      "color": "#3178C6"
+    },
+    {
+      "name": "React",
+      "description": "UI library for modern web.",
+      "proficiency": 5,
+      "projects": 12,
+      "color": "#61DAFB"
+    },
+    {
+      "name": "Next.js",
+      "description": "The React Framework.",
+      "proficiency": 4,
+      "projects": 6,
+      "color": "#ffffff"
+    },
+    {
+      "name": "Tailwind CSS",
+      "description": "Utility-first styling.",
+      "proficiency": 5,
+      "projects": 15,
+      "color": "#06B6D4"
+    },
+    {
+      "name": "HTML",
+      "description": "Structure the web.",
+      "proficiency": 5,
+      "projects": 20,
+      "color": "#E34F26"
+    },
+    {
+      "name": "CSS",
+      "description": "Design & styling.",
+      "proficiency": 5,
+      "projects": 20,
+      "color": "#1572B6"
+    },
+    {
+      "name": "Python",
+      "description": "Scripting & backend.",
+      "proficiency": 4,
+      "projects": 5,
+      "color": "#3776AB"
+    },
+    {
+      "name": "FastAPI",
+      "description": "Modern high performance API.",
+      "proficiency": 3,
+      "projects": 2,
+      "color": "#009688"
+    },
+    {
+      "name": "Node.js",
+      "description": "JavaScript runtime.",
+      "proficiency": 4,
+      "projects": 7,
+      "color": "#339933"
+    },
+    {
+      "name": "GitHub",
+      "description": "Version control & collaboration.",
+      "proficiency": 5,
+      "projects": 20,
+      "color": "#ffffff"
+    }
+  ],
+  "education": [
+    {
+      "period": "2022 - 2026",
+      "degree": "Bachelor of Technology in Computer Science & Engineering (Artificial Intelligence & Data Science)",
+      "institution": "Khwaja Moinuddin Chishti Language University, Lucknow"
+    },
+    {
+      "period": "2022",
+      "degree": "Intermediate",
+      "institution": "Kendriya Vidyalaya IIM, Lucknow"
+    },
+    {
+      "period": "2020",
+      "degree": "High school",
+      "institution": "Kendriya Vidyalaya IIM, Lucknow"
+    }
+  ],
+  "lifeOutsideCode": {
+    "subtitle": "LIFE OUTSIDE CODE",
+    "title": "Things that keep me inspired.",
+    "description": "Good ideas often come from a well-lived life. Here are a few things that keep me curious\u2014 creative and happy.",
+    "items": [
+      {
+        "title": "Exploring\nNew Places",
+        "image": "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80"
+      },
+      {
+        "title": "Good\nCoffee",
+        "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=800&q=80"
+      },
+      {
+        "title": "Capturing\nMoments",
+        "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80"
+      },
+      {
+        "title": "Hiking\n& Nature",
+        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80"
+      },
+      {
+        "title": "Great\nFood",
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80"
+      },
+      {
+        "title": "Reading\nBooks",
+        "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80"
+      }
+    ]
+  }
+}
