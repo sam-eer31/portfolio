@@ -3,10 +3,10 @@ import React from "react";
 export const WavyContour = ({ color, isActive }: { color: string; isActive: boolean }) => {
   return (
     <div
-      className="absolute top-[-10%] left-[-15%] w-[130%] h-[60%] overflow-visible pointer-events-none z-0 transition-opacity duration-500"
+      className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none z-0 transition-opacity duration-500"
       style={{ opacity: isActive ? 0.7 : 0.15 }}
     >
-      <svg className="w-full h-full" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true" style={{ animation: isActive ? 'drift 18s ease-in-out infinite alternate' : 'none' }}>
+      <svg className="absolute top-[-10%] left-[-15%] w-[130%] h-[60%]" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true" style={{ animation: isActive ? 'drift 18s ease-in-out infinite alternate' : 'none' }}>
 
         {/* dim contour */}
         <path d="M-80 35 C80 -20 150 30 240 70 C360 125 440 120 550 45 C690 -50 790 5 900 65 C1030 135 1100 110 1280 35" fill="none" strokeLinecap="round" stroke={color} strokeWidth="1" opacity="0.35" />
@@ -28,7 +28,10 @@ export const WavyContour = ({ color, isActive }: { color: string; isActive: bool
       </svg>
 
       {/* Fade out the bottom of the waves */}
-      <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#060913]/30 to-[#060913] z-10" />
+      <div 
+        className="absolute inset-0 z-10 pointer-events-none" 
+        style={{ background: "linear-gradient(to bottom, transparent 30%, #020304 60%)" }}
+      />
     </div>
   );
 };

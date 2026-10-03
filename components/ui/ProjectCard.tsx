@@ -16,10 +16,13 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="snap-start shrink-0 w-[85vw] md:w-[45vw] lg:w-[calc(33.333%-1rem)] p-5 flex flex-col justify-between bg-[#0A0D18]/50 backdrop-blur-md border-white/5 hover:border-white/10 transition-colors rounded-[24px] group overflow-hidden">
+    <Card 
+      className="snap-start shrink-0 w-[85vw] md:w-[45vw] lg:w-[calc(33.333%-1rem)] p-4 md:p-5 flex flex-col justify-between backdrop-blur-md border-[2px] border-[#242628] transition-colors rounded-[24px] group overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #141618 0%, #020304 100%)" }}
+    >
       <div className="flex flex-col h-full">
         {/* Site Preview / Image */}
-        <div className="w-full aspect-[16/10] bg-[#060913] rounded-xl mb-6 overflow-hidden relative flex items-center justify-center group/preview border border-white/5">
+        <div className="w-full aspect-video bg-[#060913] rounded-xl mb-4 overflow-hidden relative flex items-center justify-center group/preview border border-white/5">
           {project.image ? (
             <Image 
               src={project.image} 
@@ -35,7 +38,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {/* Optional Overlay to catch clicks and open link */}
           {project.link && (
             <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover/preview:opacity-100 transition-all duration-500 bg-background/20 backdrop-blur-[2px] pointer-events-none">
-              <Link href={project.link} target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 bg-white text-black rounded-full text-sm font-semibold shadow-xl pointer-events-auto hover:scale-105 transition-transform duration-300">
+              <Link href={project.link} target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white text-black rounded-full text-sm font-semibold shadow-xl pointer-events-auto hover:scale-105 transition-transform duration-300">
                 Visit Site
               </Link>
             </div>
@@ -44,14 +47,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         {/* Content */}
         <div className="flex-grow flex flex-col">
-          <h3 className="font-bold text-xl mb-2.5 text-white/90 group-hover:text-white transition-colors">{project.title}</h3>
-          <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-h-[100px] overflow-y-auto pr-3 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-white/20">
+          <h3 className="font-bold text-lg md:text-xl mb-1.5 text-white/90 group-hover:text-white transition-colors">{project.title}</h3>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-4 max-h-[72px] overflow-y-auto pr-3 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-white/20">
             {project.description}
           </p>
         </div>
 
         {/* Footer of Card (Tags & Arrow) */}
-        <div className="flex items-end justify-between mt-auto pt-5 border-t border-white/5">
+        <div className="flex items-end justify-between mt-auto pt-4 border-t border-white/5">
           <div className="flex flex-wrap gap-2 pr-4">
             {project.tags?.slice(0, 3).map((tag: string, tagIndex: number) => (
               <span

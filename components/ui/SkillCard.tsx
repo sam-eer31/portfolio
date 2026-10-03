@@ -19,7 +19,7 @@ interface SkillCardProps {
 
 export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardProps) {
   const invertClass = (skill.name === "Next.js" || skill.name === "GitHub" || skill.name === "Flask")
-    ? "dark:invert"
+    ? "invert"
     : "";
 
   return (
@@ -40,7 +40,10 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
         }}
       >
         {/* Inner Card Body */}
-        <div className="w-full h-full rounded-[30px] flex flex-col items-center p-6 md:p-8 relative overflow-hidden bg-[#060913]">
+        <div 
+          className="w-full h-full rounded-[30px] flex flex-col items-center p-6 md:p-8 relative overflow-hidden"
+          style={{ background: "linear-gradient(135deg, #141618 0%, #020304 100%)" }}
+        >
 
           {/* Dynamic Wavy Contour Pattern */}
           <WavyContour color={skill.color} isActive={isActive} />
@@ -64,7 +67,7 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
           {/* Centered Content (Logo + Text) */}
           <div className="flex flex-col items-center justify-center flex-grow w-full z-10 mt-2 md:mt-4">
             {/* Icon */}
-            <div className="w-14 h-14 md:w-16 md:h-16 mb-4 md:mb-5 flex items-center justify-center drop-shadow-2xl transition-transform duration-300 group-hover:scale-110 bg-[#060913]/80 rounded-2xl p-2 md:p-3 border border-white/5 relative">
+            <div className="w-14 h-14 md:w-16 md:h-16 mb-4 md:mb-5 flex items-center justify-center drop-shadow-2xl transition-transform duration-300 group-hover:scale-110 bg-[#13151A]/80 rounded-2xl p-2 md:p-3 border border-white/5 relative">
               <Image
                 src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}`}
                 alt={skill.name}

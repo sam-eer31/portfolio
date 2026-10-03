@@ -5,7 +5,7 @@ export function Education() {
   const education = portfolioData.education;
 
   return (
-    <section id="education" className="py-24">
+    <section id="education" className="py-8 md:py-12">
       <Container>
         {/* Header Section */}
         <div className="mb-16 flex flex-col items-start text-left">
@@ -18,11 +18,16 @@ export function Education() {
         </div>
 
         {/* Timeline Section */}
-        <div className="max-w-4xl">
+        <div className="w-full max-w-4xl">
           {education.map((item, index) => (
-            <div key={index} className="flex gap-6 md:gap-12 group">
+            <div key={index} className="flex gap-6 group">
+              {/* Date (Desktop - Left of Dot) */}
+              <div className="hidden md:block w-36 shrink-0 text-muted-foreground text-right font-medium">
+                {item.period}
+              </div>
+
               {/* Timeline graphic */}
-              <div className="relative flex flex-col items-center w-4">
+              <div className="relative flex flex-col items-center w-4 shrink-0">
                 {/* Vertical Line */}
                 {index !== education.length - 1 && (
                   <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[1px] h-full bg-border/40 z-0" />
@@ -32,9 +37,9 @@ export function Education() {
               </div>
 
               {/* Content */}
-              <div className="pb-16 flex flex-col md:flex-row md:gap-16 w-full">
-                {/* Date */}
-                <div className="w-36 shrink-0 text-muted-foreground md:text-right font-medium mb-2 md:mb-0">
+              <div className="pb-16 flex flex-col flex-1">
+                {/* Date (Mobile - Above Title) */}
+                <div className="md:hidden text-muted-foreground text-left font-medium mb-1">
                   {item.period}
                 </div>
                 

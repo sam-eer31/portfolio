@@ -4,7 +4,7 @@ import portfolioData from "../../data/portfolio.json";
 
 export function Contact() {
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-8 md:py-12">
       <Container className="max-w-xl text-center space-y-8">
         <h2 className="text-3xl font-bold tracking-tight">Get In Touch</h2>
         <p className="text-muted-foreground">

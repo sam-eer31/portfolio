@@ -57,7 +57,7 @@ const badgeData = [
 
 export function About() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
+    <section id="about" className="py-8 md:py-12 relative overflow-hidden">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
         .font-handwriting { font-family: 'Caveat', cursive; }
@@ -67,7 +67,7 @@ export function About() {
         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center min-h-[600px]">
           
           {/* Left Column: Text and Badges */}
-          <div className="block pr-0 lg:pr-8 relative z-20 py-12 lg:py-0 w-full">
+          <div className="block pr-0 lg:pr-8 relative z-20 w-full">
             
             {/* Tablet Image Float (Passport style) - Only visible between sm and lg */}
             <div className="hidden sm:block lg:hidden float-right w-[260px] md:w-[320px] ml-8 mb-6 mt-4 relative z-30 transition-transform duration-700 hover:scale-[1.02]">
@@ -92,7 +92,7 @@ export function About() {
             </h2>
             
             {/* Mobile Image - Visible only below sm screens */}
-            <div className="block sm:hidden w-full max-w-[340px] mx-auto my-10 relative z-30 transition-transform duration-700 hover:scale-[1.02]">
+            <div className="block sm:hidden w-full max-w-[260px] mx-auto my-10 relative z-30 transition-transform duration-700 hover:scale-[1.02]">
               <img 
                 src="/about-card.png" 
                 alt="About" 
@@ -166,7 +166,7 @@ export function About() {
           </div>
 
           {/* Right Column (Desktop only) */}
-          <div className="hidden lg:flex relative w-full max-w-[500px] mx-auto pointer-events-auto items-center justify-center transition-transform duration-700 hover:scale-[1.02]">
+          <div className="hidden lg:flex relative w-full max-w-[600px] xl:max-w-[700px] mx-auto pointer-events-auto items-center justify-center transition-transform duration-700 hover:scale-[1.02]">
             <img 
               src="/about-card.png" 
               alt="About" 

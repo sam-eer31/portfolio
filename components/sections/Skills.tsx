@@ -94,14 +94,33 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden">
+    <section id="skills" className="py-8 md:py-12 relative overflow-hidden">
+      {/* Faded Dot Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+        <svg
+          className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.25]"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            maskImage: 'radial-gradient(ellipse at center, black 10%, transparent 60%)',
+            WebkitMaskImage: 'radial-gradient(ellipse at center, black 10%, transparent 60%)'
+          }}
+        >
+          <defs>
+            <pattern id="skill-dot" width="32" height="32" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.5" fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#skill-dot)" />
+        </svg>
+      </div>
+      
       <style>{`
         @keyframes drift {
-          from { transform: translate3d(-1%, -1%, 0) scale(1); }
-          to { transform: translate3d(1%, 1%, 0) scale(1.015); }
+           from { transform: translate3d(-1%, -1%, 0) scale(1); }
+           to { transform: translate3d(1%, 1%, 0) scale(1.015); }
         }
       `}</style>
-      <Container>
+      <Container className="relative z-10">
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div className="flex flex-col items-start text-left max-w-xl">
@@ -126,7 +145,7 @@ export function Skills() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            className="relative w-full h-[450px] md:h-[550px] flex items-center justify-center overflow-visible touch-pan-y"
+            className="relative w-full h-[360px] md:h-[420px] flex items-center justify-center overflow-visible touch-pan-y"
           >
             {skills.map((skill, index) => {
               const slug = iconSlugs[skill.name];

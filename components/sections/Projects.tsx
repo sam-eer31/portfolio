@@ -35,7 +35,7 @@ export function Projects() {
   }, [projects]);
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
+    <section id="projects" className="py-8 md:py-12 relative overflow-hidden">
       {/* Faded Grid Background */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
         <svg

@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+
+export const viewport: Viewport = {
+  themeColor: "#040506",
+  colorScheme: "dark",
+};
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth scroll-pt-16">
       <body className={`${inter.variable} font-sans min-h-screen flex flex-col antialiased`}>
         <Header />
         <main className="grow">{children}</main>
