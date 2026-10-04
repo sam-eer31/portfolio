@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "My Portfolio",
     images: [
       {
-        url: "/crisper.png", // fallback image
+        url: "/projects/crisper.png", // fallback image
         width: 1200,
         height: 630,
       },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "My Portfolio",
     description: "A professional portfolio showcasing my work and experience.",
-    images: ["/crisper.png"], // fallback image
+    images: ["/projects/crisper.png"], // fallback image
   },
 };
 

@@ -48,7 +48,7 @@
       "title": "ShadowxAI",
       "description": "Privacy-first BYOK AI assistant with local browser storage, web search, image generation, and support for Ollama, Cloudflare, and Puter.",
       "link": "https://shadowxai.vercel.app",
-      "image": "/shadowxai.png",
+      "image": "/projects/shadowxai.png",
       "tags": [
         "Next.js",
         "React",
@@ -61,7 +61,7 @@
       "title": "Crisper",
       "description": "Modern music search platform and free API for discovering and downloading high-quality audio tracks.",
       "link": "https://crisperstudio.vercel.app",
-      "image": "/crisper.png",
+      "image": "/projects/crisper.png",
       "tags": [
         "Next.js",
         "React",
@@ -72,7 +72,7 @@
       "title": "PlanetZero",
       "description": "Interactive 3D solar system experience with stunning graphics, smooth animations, and a premium web interface.",
       "link": "",
-      "image": "",
+      "image": "/projects/planetzero.png",
       "tags": []
     },
     {

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { WavyContour } from "./WavyContour";
+import { WavyContour } from "../graphics/WavyContour";
+import { GlassCard } from "../ui/GlassCard";
 
 interface Skill {
   name: string;
@@ -24,45 +25,18 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
 
   return (
     <div
-      onClick={onClick}
-      className={`absolute top-1/2 left-1/2 w-[260px] md:w-[320px] rounded-[32px] select-none group transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'cursor-default' : 'cursor-pointer'}`}
+      className={`absolute top-1/2 left-1/2 w-[220px] md:w-[260px] h-[280px] md:h-[320px] select-none group transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'cursor-default' : 'cursor-pointer'}`}
       style={style}
     >
-      <div
-        className="w-full h-[320px] md:h-[380px] rounded-[32px] p-[1.5px] overflow-hidden relative transition-all duration-500"
-        style={{
-          background: isActive
-            ? `linear-gradient(180deg, ${skill.color} 0%, ${skill.color}40 100%)`
-            : `linear-gradient(180deg, ${skill.color}40 0%, rgba(255,255,255,0.03) 100%)`,
-          boxShadow: isActive
-            ? `0 0 25px 0px ${skill.color}40, 0 20px 40px -15px ${skill.color}40`
-            : '0 10px 30px -10px rgba(0,0,0,0.8)',
-        }}
+      <GlassCard
+        onClick={onClick}
+        color={skill.color}
+        isActive={isActive}
+        containerClassName="w-full h-full rounded-[32px]"
+        innerClassName="rounded-[30px] flex flex-col items-center p-6 md:p-8"
       >
-        {/* Inner Card Body */}
-        <div 
-          className="w-full h-full rounded-[30px] flex flex-col items-center p-6 md:p-8 relative overflow-hidden"
-          style={{ background: "linear-gradient(135deg, #141618 0%, #020304 100%)" }}
-        >
-
-          {/* Dynamic Wavy Contour Pattern */}
-          <WavyContour color={skill.color} isActive={isActive} />
-
-          {/* Subtle Radial Glow Behind Icon */}
-          <div
-            className="absolute top-0 w-full h-48 z-0 transition-opacity duration-500"
-            style={{
-              background: `radial-gradient(circle at 50% 20%, ${skill.color}${isActive ? '25' : '05'} 0%, transparent 70%)`
-            }}
-          />
-
-          {/* Top Edge Inner Highlight */}
-          <div
-            className="absolute top-0 inset-x-0 h-[1.5px] z-10 transition-opacity duration-500"
-            style={{
-              background: `linear-gradient(90deg, transparent, ${skill.color}${isActive ? 'ff' : '40'}, transparent)`
-            }}
-          />
+        {/* Dynamic Wavy Contour Pattern */}
+        <WavyContour color={skill.color} isActive={isActive} />
 
           {/* Centered Content (Logo + Text) */}
           <div className="flex flex-col items-center justify-center flex-grow w-full z-10 mt-2 md:mt-4">
@@ -109,8 +83,7 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
               {skill.projects} projects
             </span>
           </div>
-        </div>
-      </div>
+      </GlassCard>
     </div>
   );
 }

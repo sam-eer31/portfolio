@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Container } from "../layout/Container";
 import portfolioData from "../../data/portfolio.json";
 
-import { SkillCard } from "../ui/SkillCard";
+import { SkillCard } from "../cards/SkillCard";
 
 const iconSlugs: Record<string, string> = {
   "Python": "python/python-original.svg",
@@ -36,10 +36,17 @@ export function Skills() {
   const touchEndX = useRef<number>(0);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    let timeoutId: NodeJS.Timeout;
+    const checkMobile = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => setIsMobile(window.innerWidth < 768), 200);
+    };
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
@@ -145,7 +152,7 @@ export function Skills() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            className="relative w-full h-[360px] md:h-[420px] flex items-center justify-center overflow-visible touch-pan-y"
+            className="relative w-full h-[320px] md:h-[360px] flex items-center justify-center overflow-visible touch-pan-y"
           >
             {skills.map((skill, index) => {
               const slug = iconSlugs[skill.name];
