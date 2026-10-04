@@ -5,6 +5,7 @@ import { Container } from "../layout/Container";
 import portfolioData from "../../data/portfolio.json";
 
 import { SkillCard } from "../cards/SkillCard";
+import { CarouselNavigation } from "../ui/CarouselNavigation";
 
 const iconSlugs: Record<string, string> = {
   "Python": "python/python-original.svg",
@@ -192,32 +193,13 @@ export function Skills() {
             })}
           </div>
 
-          {/* Carousel Controls */}
-          <div className="flex justify-center items-center gap-6 mt-8 z-20 relative">
-            <button
-              onClick={() => handleNav("left")}
-              disabled={activeIndex === 0}
-              className="w-10 h-10 rounded-full flex items-center justify-center border border-white/10 hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-white/50 hover:text-white"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            <span className="text-sm font-medium text-white/40 tracking-wide uppercase text-[11px] md:text-xs">
-              Scroll or use arrow keys to explore
-            </span>
-
-            <button
-              onClick={() => handleNav("right")}
-              disabled={activeIndex === skills.length - 1}
-              className="w-10 h-10 rounded-full flex items-center justify-center border border-white/10 hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-white/50 hover:text-white"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+          <CarouselNavigation 
+            onPrev={() => handleNav("left")}
+            onNext={() => handleNav("right")}
+            text="Scroll or use arrow keys to explore"
+            prevDisabled={activeIndex === 0}
+            nextDisabled={activeIndex === skills.length - 1}
+          />
         </div>
 
       </Container>

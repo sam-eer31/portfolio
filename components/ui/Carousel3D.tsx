@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { ProjectCard, Project } from "../cards/ProjectCard";
+import { CarouselNavigation } from "./CarouselNavigation";
 
 interface Carousel3DProps {
   projects: Project[];
@@ -98,7 +99,7 @@ export function Carousel3D({ projects }: Carousel3DProps) {
   }
 
   const theta = 360 / N;
-  const cardWidth = isMobile ? 280 : 360;
+  const cardWidth = isMobile ? 260 : 320;
   const radius = Math.round((cardWidth / 2) / Math.tan(Math.PI / N)) + (isMobile ? 40 : 60);
 
   const getNormalizedIndex = (index: number) => {
@@ -163,7 +164,7 @@ export function Carousel3D({ projects }: Carousel3DProps) {
                       setRotationIndex(prev => prev + diff);
                     }
                   }}
-                  className="w-[280px] md:w-[360px] h-[360px] md:h-[440px]"
+                  className="w-[260px] md:w-[320px] h-[340px] md:h-[400px]"
                 />
               </div>
             );
@@ -171,29 +172,13 @@ export function Carousel3D({ projects }: Carousel3DProps) {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-6 mt-8 z-20 relative">
-        <button
-          onClick={() => handleNav("left")}
-          className="w-10 h-10 rounded-full flex items-center justify-center border border-white/10 hover:bg-white/5 transition-colors text-white/50 hover:text-white"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
 
-        <span className="text-sm font-medium text-white/40 tracking-wide uppercase text-[11px] md:text-xs">
-          Scroll or use arrow keys to spin
-        </span>
-
-        <button
-          onClick={() => handleNav("right")}
-          className="w-10 h-10 rounded-full flex items-center justify-center border border-white/10 hover:bg-white/5 transition-colors text-white/50 hover:text-white"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
+      <CarouselNavigation 
+        onPrev={() => handleNav("left")}
+        onNext={() => handleNav("right")}
+        text="Scroll or use arrow keys to spin"
+        className="!mt-2 md:!mt-0"
+      />
     </div>
   );
 }

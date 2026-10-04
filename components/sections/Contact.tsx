@@ -7,14 +7,17 @@ export function Contact() {
   return (
     <section id="contact" className="py-16 sm:py-20 md:py-32 relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] sm:h-[500px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-indigo-500/10 via-purple-500/5 to-transparent opacity-50 z-0 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] sm:h-[500px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-emerald-500/10 to-transparent opacity-50 z-0 pointer-events-none" />
       
       {/* Grid Pattern */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-20 mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)">
-        <svg className="absolute w-[200%] h-[200%] sm:w-[150%] sm:h-[150%] text-accent" xmlns="http://www.w3.org/2000/svg">
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-[0.05]"
+        style={{ WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 70%)' }}
+      >
+        <svg className="absolute w-[200%] h-[200%] sm:w-[150%] sm:h-[150%] text-white" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="contact-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-              <path d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" strokeWidth="0.5" />
+            <pattern id="contact-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#contact-grid)" />
@@ -32,7 +35,7 @@ export function Contact() {
 
         <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-center mb-6 leading-[1.1] sm:leading-[1.1]">
           Let&apos;s connect and <br />
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 via-purple-400 to-pink-400">
+          <span className="text-emerald-400 drop-shadow-[0_0_15px_rgba(16,185,129,0.2)]">
             grow together.
           </span>
         </h2>
@@ -44,17 +47,17 @@ export function Contact() {
         {/* Contact Card */}
         <div className="w-full max-w-4xl relative group">
           {/* Animated border glow (visible mostly on desktop) */}
-          <div className="hidden sm:block absolute -inset-[1px] rounded-[2rem] bg-linear-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 opacity-20 group-hover:opacity-50 transition-opacity duration-700 blur-sm" />
+          <div className="hidden sm:block absolute -inset-[1px] rounded-[2rem] bg-emerald-500/20 opacity-20 group-hover:opacity-50 transition-opacity duration-700 blur-sm" />
           
           <div className="relative w-full rounded-3xl sm:rounded-[2rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 sm:border-white/10 p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center justify-between shadow-2xl overflow-hidden">
             
             {/* Ambient inner glow for mobile */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-indigo-500/20 via-purple-500/5 to-transparent opacity-50 pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-32 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-emerald-500/15 to-transparent opacity-50 pointer-events-none" />
 
             {/* Left Column: Email */}
             <div className="flex flex-col items-center md:items-start text-center md:text-left z-10 w-full md:w-1/2 md:pr-8">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center mb-5 sm:mb-6 shadow-inner">
-                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-5 sm:mb-6 shadow-inner">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>

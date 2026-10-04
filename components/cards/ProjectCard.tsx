@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { GlassCard } from "../ui/GlassCard";
+import { NeonCard } from "./NeonCard";
 
 export interface Project {
   title: string;
@@ -21,13 +21,13 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, isActive, onClick, style, className = "", color = "#ffffff" }: ProjectCardProps) {
   return (
-    <GlassCard
+    <NeonCard
       onClick={onClick}
       color={color}
       isActive={isActive}
       style={style}
       containerClassName={`shrink-0 rounded-[26px] ${className}`}
-      innerClassName="rounded-[24px] p-4 md:p-5 flex flex-col justify-between group"
+      innerClassName="rounded-[24px] p-4 md:p-5 flex flex-col justify-between group relative overflow-hidden"
     >
       <div className="flex flex-col h-full relative z-20">
           {/* Site Preview / Image */}
@@ -92,6 +92,6 @@ export function ProjectCard({ project, isActive, onClick, style, className = "",
             )}
           </div>
         </div>
-    </GlassCard>
+    </NeonCard>
   );
 }

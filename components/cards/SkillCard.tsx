@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { WavyContour } from "../graphics/WavyContour";
-import { GlassCard } from "../ui/GlassCard";
+import { NeonCard } from "./NeonCard";
 
 interface Skill {
   name: string;
@@ -28,7 +28,7 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
       className={`absolute top-1/2 left-1/2 w-[220px] md:w-[260px] h-[280px] md:h-[320px] select-none group transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'cursor-default' : 'cursor-pointer'}`}
       style={style}
     >
-      <GlassCard
+      <NeonCard
         onClick={onClick}
         color={skill.color}
         isActive={isActive}
@@ -83,7 +83,7 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
               {skill.projects} projects
             </span>
           </div>
-      </GlassCard>
+      </NeonCard>
     </div>
   );
 }
