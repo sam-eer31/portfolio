@@ -33,6 +33,7 @@ export function Skills() {
   const [activeIndex, setActiveIndex] = useState(Math.floor(skills.length / 2));
   const [isMobile, setIsMobile] = useState(false);
   const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
@@ -49,6 +50,8 @@ export function Skills() {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -101,17 +104,75 @@ export function Skills() {
     }
   };
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (wheelTimeout.current) return;
+      if (e.deltaY > 20 || e.deltaX > 20) {
+        handleNav("right");
+        wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
+      } else if (e.deltaY < -20 || e.deltaX < -20) {
+        handleNav("left");
+        wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
+      }
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.targetTouches[0].clientX;
+      touchEndX.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      touchEndX.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchEnd = () => {
+      const distance = touchStartX.current - touchEndX.current;
+      if (distance > 50) {
+        handleNav("right");
+      } else if (distance < -50) {
+        handleNav("left");
+      }
+    };
+
+    const onScroll = () => {
+      if (container) {
+        container.style.pointerEvents = "none";
+      }
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(() => {
+        if (container) {
+          container.style.pointerEvents = "auto";
+        }
+      }, 150);
+    };
+
+    container.addEventListener("wheel", onWheel, { passive: true });
+    container.addEventListener("touchstart", onTouchStart, { passive: true });
+    container.addEventListener("touchmove", onTouchMove, { passive: true });
+    container.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      container.removeEventListener("wheel", onWheel);
+      container.removeEventListener("touchstart", onTouchStart);
+      container.removeEventListener("touchmove", onTouchMove);
+      container.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("scroll", onScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, []);
+
   return (
     <section id="skills" className="py-8 md:py-12 relative overflow-hidden">
       {/* Faded Dot Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_10%,var(--background)_60%)]" />
         <svg
-          className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.25]"
+          className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.25] z-0"
           xmlns="http://www.w3.org/2000/svg"
-          style={{
-            maskImage: 'radial-gradient(ellipse at center, black 10%, transparent 60%)',
-            WebkitMaskImage: 'radial-gradient(ellipse at center, black 10%, transparent 60%)'
-          }}
         >
           <defs>
             <pattern id="skill-dot" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -149,10 +210,7 @@ export function Skills() {
         {/* Slider Container */}
         <div className="relative w-full">
           <div
-            onWheel={handleWheel}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            ref={containerRef}
             className="relative w-full h-[320px] md:h-[360px] flex items-center justify-center overflow-visible touch-pan-y"
           >
             {skills.map((skill, index) => {
@@ -174,21 +232,27 @@ export function Skills() {
               const opacity = absDistance === 0 ? 1 : Math.max(0, 0.7 - absDistance * 0.2);
 
               return (
-                <SkillCard
+                <div
                   key={skill.name}
-                  skill={skill}
-                  slug={slug}
-                  isActive={isActive}
-                  onClick={() => setActiveIndex(index)}
+                  className="absolute top-1/2 left-1/2 w-[220px] md:w-[260px] h-[280px] md:h-[320px] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
                   style={{
                     transform: `translate3d(calc(-50% + ${translateX}px), -50%, 0) scale(${scale})`,
                     zIndex,
                     opacity: scale > 0 ? opacity : 0,
                     visibility: (scale > 0 && opacity > 0) ? "visible" : "hidden",
                     pointerEvents: absDistance > 3 ? "none" : "auto",
-                    willChange: "transform, opacity",
                   }}
-                />
+                >
+                  {absDistance <= 2 ? (
+                    <SkillCard
+                      skill={skill}
+                      slug={slug}
+                      isActive={isActive}
+                      onClick={() => setActiveIndex(index)}
+                      style={{ position: 'relative', top: 0, left: 0, transform: 'none' }}
+                    />
+                  ) : null}
+                </div>
               );
             })}
           </div>

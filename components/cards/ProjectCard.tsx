@@ -46,7 +46,7 @@ export function ProjectCard({ project, isActive, onClick, style, className = "",
 
             {/* Optional Overlay to catch clicks and open link */}
             {project.link && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover/preview:opacity-100 transition-all duration-500 bg-background/20 backdrop-blur-[2px] pointer-events-none">
+              <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover/preview:opacity-100 transition-all duration-500 bg-[#040506]/80 pointer-events-none">
                 <Link href={project.link} target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-white text-black rounded-full text-sm font-semibold shadow-xl pointer-events-auto hover:scale-105 transition-transform duration-300">
                   Visit Site
                 </Link>

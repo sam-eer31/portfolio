@@ -2,7 +2,7 @@ import { Container } from "../layout/Container";
 import portfolioData from "../../data/portfolio.json";
 import { InterestCard } from "../cards/InterestCard";
 import { DesktopConnections, TabletConnections } from "../graphics/PathConnections";
-import { colorGradients, neonColors, imageDropShadows } from "./InterestConstants";
+import { colorGradients, neonColors, imageDropShadows } from "../../lib/constants";
 
 export function Interests() {
   const data = portfolioData.interests;

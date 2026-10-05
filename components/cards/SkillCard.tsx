@@ -25,7 +25,7 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
 
   return (
     <div
-      className={`absolute top-1/2 left-1/2 w-[220px] md:w-[260px] h-[280px] md:h-[320px] select-none group transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'cursor-default' : 'cursor-pointer'}`}
+      className={`w-full h-full select-none group transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'cursor-default' : 'cursor-pointer'}`}
       style={style}
     >
       <NeonCard

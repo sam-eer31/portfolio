@@ -40,11 +40,11 @@ export function DesktopConnections({ index, totalItems, neonColors }: Connection
         </svg>
         <div
           className="absolute right-0 top-0 w-2.5 h-2.5 -mr-[5px] -mt-[5px] rounded-full z-10"
-          style={{ backgroundColor: strokeColor, boxShadow: `0 0 15px 2px ${strokeColor}` }}
+          style={{ backgroundColor: strokeColor, boxShadow: `0 0 15px 2px ${strokeColor}`, willChange: "transform" }}
         />
         <div
           className="absolute left-0 bottom-0 w-2.5 h-2.5 -ml-[5px] -mb-[5px] rounded-full z-10"
-          style={{ backgroundColor: nextStrokeColor, boxShadow: `0 0 15px 2px ${nextStrokeColor}` }}
+          style={{ backgroundColor: nextStrokeColor, boxShadow: `0 0 15px 2px ${nextStrokeColor}`, willChange: "transform" }}
         />
       </div>
     );
@@ -85,11 +85,11 @@ export function DesktopConnections({ index, totalItems, neonColors }: Connection
       </svg>
       <div
         className="absolute left-0 w-2.5 h-2.5 -ml-[5px] rounded-full z-10"
-        style={{ top: '50%', marginTop: '-5px', backgroundColor: strokeColor, boxShadow: `0 0 15px 2px ${strokeColor}` }}
+        style={{ top: '50%', marginTop: '-5px', backgroundColor: strokeColor, boxShadow: `0 0 15px 2px ${strokeColor}`, willChange: "transform" }}
       />
       <div
         className="absolute right-0 w-2.5 h-2.5 -mr-[5px] rounded-full z-10"
-        style={{ top: `calc(50% + ${yOffsetPx}px)`, marginTop: '-5px', backgroundColor: nextStrokeColor, boxShadow: `0 0 15px 2px ${nextStrokeColor}` }}
+        style={{ top: `calc(50% + ${yOffsetPx}px)`, marginTop: '-5px', backgroundColor: nextStrokeColor, boxShadow: `0 0 15px 2px ${nextStrokeColor}`, willChange: "transform" }}
       />
     </div>
   );
@@ -127,8 +127,8 @@ export function TabletConnections({ index, totalItems, neonColors }: ConnectionP
             vectorEffect="non-scaling-stroke"
           />
         </svg>
-        <div className="absolute top-0 right-0 w-2 h-2 rounded-full translate-x-1/2 -translate-y-1/2 bg-white" style={{ boxShadow: `0 0 15px 2px ${strokeColor}` }} />
-        <div className="absolute bottom-0 left-0 w-2 h-2 rounded-full -translate-x-1/2 translate-y-1/2 bg-white" style={{ boxShadow: `0 0 15px 2px ${nextStrokeColor}` }} />
+        <div className="absolute top-0 right-0 w-2 h-2 rounded-full translate-x-1/2 -translate-y-1/2 bg-white" style={{ boxShadow: `0 0 15px 2px ${strokeColor}`, willChange: "transform" }} />
+        <div className="absolute bottom-0 left-0 w-2 h-2 rounded-full -translate-x-1/2 translate-y-1/2 bg-white" style={{ boxShadow: `0 0 15px 2px ${nextStrokeColor}`, willChange: "transform" }} />
       </div>
     );
   }
@@ -162,8 +162,8 @@ export function TabletConnections({ index, totalItems, neonColors }: ConnectionP
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="absolute top-1/2 left-0 w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2 bg-white" style={{ boxShadow: `0 0 15px 2px ${strokeColor}` }} />
-      <div className="absolute left-full w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2 bg-white" style={{ top: `calc(50% + ${yOffsetPx}px)`, boxShadow: `0 0 15px 2px ${nextStrokeColor}` }} />
+      <div className="absolute top-1/2 left-0 w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2 bg-white" style={{ boxShadow: `0 0 15px 2px ${strokeColor}`, willChange: "transform" }} />
+      <div className="absolute left-full w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2 bg-white" style={{ top: `calc(50% + ${yOffsetPx}px)`, boxShadow: `0 0 15px 2px ${nextStrokeColor}`, willChange: "transform" }} />
     </div>
   );
 }

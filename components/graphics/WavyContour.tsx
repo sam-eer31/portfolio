@@ -4,9 +4,9 @@ export const WavyContour = ({ color, isActive }: { color: string; isActive: bool
   return (
     <div
       className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none z-0 transition-opacity duration-500"
-      style={{ opacity: isActive ? 0.7 : 0.15 }}
+      style={{ opacity: isActive ? 0.7 : 0.15, willChange: 'opacity, transform' }}
     >
-      <svg className="absolute top-[-10%] left-[-15%] w-[130%] h-[60%]" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true" style={{ animation: isActive ? 'drift 18s ease-in-out infinite alternate' : 'none' }}>
+      <svg className="absolute top-[-10%] left-[-15%] w-[130%] h-[60%]" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
 
         {/* dim contour */}
         <path d="M-80 35 C80 -20 150 30 240 70 C360 125 440 120 550 45 C690 -50 790 5 900 65 C1030 135 1100 110 1280 35" fill="none" strokeLinecap="round" stroke={color} strokeWidth="1" opacity="0.35" />

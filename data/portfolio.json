@@ -3,8 +3,11 @@
     "name": "Sameer Shahid Siddiqui",
     "title": "Frontend Developer | AI-Assisted Development | Python",
     "email": "sameershahidsiddiqui365@gmail.com",
-    "github": "https://github.com/sameershahidsiddiqui365",
-    "linkedin": "https://linkedin.com/in/sameershahidsiddiqui/"
+    "github": "https://github.com/sam-eer31",
+    "linkedin": "https://linkedin.com/in/sameershahidsiddiqui/",
+    "phone": "+91 9335847773",
+    "location": "Lucknow, India",
+    "whatsapp": "https://wa.me/919335847773"
   },
   "hero": {
     "role": "FRONTEND DEVELOPER",
@@ -73,14 +76,30 @@
       "description": "Interactive 3D solar system experience with stunning graphics, smooth animations, and a premium web interface.",
       "link": "",
       "image": "/projects/planetzero.png",
-      "tags": []
+      "tags": [
+        "TypeScript",
+        "React",
+        "Three.js",
+        "WebGL",
+        "3D Graphics",
+        "Interactive Visualization",
+        "Solar System",
+        "3D Animation",
+        "Tailwind CSS"
+      ]
     },
     {
       "title": "GrooveBox",
       "description": "Real-time shared music and watch rooms for synchronized listening and viewing.",
       "link": "",
-      "image": "",
-      "tags": []
+      "image": "/projects/groovebox.png",
+      "tags": [
+        "Next.js",
+        "Tailwind CSS",
+        "React",
+        "PartyKit",
+        "Zustand"
+      ]
     },
     {
       "title": "Codexa",
@@ -93,15 +112,34 @@
       "title": "Audrix",
       "description": "Client-side 3D audio visualization engine with 20 immersive environments, MP4 export, and a Developer Embed API.",
       "link": "",
-      "image": "",
-      "tags": []
+      "image": "/projects/audrix.png",
+      "tags": [
+        "React",
+        "Three.js",
+        "Web Audio API",
+        "TypeScript",
+        "Tailwind CSS",
+        "Zustand"
+      ]
     },
     {
       "title": "FeedBack Analyzer",
       "description": "Self-hosted NLP platform that turns user feedback into insights with sentiment analysis, AI summaries, dashboards, and data exports.",
       "link": "",
       "image": "",
-      "tags": []
+      "tags": [
+        "Python",
+        "FastAPI",
+        "NLP",
+        "Transformers",
+        "RoBERTa",
+        "DistilBERT",
+        "Sentiment Analysis",
+        "Generative AI",
+        "Gemini API",
+        "Ollama",
+        "Data Visualization"
+      ]
     }
   ],
   "skills": [

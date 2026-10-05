@@ -8,14 +8,11 @@ export function Projects() {
   return (
     <section id="projects" className="py-8 md:py-12 relative overflow-hidden">
       {/* Faded Grid Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_10%,var(--background)_60%)]" />
         <svg
-          className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.15]"
+          className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.15] z-0"
           xmlns="http://www.w3.org/2000/svg"
-          style={{
-            maskImage: 'radial-gradient(ellipse at center, black 10%, transparent 60%)',
-            WebkitMaskImage: 'radial-gradient(ellipse at center, black 10%, transparent 60%)'
-          }}
         >
           <defs>
             <pattern id="project-grid" width="48" height="48" patternUnits="userSpaceOnUse">

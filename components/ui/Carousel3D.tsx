@@ -24,6 +24,7 @@ export function Carousel3D({ projects }: Carousel3DProps) {
   const [rotationIndex, setRotationIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
@@ -40,6 +41,8 @@ export function Carousel3D({ projects }: Carousel3DProps) {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -90,6 +93,67 @@ export function Carousel3D({ projects }: Carousel3DProps) {
     }
   };
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (wheelTimeout.current) return;
+      if (e.deltaY > 20 || e.deltaX > 20) {
+        handleNav("right");
+        wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
+      } else if (e.deltaY < -20 || e.deltaX < -20) {
+        handleNav("left");
+        wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
+      }
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.targetTouches[0].clientX;
+      touchEndX.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      touchEndX.current = e.targetTouches[0].clientX;
+    };
+
+    const onTouchEnd = () => {
+      const distance = touchStartX.current - touchEndX.current;
+      if (distance > 50) {
+        handleNav("right");
+      } else if (distance < -50) {
+        handleNav("left");
+      }
+    };
+
+    const onScroll = () => {
+      if (container) {
+        container.style.pointerEvents = "none";
+      }
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(() => {
+        if (container) {
+          container.style.pointerEvents = "auto";
+        }
+      }, 150);
+    };
+
+    container.addEventListener("wheel", onWheel, { passive: true });
+    container.addEventListener("touchstart", onTouchStart, { passive: true });
+    container.addEventListener("touchmove", onTouchMove, { passive: true });
+    container.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      container.removeEventListener("wheel", onWheel);
+      container.removeEventListener("touchstart", onTouchStart);
+      container.removeEventListener("touchmove", onTouchMove);
+      container.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("scroll", onScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, []);
+
   if (projects.length === 0) {
     return (
       <div className="text-center text-muted-foreground p-12 border border-dashed rounded-lg">
@@ -111,10 +175,7 @@ export function Carousel3D({ projects }: Carousel3DProps) {
   return (
     <div className="relative w-full flex flex-col items-center">
       <div
-        onWheel={handleWheel}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        ref={containerRef}
         className="relative w-full h-[450px] md:h-[500px] flex items-center justify-center touch-pan-y"
         style={{ perspective: "1500px", overflow: "hidden" }}
       >
@@ -148,24 +209,27 @@ export function Carousel3D({ projects }: Carousel3DProps) {
                   zIndex,
                   visibility: opacity > 0.1 ? "visible" : "hidden",
                   pointerEvents: angularDistance <= 1 ? "auto" : "none",
-                  willChange: angularDistance <= 1 ? "transform, opacity" : "auto",
                   transition: "opacity 0.8s ease, transform 0.8s ease"
                 }}
               >
-                <ProjectCard
-                  project={project}
-                  isActive={isActive}
-                  color={projectColor}
-                  onClick={() => {
-                    if (!isActive) {
-                      let diff = index - currentFrontIndex;
-                      if (diff > N / 2) diff -= N;
-                      if (diff < -N / 2) diff += N;
-                      setRotationIndex(prev => prev + diff);
-                    }
-                  }}
-                  className="w-[260px] md:w-[320px] h-[340px] md:h-[400px]"
-                />
+                {angularDistance <= 1 ? (
+                  <ProjectCard
+                    project={project}
+                    isActive={isActive}
+                    color={projectColor}
+                    onClick={() => {
+                      if (!isActive) {
+                        let diff = index - currentFrontIndex;
+                        if (diff > N / 2) diff -= N;
+                        if (diff < -N / 2) diff += N;
+                        setRotationIndex(prev => prev + diff);
+                      }
+                    }}
+                    className="w-[260px] md:w-[320px] h-[340px] md:h-[400px]"
+                  />
+                ) : (
+                  <div className="w-[260px] md:w-[320px] h-[340px] md:h-[400px] rounded-[26px] bg-[#060913]/40 border border-white/5" />
+                )}
               </div>
             );
           })}

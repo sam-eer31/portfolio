@@ -36,7 +36,7 @@ export function NeonCard({
   
   return (
     <div 
-      className={`relative overflow-hidden backdrop-blur-md bg-linear-to-br from-[#141618]/95 to-[#020304]/95 transition-all duration-500 z-20 ${mergedContainerClass} ${className} ${hoverStyle}`} 
+      className={`relative overflow-hidden bg-linear-to-br from-[#141618] to-[#020304] transition-all duration-500 z-20 ${mergedContainerClass} ${className} ${hoverStyle}`} 
       onClick={onClick}
       style={style}
       {...props}
@@ -44,7 +44,7 @@ export function NeonCard({
       {/* --- NEON VISUAL EFFECTS --- */}
       {/* Corner Glow */}
       <div 
-        className={`absolute -top-12 -left-12 w-32 h-32 opacity-30 pointer-events-none rounded-full blur-2xl transition-all duration-500`}
+        className={`absolute -top-12 -left-12 w-32 h-32 opacity-30 pointer-events-none rounded-full transition-all duration-500`}
         style={color && !gradient ? { background: `radial-gradient(circle, ${color} 0%, transparent 70%)` } : undefined}
       >
         {gradient && <div className={`w-full h-full bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] ${gradient} to-transparent`} />}

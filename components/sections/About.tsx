@@ -1,6 +1,7 @@
 import { Container } from "../layout/Container";
 import portfolioData from "../../data/portfolio.json";
 import { Badge, badgeData } from "../ui/Badge";
+import Image from "next/image";
 
 export function About() {
   return (
@@ -18,10 +19,12 @@ export function About() {
             
             {/* Tablet Image Float (Passport style) - Only visible between sm and lg */}
             <div className="hidden sm:block lg:hidden float-right w-[260px] md:w-[320px] ml-8 mb-6 mt-4 relative z-30 transition-transform duration-700 hover:scale-[1.02]">
-              <img 
+              <Image 
                 src="/about/about-card.png" 
                 alt="About" 
-                className="w-full h-auto object-contain drop-shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)]"
+                width={320}
+                height={400}
+                className="w-full h-auto object-contain shadow-2xl rounded-xl"
               />
             </div>
 
@@ -38,10 +41,12 @@ export function About() {
             
             {/* Mobile Image - Visible only below sm screens */}
             <div className="block sm:hidden w-full max-w-[260px] mx-auto my-10 relative z-30 transition-transform duration-700 hover:scale-[1.02]">
-              <img 
+              <Image 
                 src="/about/about-card.png" 
                 alt="About" 
-                className="w-full h-auto object-contain drop-shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)]"
+                width={260}
+                height={320}
+                className="w-full h-auto object-contain shadow-2xl rounded-xl"
               />
             </div>
 
@@ -90,10 +95,13 @@ export function About() {
 
           {/* Right Column (Desktop only) */}
           <div className="hidden lg:flex relative w-full max-w-[600px] xl:max-w-[700px] mx-auto pointer-events-auto items-center justify-center transition-transform duration-700 hover:scale-[1.02]">
-            <img 
+            <Image 
               src="/about/about-card.png" 
               alt="About" 
-              className="w-full h-auto object-contain drop-shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)]"
+              width={700}
+              height={850}
+              priority={false}
+              className="w-full h-auto object-contain shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] rounded-3xl"
             />
           </div>
         </div>
