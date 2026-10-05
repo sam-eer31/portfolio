@@ -40,7 +40,7 @@
       "I am a Frontend Developer focused on building modern, responsive, and interactive web interfaces with React, Next.js, TypeScript, and Tailwind CSS.",
       "Experienced in creating polished UI experiences with animations, responsive layouts, rich components, and real-time interactions using AI-assisted development for faster implementation and iteration."
     ],
-    "image": "/about/about-card.png",
+    "image": "/about/about-card.webp",
     "tags": [
       {
         "sub": "Good",
@@ -77,14 +77,14 @@
       "title": "TrackDaily",
       "description": "AI-powered nutrition and health journal that turns natural language and food photos into structured meal logs and personalized health insights.",
       "link": "",
-      "image": "/projects/trackdaily.png",
+      "image": "/projects/trackdaily.webp",
       "tags": []
     },
     {
       "title": "ShadowxAI",
       "description": "Privacy-first BYOK AI assistant with local browser storage, web search, image generation, and support for Ollama, Cloudflare, and Puter.",
       "link": "https://shadowxai.vercel.app",
-      "image": "/projects/shadowxai.png",
+      "image": "/projects/shadowxai.webp",
       "tags": [
         "Next.js",
         "React",
@@ -97,7 +97,7 @@
       "title": "Crisper",
       "description": "Modern music search platform and free API for discovering and downloading high-quality audio tracks.",
       "link": "https://crisperstudio.vercel.app",
-      "image": "/projects/crisper.png",
+      "image": "/projects/crisper.webp",
       "tags": [
         "Next.js",
         "React",
@@ -108,7 +108,7 @@
       "title": "PlanetZero",
       "description": "Interactive 3D solar system experience with stunning graphics, smooth animations, and a premium web interface.",
       "link": "",
-      "image": "/projects/planetzero.png",
+      "image": "/projects/planetzero.webp",
       "tags": [
         "TypeScript",
         "React",
@@ -125,7 +125,7 @@
       "title": "GrooveBox",
       "description": "Real-time shared music and watch rooms for synchronized listening and viewing.",
       "link": "",
-      "image": "/projects/groovebox.png",
+      "image": "/projects/groovebox.webp",
       "tags": [
         "Next.js",
         "Tailwind CSS",
@@ -145,7 +145,7 @@
       "title": "Audrix",
       "description": "Client-side 3D audio visualization engine with 20 immersive environments, MP4 export, and a Developer Embed API.",
       "link": "",
-      "image": "/projects/audrix.png",
+      "image": "/projects/audrix.webp",
       "tags": [
         "React",
         "Three.js",
@@ -280,37 +280,37 @@
         "id": "01",
         "title": "Coding",
         "description": "Turning ideas into reality with code.",
-        "image": "/interests/coding.png"
+        "image": "/interests/coding.webp"
       },
       {
         "id": "02",
         "title": "UI Design",
         "description": "Crafting simple and meaningful experiences.",
-        "image": "/interests/ui-designing.png"
+        "image": "/interests/ui-designing.webp"
       },
       {
         "id": "03",
         "title": "Gaming",
         "description": "Exploring virtual worlds and new adventures.",
-        "image": "/interests/gaming.png"
+        "image": "/interests/gaming.webp"
       },
       {
         "id": "04",
         "title": "Fitness",
         "description": "Building a stronger and healthier me.",
-        "image": "/interests/fitness.png"
+        "image": "/interests/fitness.webp"
       },
       {
         "id": "05",
         "title": "Food / Cooking",
         "description": "Experimenting with flavors and creating good food.",
-        "image": "/interests/cooking.png"
+        "image": "/interests/cooking.webp"
       },
       {
         "id": "06",
         "title": "Book Reading",
         "description": "Discovering new perspectives one book at a time.",
-        "image": "/interests/reading.png"
+        "image": "/interests/reading.webp"
       }
     ]
   }
