@@ -30,10 +30,10 @@ export const PROJECT_COLORS = [
   "#ffffff", // White
   "#CB2957", // Crimson
   "#F8AF00", // Yellow
-  "#8B5CF6", // Violet
+  "#14b8a6", // Emerald
   "#F59E0B", // Amber
   "#EF4444", // Red
-  "#6366F1", // Indigo
+  "#06b6d4", // Cyan
 ];
 
 export const SECTION_SPACING = "py-8 md:py-12";

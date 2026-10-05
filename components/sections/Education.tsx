@@ -21,7 +21,7 @@ export function Education() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight text-white relative z-10">
+          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white relative z-10">
             A journey of <span className="relative inline-block text-yellow-500 pb-2">continuous learning.</span>
           </h2>
         </div>

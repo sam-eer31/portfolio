@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Manrope, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -9,25 +9,33 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const inter = Inter({
-  variable: "--font-inter",
+const manrope = Manrope({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "A professional portfolio showcasing my work and experience.",
+  title: "Portfolio | Sameer Shahid Siddiqui",
+  description: "Professional portfolio of Sameer Shahid Siddiqui, a Frontend Developer specializing in React, Next.js, and AI-Assisted Development.",
   openGraph: {
-    title: "My Portfolio",
-    description: "A professional portfolio showcasing my work and experience.",
-    url: "https://your-portfolio-url.com", // update this with your actual deployed URL
-    siteName: "My Portfolio",
+    title: "Portfolio | Sameer Shahid Siddiqui",
+    description: "Professional portfolio of Sameer Shahid Siddiqui, a Frontend Developer specializing in React, Next.js, and AI-Assisted Development.",
+    url: "https://shadowxai.vercel.app", // Fallback URL, update with actual domain
+    siteName: "Sameer Shahid Siddiqui - Portfolio",
     images: [
       {
-        url: "/projects/crisper.png", // fallback image
+        url: "/logo.png", 
         width: 1200,
         height: 630,
+        alt: "Sameer Shahid Siddiqui Portfolio"
       },
     ],
     locale: "en_US",
@@ -35,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Portfolio",
-    description: "A professional portfolio showcasing my work and experience.",
-    images: ["/projects/crisper.png"], // fallback image
+    title: "Portfolio | Sameer Shahid Siddiqui",
+    description: "Professional portfolio of Sameer Shahid Siddiqui, a Frontend Developer specializing in React, Next.js, and AI-Assisted Development.",
+    images: ["/logo.png"],
   },
 };
 
@@ -48,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth scroll-pt-16">
-      <body className={`${inter.variable} font-sans min-h-screen flex flex-col antialiased`}>
+      <body className={`${manrope.variable} ${instrumentSerif.variable} font-sans min-h-screen flex flex-col antialiased`}>
         <Header />
         <main className="grow">{children}</main>
         <Footer />

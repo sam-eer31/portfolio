@@ -35,7 +35,7 @@ export function Interests() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight text-white mb-6 relative z-10">
+          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white mb-6 relative z-10">
             Things That Keep Me <span className="relative inline-block text-purple-500 pb-2">
               Inspired
             </span>

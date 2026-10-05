@@ -40,7 +40,7 @@ export function Contact() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight text-white relative z-10">
+          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white relative z-10">
             Let&apos;s connect and<br />
             <span className="relative inline-block text-emerald-500 pb-2">grow together.</span>
           </h2>
@@ -51,7 +51,7 @@ export function Contact() {
           
           {/* Intro Text (Order 1 on mobile, Col 1 Row 1 on desktop) */}
           <div className="flex flex-col z-10 w-full order-1 lg:col-start-1 lg:row-start-1">
-            <p className="text-gray-400 text-lg leading-relaxed">
+            <p className="text-gray-400 text-sm md:text-base lg:text-lg font-light leading-relaxed">
               I&apos;m actively seeking my first full-time role as a frontend developer. Whether you&apos;re hiring, want to collaborate on a project, or just want to chat about tech, I&apos;d love to hear from you!
             </p>
           </div>

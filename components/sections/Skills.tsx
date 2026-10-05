@@ -25,7 +25,9 @@ const iconSlugs: Record<string, string> = {
   "GitHub": "github/github-original.svg",
   "Figma": "figma/figma-original.svg",
   "Git": "git/git-original.svg",
-  "VS Code": "vscode/vscode-original.svg"
+  "VS Code": "vscode/vscode-original.svg",
+  "Antigravity": "/icons/Google-Antigravity-Icon.svg",
+  "Ollama": "https://ollama.com/public/ollama-nav.png"
 };
 
 
@@ -206,7 +208,7 @@ export function Skills() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight text-white mb-6 relative z-10">
+          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white mb-6 relative z-10">
             Tools I use to <span className="relative inline-block text-emerald-500 pb-2">turn ideas into reality.</span>
           </h2>
           

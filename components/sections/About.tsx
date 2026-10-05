@@ -25,7 +25,7 @@ export function About() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-white">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-normal leading-tight text-white">
             A developer who turns ideas<br />
             into <span className="relative inline-block text-[#FF5E3A] pb-2">real experiences.</span>
           </h2>
@@ -35,9 +35,9 @@ export function About() {
         <div className="relative w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center mb-16">
 
           {/* Text Description */}
-          <div className="order-2 lg:order-1 text-lg text-muted-foreground leading-relaxed space-y-6">
+          <div className="order-2 lg:order-1 text-sm md:text-base lg:text-lg font-light text-muted-foreground leading-relaxed space-y-6">
             {portfolioData.about.description.map((paragraph: string, index: number) => (
-              <p key={index}>{paragraph}</p>
+              <p key={index} className="text-center md:text-justify">{paragraph}</p>
             ))}
           </div>
 

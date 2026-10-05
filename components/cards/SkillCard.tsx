@@ -5,7 +5,6 @@ import { NeonCard } from "./NeonCard";
 interface Skill {
   name: string;
   description: string;
-  proficiency: number;
   projects: number;
   color: string;
 }
@@ -42,14 +41,23 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
           <div className="flex flex-col items-center justify-center flex-grow w-full z-10 mt-2 md:mt-4">
             {/* Icon */}
             <div className="w-14 h-14 md:w-16 md:h-16 mb-4 md:mb-5 flex items-center justify-center drop-shadow-2xl transition-transform duration-300 group-hover:scale-110 bg-[#13151A]/80 rounded-2xl p-2 md:p-3 border border-white/5 relative">
-              <Image
-                src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}`}
-                alt={skill.name}
-                fill
-                className={`p-2 object-contain ${invertClass}`}
-                draggable={false}
-                sizes="80px"
-              />
+              {slug.startsWith("http") || slug.startsWith("/") ? (
+                <img
+                  src={slug}
+                  alt={skill.name}
+                  className={`absolute inset-0 w-full h-full p-2 object-contain ${invertClass}`}
+                  draggable={false}
+                />
+              ) : (
+                <Image
+                  src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}`}
+                  alt={skill.name}
+                  fill
+                  className={`p-2 object-contain ${invertClass}`}
+                  draggable={false}
+                  sizes="80px"
+                />
+              )}
             </div>
 
             {/* Text Content */}
@@ -63,25 +71,13 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
             </div>
           </div>
 
-          {/* Proficiency & Footer */}
-          <div className="w-full flex flex-col items-center mt-auto pt-4 z-10">
-            <div className="flex gap-1.5 mb-4">
-              {[1, 2, 3, 4, 5].map((level) => (
-                <div
-                  key={level}
-                  className="h-1.5 w-5 rounded-full shadow-sm transition-colors duration-500"
-                  style={{
-                    backgroundColor: level <= skill.proficiency
-                      ? skill.color
-                      : 'rgba(255,255,255,0.1)',
-                    opacity: isActive ? 1 : 0.4
-                  }}
-                />
-              ))}
-            </div>
-            <span className={`text-[11px] font-semibold tracking-wider uppercase transition-colors duration-500 ${isActive ? 'text-muted-foreground' : 'text-muted-foreground/40'}`}>
-              {skill.projects} projects
-            </span>
+          {/* Footer */}
+          <div className="w-full flex flex-col items-center mt-auto pt-4 z-10 h-8">
+            {skill.projects > 0 && (
+              <span className={`text-[11px] font-semibold tracking-wider uppercase transition-colors duration-500 ${isActive ? 'text-muted-foreground' : 'text-muted-foreground/40'}`}>
+                {skill.projects} projects
+              </span>
+            )}
           </div>
       </NeonCard>
     </div>

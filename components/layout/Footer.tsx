@@ -7,9 +7,12 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/20">
       <Container className="py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} {name}. All rights reserved.
-        </p>
+        <div className="flex items-center">
+          <img src="/logo.png" alt="Logo" className="h-8 md:h-10 w-auto object-contain opacity-70 grayscale hover:grayscale-0 transition-all" />
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} {name}. All rights reserved.
+          </p>
+        </div>
         <div className="flex items-center gap-6 text-sm text-muted-foreground">
           {github && (
             <a href={github} target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">

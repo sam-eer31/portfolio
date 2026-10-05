@@ -78,7 +78,13 @@
       "description": "AI-powered nutrition and health journal that turns natural language and food photos into structured meal logs and personalized health insights.",
       "link": "",
       "image": "/projects/trackdaily.webp",
-      "tags": []
+      "tags": [
+        "Next.js",
+        "Firebase",
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ]
     },
     {
       "title": "ShadowxAI",
@@ -101,13 +107,14 @@
       "tags": [
         "Next.js",
         "React",
-        "TypeScript"
+        "TypeScript",
+        "Express.js"
       ]
     },
     {
       "title": "PlanetZero",
       "description": "Interactive 3D solar system experience with stunning graphics, smooth animations, and a premium web interface.",
-      "link": "",
+      "link": "https://planetzero.vercel.app",
       "image": "/projects/planetzero.webp",
       "tags": [
         "TypeScript",
@@ -124,7 +131,7 @@
     {
       "title": "GrooveBox",
       "description": "Real-time shared music and watch rooms for synchronized listening and viewing.",
-      "link": "",
+      "link": "https://grooveboxplayer.vercel.app",
       "image": "/projects/groovebox.webp",
       "tags": [
         "Next.js",
@@ -135,16 +142,9 @@
       ]
     },
     {
-      "title": "Codexa",
-      "description": "AI-powered platform for generating and analyzing documents and code, with built-in AI tutoring and support for local and cloud LLMs.",
-      "link": "",
-      "image": "",
-      "tags": []
-    },
-    {
       "title": "Audrix",
       "description": "Client-side 3D audio visualization engine with 20 immersive environments, MP4 export, and a Developer Embed API.",
-      "link": "",
+      "link": "https://audrix.vercel.app",
       "image": "/projects/audrix.webp",
       "tags": [
         "React",
@@ -159,7 +159,7 @@
       "title": "FeedBack Analyzer",
       "description": "Self-hosted NLP platform that turns user feedback into insights with sentiment analysis, AI summaries, dashboards, and data exports.",
       "link": "",
-      "image": "",
+      "image": "/projects/feedback-analyzer.webp",
       "tags": [
         "Python",
         "FastAPI",
@@ -179,78 +179,97 @@
     {
       "name": "JavaScript",
       "description": "Core language for the web.",
-      "proficiency": 5,
-      "projects": 8,
+      "projects": 0,
       "color": "#F7DF1E"
     },
     {
       "name": "TypeScript",
       "description": "Type safety at scale.",
-      "proficiency": 4,
-      "projects": 5,
+      "projects": 0,
       "color": "#3178C6"
     },
     {
       "name": "React",
       "description": "UI library for modern web.",
-      "proficiency": 5,
-      "projects": 12,
+      "projects": 0,
       "color": "#61DAFB"
     },
     {
       "name": "Next.js",
       "description": "The React Framework.",
-      "proficiency": 4,
-      "projects": 6,
+      "projects": 0,
       "color": "#ffffff"
     },
     {
       "name": "Tailwind CSS",
       "description": "Utility-first styling.",
-      "proficiency": 5,
-      "projects": 15,
+      "projects": 0,
       "color": "#06B6D4"
     },
     {
       "name": "HTML",
       "description": "Structure the web.",
-      "proficiency": 5,
-      "projects": 20,
+      "projects": 0,
       "color": "#E34F26"
     },
     {
       "name": "CSS",
       "description": "Design & styling.",
-      "proficiency": 5,
-      "projects": 20,
+      "projects": 0,
       "color": "#1572B6"
     },
     {
       "name": "Python",
       "description": "Scripting & backend.",
-      "proficiency": 4,
-      "projects": 5,
+      "projects": 0,
       "color": "#3776AB"
     },
     {
       "name": "FastAPI",
       "description": "Modern high performance API.",
-      "proficiency": 3,
-      "projects": 2,
+      "projects": 0,
       "color": "#009688"
     },
     {
       "name": "Node.js",
       "description": "JavaScript runtime.",
-      "proficiency": 4,
-      "projects": 7,
+      "projects": 0,
       "color": "#339933"
     },
     {
       "name": "GitHub",
       "description": "Version control & collaboration.",
-      "proficiency": 5,
-      "projects": 20,
+      "projects": 0,
+      "color": "#ffffff"
+    },
+    {
+      "name": "Antigravity",
+      "description": "AI Coding Assistant.",
+      "projects": 0,
+      "color": "#4285F4"
+    },
+    {
+      "name": "Ollama",
+      "description": "Local AI models.",
+      "projects": 0,
+      "color": "#ffffff"
+    },
+    {
+      "name": "MySQL",
+      "description": "Relational Database.",
+      "projects": 0,
+      "color": "#4479A1"
+    },
+    {
+      "name": "MongoDB",
+      "description": "NoSQL Database.",
+      "projects": 0,
+      "color": "#47A248"
+    },
+    {
+      "name": "Flask",
+      "description": "Python web framework.",
+      "projects": 0,
       "color": "#ffffff"
     }
   ],

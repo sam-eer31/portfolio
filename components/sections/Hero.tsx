@@ -13,8 +13,7 @@ export function Hero() {
   return (
     <section className={`relative flex items-center overflow-hidden ${SECTION_SPACING}`}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Caveat:wght@400;500;600;700&display=swap');
-        .font-serif-hero { font-family: 'Playfair Display', serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
         .font-handwriting { font-family: 'Caveat', cursive; }
       `}</style>
 
@@ -54,28 +53,28 @@ export function Hero() {
         <FloatingNotes />
 
         {/* Main Content */}
-        <div className="flex flex-col items-start text-left space-y-6 w-full md:w-3/4 lg:w-3/5 mt-0">
+        <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 w-full md:w-3/4 lg:w-3/5 mt-0">
 
           <div className="space-y-4">
-            <div className="flex items-center justify-start gap-3">
+            <div className="flex items-center justify-center md:justify-start gap-3">
               <p className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] text-white/60 uppercase">
                 {portfolioData.hero.role}
               </p>
               <div className="w-1.5 h-1.5 rounded-full bg-[#F97316] shadow-[0_0_8px_#F97316]"></div>
             </div>
 
-            <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-serif-hero font-bold tracking-tight leading-[1.05]">
+            <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-serif font-bold tracking-normal leading-[1.05] text-center md:text-left">
               {portfolioData.hero.greeting} <br />
               <span className="text-[#ff5e3a]">{portfolioData.hero.name}</span>
             </h1>
 
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl pt-3">
+            <p className="text-lg text-white/80 leading-relaxed max-w-xl pt-3 text-center md:text-justify">
               {portfolioData.hero.description}
             </p>
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-start gap-3 md:gap-4 pt-4">
+          <div className="flex justify-center md:justify-start gap-3 md:gap-4 pt-4">
             <a href={portfolioData.hero.buttons.primary.link}>
               <Button className="h-[42px] md:h-[48px] rounded-[57px] px-5 md:px-8 text-xs md:text-sm font-semibold text-black bg-white hover:bg-slate-100 transition-all whitespace-nowrap">
                 {portfolioData.hero.buttons.primary.text}
