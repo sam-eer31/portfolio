@@ -9,7 +9,7 @@ export function Contact() {
   return (
     <section id="contact" className={`${SECTION_SPACING} relative overflow-hidden`}>
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] sm:h-[500px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-emerald-500/10 to-transparent opacity-50 z-0 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] sm:h-[500px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-[#3b82f6]/15 to-transparent opacity-50 z-0 pointer-events-none" />
       
       {/* Grid Pattern */}
       <div 
@@ -31,7 +31,7 @@ export function Contact() {
         <div className="text-center mb-8 md:mb-12 relative flex flex-col items-center">
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-emerald-400">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#3b82f6]">
               <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
             </svg>
             <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
@@ -42,7 +42,7 @@ export function Contact() {
           {/* Main Heading */}
           <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white relative z-10">
             Let&apos;s connect and<br />
-            <span className="relative inline-block text-emerald-500 pb-2">grow together.</span>
+            <span className="relative inline-block text-[#3b82f6] pb-2">grow together.</span>
           </h2>
         </div>
         
@@ -58,10 +58,10 @@ export function Contact() {
 
           {/* Form (Order 2 on mobile, Col 2 Row 1-span-2 on desktop) */}
           <div className="relative group w-full order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2">
-            <div className="absolute -inset-[1px] rounded-[2rem] bg-emerald-500/20 opacity-0 group-hover:opacity-50 transition-opacity duration-700 blur-sm hidden lg:block" />
+            <div className="absolute -inset-[1px] rounded-[2rem] bg-[#3b82f6]/20 opacity-0 group-hover:opacity-50 transition-opacity duration-700 blur-sm hidden lg:block" />
             
-            <div className="relative w-full rounded-[2rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 lg:border-white/10 p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-32 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-emerald-500/15 to-transparent opacity-50 pointer-events-none" />
+            <div className="relative w-full rounded-[2rem] bg-gradient-to-br from-[#141618] to-[#020304] border border-white/5 lg:border-white/10 p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-32 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-[#3b82f6]/15 to-transparent opacity-50 pointer-events-none" />
               <ContactForm />
             </div>
           </div>
@@ -73,28 +73,28 @@ export function Contact() {
             <div className="space-y-6">
               {/* Email */}
               <a href={`mailto:${email}`} className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
-                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 group-hover:border-emerald-500/50 group-hover:text-emerald-400 transition-all duration-300">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#3b82f6]/20 group-hover:border-[#3b82f6]/50 group-hover:text-[#3b82f6] transition-all duration-300">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Email</p>
-                  <p className="font-medium">{email}</p>
+                  <p className="font-medium break-all">{email}</p>
                 </div>
               </a>
 
               {/* Phone */}
               {phone && (
                 <div className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
-                  <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 group-hover:border-emerald-500/50 group-hover:text-emerald-400 transition-all duration-300">
+                  <div className="shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#3b82f6]/20 group-hover:border-[#3b82f6]/50 group-hover:text-[#3b82f6] transition-all duration-300">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Phone</p>
-                    <p className="font-medium">{phone}</p>
+                    <p className="font-medium break-words">{phone}</p>
                   </div>
                 </div>
               )}
@@ -102,7 +102,7 @@ export function Contact() {
               {/* Location */}
               {location && (
                 <div className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
-                  <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 group-hover:border-emerald-500/50 group-hover:text-emerald-400 transition-all duration-300">
+                  <div className="shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#3b82f6]/20 group-hover:border-[#3b82f6]/50 group-hover:text-[#3b82f6] transition-all duration-300">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -110,7 +110,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Location</p>
-                    <p className="font-medium">{location}</p>
+                    <p className="font-medium break-words">{location}</p>
                   </div>
                 </div>
               )}

@@ -8,8 +8,6 @@ interface Carousel3DProps {
   projects: Project[];
 }
 
-import { PROJECT_COLORS } from "../../lib/constants";
-
 export function Carousel3D({ projects }: Carousel3DProps) {
   const N = projects.length;
   const [rotationIndex, setRotationIndex] = useState(0);
@@ -188,7 +186,7 @@ export function Carousel3D({ projects }: Carousel3DProps) {
             const opacity = isActive ? 1 : Math.max(0.1, 0.7 - angularDistance * 0.25);
             const scale = isActive ? 1 : Math.max(0.8, 1 - angularDistance * 0.05);
             const zIndex = 50 - angularDistance;
-            const projectColor = PROJECT_COLORS[index % PROJECT_COLORS.length];
+            const projectColor = project.color || "#ffffff";
             
             return (
               <div

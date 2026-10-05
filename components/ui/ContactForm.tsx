@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { sendEmail } from '@/app/actions/sendEmail';
 
 export function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -15,15 +17,22 @@ export function ContactForm() {
     return () => clearTimeout(timeout);
   }, [status]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage('');
     
-    // Simulate network request
-    setTimeout(() => {
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const result = await sendEmail(formData);
+
+    if (result?.error) {
+      setStatus('error');
+      setErrorMessage(result.error);
+    } else {
       setStatus('success');
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+      form.reset();
+    }
   };
 
   if (status === 'success') {
@@ -39,9 +48,9 @@ export function ContactForm() {
             100% { stroke-dasharray: 100; stroke-dashoffset: 0; }
           }
         `}} />
-        <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 relative">
-          <div className="absolute inset-0 rounded-full border-2 border-emerald-500/30 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
-          <svg className="w-10 h-10 text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]" style={{ animation: 'drawCheck 0.8s ease-out forwards' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-20 h-20 bg-[#3b82f6]/20 rounded-full flex items-center justify-center mb-6 relative">
+          <div className="absolute inset-0 rounded-full border-2 border-[#3b82f6]/30 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
+          <svg className="w-10 h-10 text-[#3b82f6] drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" style={{ animation: 'drawCheck 0.8s ease-out forwards' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -64,7 +73,7 @@ export function ContactForm() {
             name="name"
             placeholder="Your Name"
             required
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
+            className="w-full bg-[#050607] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#3b82f6] focus:border-[#3b82f6] transition-all shadow-inner"
           />
         </div>
         <div className="flex-1">
@@ -75,7 +84,7 @@ export function ContactForm() {
             name="email"
             placeholder="Your Email"
             required
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
+            className="w-full bg-[#050607] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#3b82f6] focus:border-[#3b82f6] transition-all shadow-inner"
           />
         </div>
       </div>
@@ -88,14 +97,20 @@ export function ContactForm() {
           placeholder="How can I help you?"
           required
           rows={4}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all resize-none"
+          className="w-full bg-[#050607] border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#3b82f6] focus:border-[#3b82f6] transition-all resize-none shadow-inner"
         ></textarea>
       </div>
+
+      {status === 'error' && (
+        <div className="text-red-400 text-sm text-center">
+          {errorMessage || 'Something went wrong. Please try again.'}
+        </div>
+      )}
 
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="group relative inline-flex items-center justify-center w-full sm:w-auto self-end h-12 px-8 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm sm:text-base overflow-hidden transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-[0_0_20px_-5px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.6)]"
+        className="group relative inline-flex items-center justify-center w-full sm:w-auto self-end h-12 px-8 rounded-xl bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold text-sm sm:text-base overflow-hidden transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-[0_0_20px_-5px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.6)] border border-white/10"
       >
         <span className="relative z-10 flex items-center">
           {status === 'submitting' ? (

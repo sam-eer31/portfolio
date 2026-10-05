@@ -8,6 +8,7 @@ export interface Project {
   link?: string;
   image?: string;
   tags?: string[];
+  color?: string;
 }
 
 interface ProjectCardProps {
@@ -65,7 +66,7 @@ export function ProjectCard({ project, isActive, onClick, style, className = "",
           {/* Footer of Card (Tags & Arrow) */}
           <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5 w-full">
             <div className="flex flex-wrap content-start gap-1.5 pr-2 overflow-hidden h-[24px] sm:h-[26px]">
-              {project.tags?.map((tag: string, tagIndex: number) => (
+              {project.tags?.slice(0, 2).map((tag: string, tagIndex: number) => (
                 <span
                   key={tagIndex}
                   className="px-2 py-1 bg-white/5 border border-white/10 text-[9px] sm:text-[10px] font-medium text-white/70 rounded-full whitespace-nowrap shrink-0"
@@ -74,6 +75,14 @@ export function ProjectCard({ project, isActive, onClick, style, className = "",
                   {tag}
                 </span>
               ))}
+              {project.tags && project.tags.length > 2 && (
+                <span
+                  className="px-2 py-1 bg-white/5 border border-white/10 text-[9px] sm:text-[10px] font-medium text-white/70 rounded-full whitespace-nowrap shrink-0"
+                  title={project.tags.slice(2).join(", ")}
+                >
+                  +{project.tags.length - 2}
+                </span>
+              )}
             </div>
 
             {project.link && (

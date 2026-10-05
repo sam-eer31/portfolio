@@ -25,15 +25,6 @@ export const imageDropShadows = [
   "drop-shadow(0 0 20px rgba(16,185,129,0.4))",
 ];
 
-export const PROJECT_COLORS = [
-  "#2a835f", // Dark Green
-  "#ffffff", // White
-  "#CB2957", // Crimson
-  "#F8AF00", // Yellow
-  "#14b8a6", // Emerald
-  "#F59E0B", // Amber
-  "#EF4444", // Red
-  "#06b6d4", // Cyan
-];
+
 
 export const SECTION_SPACING = "py-8 md:py-12";

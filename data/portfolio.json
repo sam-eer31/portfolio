@@ -84,7 +84,8 @@
         "React",
         "TypeScript",
         "Tailwind CSS"
-      ]
+      ],
+      "color": "#2a835f"
     },
     {
       "title": "ShadowxAI",
@@ -97,7 +98,8 @@
         "TypeScript",
         "Tailwind CSS",
         "Zustand"
-      ]
+      ],
+      "color": "#ffffff"
     },
     {
       "title": "Crisper",
@@ -109,7 +111,8 @@
         "React",
         "TypeScript",
         "Express.js"
-      ]
+      ],
+      "color": "#CB2957"
     },
     {
       "title": "PlanetZero",
@@ -126,7 +129,8 @@
         "Solar System",
         "3D Animation",
         "Tailwind CSS"
-      ]
+      ],
+      "color": "#F8AF00"
     },
     {
       "title": "GrooveBox",
@@ -139,7 +143,8 @@
         "React",
         "PartyKit",
         "Zustand"
-      ]
+      ],
+      "color": "#14b8a6"
     },
     {
       "title": "Audrix",
@@ -153,7 +158,8 @@
         "TypeScript",
         "Tailwind CSS",
         "Zustand"
-      ]
+      ],
+      "color": "#ff1f5a"
     },
     {
       "title": "FeedBack Analyzer",
@@ -172,7 +178,8 @@
         "Gemini API",
         "Ollama",
         "Data Visualization"
-      ]
+      ],
+      "color": "#06b6d4"
     }
   ],
   "skills": [

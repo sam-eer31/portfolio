@@ -64,8 +64,7 @@ export function Hero() {
             </div>
 
             <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-serif font-bold tracking-normal leading-[1.05] text-center md:text-left">
-              {portfolioData.hero.greeting} <br />
-              <span className="text-[#ff5e3a]">{portfolioData.hero.name}</span>
+              {portfolioData.hero.greeting} <span className="text-[#ff5e3a]">{portfolioData.hero.name}</span>
             </h1>
 
             <p className="text-lg text-white/80 leading-relaxed max-w-xl pt-3 text-center md:text-justify">
