@@ -3,12 +3,13 @@ import portfolioData from "../../data/portfolio.json";
 import { InterestCard } from "../cards/InterestCard";
 import { DesktopConnections, TabletConnections } from "../graphics/PathConnections";
 import { colorGradients, neonColors, imageDropShadows } from "../../lib/constants";
+import { SECTION_SPACING } from "../../lib/constants";
 
 export function Interests() {
   const data = portfolioData.interests;
 
   return (
-    <section id="interests" className="py-8 md:py-12 relative overflow-hidden">
+    <section id="interests" className={`${SECTION_SPACING} relative overflow-hidden`}>
       <style dangerouslySetInnerHTML={{__html: `
         .interests-zoom { zoom: 0.45; }
         @media (min-width: 400px) { .interests-zoom { zoom: 0.6; } }
@@ -16,12 +17,12 @@ export function Interests() {
         @media (min-width: 640px) { .interests-zoom { zoom: 0.8; } }
         @media (min-width: 768px) { .interests-zoom { zoom: 0.8; } }
         @media (min-width: 900px) { .interests-zoom { zoom: 0.85; } }
-        @media (min-width: 1024px) { .interests-zoom { zoom: 0.9; } }
-        @media (min-width: 1280px) { .interests-zoom { zoom: 1; } }
+        @media (min-width: 1024px) { .interests-zoom { zoom: 0.75; } }
+        @media (min-width: 1280px) { .interests-zoom { zoom: 0.8; } }
       `}} />
       <Container className="relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-12 relative flex flex-col items-center">
+        <div className="text-center mb-6 md:mb-10 relative flex flex-col items-center">
           
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
@@ -35,7 +36,7 @@ export function Interests() {
 
           {/* Main Heading */}
           <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight text-white mb-6 relative z-10">
-            Things That Keep Me <span className="relative inline-block text-indigo-500 pb-2">
+            Things That Keep Me <span className="relative inline-block text-purple-500 pb-2">
               Inspired
             </span>
           </h2>

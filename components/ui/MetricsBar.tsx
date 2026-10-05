@@ -3,7 +3,7 @@ import portfolioData from '../../data/portfolio.json';
 
 export function MetricsBar() {
   return (
-    <div className="flex flex-row items-center justify-between md:justify-start gap-2 sm:gap-6 md:gap-12 pt-4 md:pt-6 w-full md:w-auto">
+    <div className="flex flex-row items-center justify-start gap-2 sm:gap-6 md:gap-12 pt-4 md:pt-6 w-full md:w-auto">
       <div className="flex flex-col gap-1 border-l-2 border-white/10 pl-2.5 md:pl-5">
         <div className="flex items-center gap-1.5 md:gap-2">
           <span className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">{portfolioData.hero.stats[0].value}</span>

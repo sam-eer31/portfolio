@@ -6,6 +6,7 @@ import portfolioData from "../../data/portfolio.json";
 
 import { SkillCard } from "../cards/SkillCard";
 import { CarouselNavigation } from "../ui/CarouselNavigation";
+import { SECTION_SPACING } from "../../lib/constants";
 
 const iconSlugs: Record<string, string> = {
   "Python": "python/python-original.svg",
@@ -166,10 +167,12 @@ export function Skills() {
   }, []);
 
   return (
-    <section id="skills" className="py-8 md:py-12 relative overflow-hidden">
+    <section id="skills" className={`${SECTION_SPACING} relative overflow-hidden`}>
       {/* Faded Dot Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_10%,var(--background)_60%)]" />
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden"
+        style={{ WebkitMaskImage: 'radial-gradient(ellipse 80% 45% at center, black 10%, transparent 100%)' }}
+      >
         <svg
           className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.25] z-0"
           xmlns="http://www.w3.org/2000/svg"
@@ -191,20 +194,26 @@ export function Skills() {
       `}</style>
       <Container className="relative z-10">
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
-          <div className="flex flex-col items-start text-left max-w-xl">
-            <p className="text-sm font-semibold tracking-wider text-muted-foreground uppercase mb-2">
-              Skills
-            </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-              Tools I use to<br />turn ideas into reality.
-            </h2>
+        <div className="text-center mb-6 md:mb-10 relative flex flex-col items-center">
+          {/* Top Badge */}
+          <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-emerald-400">
+              <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
+            </svg>
+            <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
+              SKILLS
+            </span>
           </div>
-          <div className="lg:max-w-md">
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-              I enjoy working across the modern frontend ecosystem, constantly learning and exploring new tools to create better experiences.
-            </p>
-          </div>
+
+          {/* Main Heading */}
+          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight text-white mb-6 relative z-10">
+            Tools I use to <span className="relative inline-block text-emerald-500 pb-2">turn ideas into reality.</span>
+          </h2>
+          
+          {/* Subheading */}
+          <p className="text-gray-400 text-sm md:text-base lg:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+            I enjoy working across the modern frontend ecosystem, constantly learning and exploring new tools to create better experiences.
+          </p>
         </div>
 
         {/* Slider Container */}

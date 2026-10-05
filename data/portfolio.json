@@ -35,16 +35,49 @@
       }
     ]
   },
-  "about": [
-    "I am a Frontend Developer focused on building modern, responsive, and interactive web interfaces with React, Next.js, TypeScript, and Tailwind CSS.",
-    "Experienced in creating polished UI experiences with animations, responsive layouts, rich components, and real-time interactions using AI-assisted development for faster implementation and iteration."
-  ],
+  "about": {
+    "description": [
+      "I am a Frontend Developer focused on building modern, responsive, and interactive web interfaces with React, Next.js, TypeScript, and Tailwind CSS.",
+      "Experienced in creating polished UI experiences with animations, responsive layouts, rich components, and real-time interactions using AI-assisted development for faster implementation and iteration."
+    ],
+    "image": "/about/about-card.png",
+    "tags": [
+      {
+        "sub": "Good",
+        "label": "Food",
+        "color": "text-[#F59E0B]",
+        "bg": "bg-[#F59E0B]/10",
+        "icon": "utensils"
+      },
+      {
+        "sub": "Clean",
+        "label": "Code",
+        "color": "text-[#3B82F6]",
+        "bg": "bg-[#3B82F6]/10",
+        "icon": "code"
+      },
+      {
+        "sub": "Curious",
+        "label": "Mindset",
+        "color": "text-[#EAB308]",
+        "bg": "bg-[#EAB308]/10",
+        "icon": "mindset"
+      },
+      {
+        "sub": "Open to",
+        "label": "Opportunities",
+        "color": "text-[#F97316]",
+        "bg": "bg-[#F97316]/10",
+        "icon": "opportunities"
+      }
+    ]
+  },
   "projects": [
     {
       "title": "TrackDaily",
       "description": "AI-powered nutrition and health journal that turns natural language and food photos into structured meal logs and personalized health insights.",
       "link": "",
-      "image": "",
+      "image": "/projects/trackdaily.png",
       "tags": []
     },
     {

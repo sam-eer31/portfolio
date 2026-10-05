@@ -54,6 +54,19 @@
     border-color: var(--border);
   }
 
+  p {
+    text-align: justify;
+  }
+  
+  .text-center p {
+    text-align: center;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
   body {
     color: var(--foreground);
     font-family: var(--font-sans);

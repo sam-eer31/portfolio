@@ -1,12 +1,13 @@
 import { Container } from "../layout/Container";
 import portfolioData from "../../data/portfolio.json";
 import { ContactForm } from "../ui/ContactForm";
+import { SECTION_SPACING } from "../../lib/constants";
 
 export function Contact() {
   const { email, github, linkedin, phone, location, whatsapp } = portfolioData.personalInfo;
 
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-32 relative overflow-hidden">
+    <section id="contact" className={`${SECTION_SPACING} relative overflow-hidden`}>
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] sm:h-[500px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-emerald-500/10 to-transparent opacity-50 z-0 pointer-events-none" />
       
@@ -26,35 +27,48 @@ export function Contact() {
       </div>
 
       <Container className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6">
-        {/* Top badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-8">
-          <span className="text-sm sm:text-lg">🎓</span>
-          <span className="text-[10px] sm:text-xs font-medium tracking-[0.2em] text-gray-400 uppercase">
-            Recent Graduate
-          </span>
-        </div>
+        {/* Header Section */}
+        <div className="text-center mb-8 md:mb-12 relative flex flex-col items-center">
+          {/* Top Badge */}
+          <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-emerald-400">
+              <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
+            </svg>
+            <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
+              RECENT GRADUATE
+            </span>
+          </div>
 
-        <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-center mb-12 sm:mb-20 leading-[1.1] sm:leading-[1.1]">
-          Let&apos;s connect and <br />
-          <span className="text-emerald-400 drop-shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-            grow together.
-          </span>
-        </h2>
+          {/* Main Heading */}
+          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-tight text-white relative z-10">
+            Let&apos;s connect and<br />
+            <span className="relative inline-block text-emerald-500 pb-2">grow together.</span>
+          </h2>
+        </div>
         
         {/* Contact Layout */}
-        <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+        <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-16 lg:gap-y-12 items-start">
           
-          {/* Left Column: Info & Socials */}
-          <div className="flex flex-col z-10 w-full space-y-12">
-            
-            {/* Intro Text */}
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-4 tracking-wide">Reach Out</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                I&apos;m actively seeking my first full-time role as a frontend developer. Whether you&apos;re hiring, want to collaborate on a project, or just want to chat about tech, I&apos;d love to hear from you!
-              </p>
-            </div>
+          {/* Intro Text (Order 1 on mobile, Col 1 Row 1 on desktop) */}
+          <div className="flex flex-col z-10 w-full order-1 lg:col-start-1 lg:row-start-1">
+            <p className="text-gray-400 text-lg leading-relaxed">
+              I&apos;m actively seeking my first full-time role as a frontend developer. Whether you&apos;re hiring, want to collaborate on a project, or just want to chat about tech, I&apos;d love to hear from you!
+            </p>
+          </div>
 
+          {/* Form (Order 2 on mobile, Col 2 Row 1-span-2 on desktop) */}
+          <div className="relative group w-full order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2">
+            <div className="absolute -inset-[1px] rounded-[2rem] bg-emerald-500/20 opacity-0 group-hover:opacity-50 transition-opacity duration-700 blur-sm hidden lg:block" />
+            
+            <div className="relative w-full rounded-[2rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 lg:border-white/10 p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-32 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-emerald-500/15 to-transparent opacity-50 pointer-events-none" />
+              <ContactForm />
+            </div>
+          </div>
+
+          {/* Contact Details & Socials (Order 3 on mobile, Col 1 Row 2 on desktop) */}
+          <div className="flex flex-col z-10 w-full space-y-12 order-3 lg:col-start-1 lg:row-start-2">
+            
             {/* Contact Details */}
             <div className="space-y-6">
               {/* Email */}
@@ -154,19 +168,6 @@ export function Contact() {
               </div>
             </div>
 
-          </div>
-
-          {/* Right Column: Form */}
-          <div className="relative group w-full">
-            {/* Animated border glow */}
-            <div className="absolute -inset-[1px] rounded-[2rem] bg-emerald-500/20 opacity-0 group-hover:opacity-50 transition-opacity duration-700 blur-sm hidden lg:block" />
-            
-            <div className="relative w-full rounded-[2rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 lg:border-white/10 p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
-              {/* Ambient inner glow */}
-              <div className="absolute top-0 left-0 w-full h-32 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-emerald-500/15 to-transparent opacity-50 pointer-events-none" />
-              
-              <ContactForm />
-            </div>
           </div>
 
         </div>

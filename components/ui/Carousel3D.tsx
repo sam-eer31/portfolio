@@ -8,16 +8,7 @@ interface Carousel3DProps {
   projects: Project[];
 }
 
-const PROJECT_COLORS = [
-  "#06B6D4", // Cyan
-  "#F472B6", // Pink
-  "#3B82F6", // Blue
-  "#10B981", // Emerald
-  "#8B5CF6", // Violet
-  "#F59E0B", // Amber
-  "#EF4444", // Red
-  "#6366F1", // Indigo
-];
+import { PROJECT_COLORS } from "../../lib/constants";
 
 export function Carousel3D({ projects }: Carousel3DProps) {
   const N = projects.length;
@@ -176,7 +167,7 @@ export function Carousel3D({ projects }: Carousel3DProps) {
     <div className="relative w-full flex flex-col items-center">
       <div
         ref={containerRef}
-        className="relative w-full h-[450px] md:h-[500px] flex items-center justify-center touch-pan-y"
+        className="relative w-full h-[380px] md:h-[420px] flex items-center justify-center touch-pan-y"
         style={{ perspective: "1500px", overflow: "hidden" }}
       >
         <div 

@@ -1,108 +1,77 @@
 import { Container } from "../layout/Container";
 import portfolioData from "../../data/portfolio.json";
-import { Badge, badgeData } from "../ui/Badge";
+import { Badge } from "../ui/Badge";
 import Image from "next/image";
+import { SECTION_SPACING } from "../../lib/constants";
 
 export function About() {
   return (
-    <section id="about" className="py-8 md:py-12 relative overflow-hidden">
+    <section id="about" className={`${SECTION_SPACING} relative overflow-hidden`}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
         .font-handwriting { font-family: 'Caveat', cursive; }
       `}</style>
-      
+
       <Container>
-        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center min-h-[600px]">
-          
-          {/* Left Column: Text and Badges */}
-          <div className="block pr-0 lg:pr-8 relative z-20 w-full">
-            
-            {/* Tablet Image Float (Passport style) - Only visible between sm and lg */}
-            <div className="hidden sm:block lg:hidden float-right w-[260px] md:w-[320px] ml-8 mb-6 mt-4 relative z-30 transition-transform duration-700 hover:scale-[1.02]">
-              <Image 
-                src="/about/about-card.png" 
-                alt="About" 
-                width={320}
-                height={400}
-                className="w-full h-auto object-contain shadow-2xl rounded-xl"
-              />
-            </div>
-
-            <div className="flex flex-col items-start text-left mb-8">
-              <p className="text-sm font-semibold tracking-wider text-muted-foreground uppercase mb-2">
-                About
-              </p>
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                A developer<br />
-                who turns ideas<br />
-                into <span className="text-[#FF5E3A]">real experiences.</span>
-              </h2>
-            </div>
-            
-            {/* Mobile Image - Visible only below sm screens */}
-            <div className="block sm:hidden w-full max-w-[260px] mx-auto my-10 relative z-30 transition-transform duration-700 hover:scale-[1.02]">
-              <Image 
-                src="/about/about-card.png" 
-                alt="About" 
-                width={260}
-                height={320}
-                className="w-full h-auto object-contain shadow-2xl rounded-xl"
-              />
-            </div>
-
-            <div className="text-lg text-muted-foreground leading-relaxed space-y-6">
-              {portfolioData.about.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-
-            {/* Badges - Desktop/Tablet (Flex Wrap) */}
-            <div className="hidden sm:flex flex-wrap gap-4 mt-10 clear-both">
-              {badgeData.map((badge, index) => (
-                <Badge key={index} badge={badge} />
-              ))}
-            </div>
-
-            {/* Badges - Mobile (Marquee) */}
-            <div 
-              className="sm:hidden mt-10 clear-both relative w-full overflow-hidden flex whitespace-nowrap -mx-4 px-4"
-              style={{ WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)' }}
-            >
-              <style>{`
-                .animate-marquee {
-                  animation: marquee 15s linear infinite;
-                  will-change: transform;
-                  transform: translateZ(0);
-                }
-                @keyframes marquee {
-                  0% { transform: translateX(0%); }
-                  100% { transform: translateX(-100%); }
-                }
-              `}</style>
-              
-              <div className="flex w-max animate-marquee shrink-0 gap-4 pr-4">
-                {badgeData.map((badge, index) => (
-                  <Badge key={index} badge={badge} className="shrink-0" />
-                ))}
-              </div>
-              <div className="flex w-max animate-marquee shrink-0 gap-4 pr-4" aria-hidden="true">
-                {badgeData.map((badge, index) => (
-                  <Badge key={`dup-${index}`} badge={badge} className="shrink-0" />
-                ))}
-              </div>
-            </div>
+        {/* Header Section */}
+        <div className="text-center mb-6 md:mb-10 relative flex flex-col items-center">
+          {/* Top Badge */}
+          <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#FF5E3A]">
+              <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
+            </svg>
+            <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
+              ABOUT
+            </span>
           </div>
 
-          {/* Right Column (Desktop only) */}
-          <div className="hidden lg:flex relative w-full max-w-[600px] xl:max-w-[700px] mx-auto pointer-events-auto items-center justify-center transition-transform duration-700 hover:scale-[1.02]">
-            <Image 
-              src="/about/about-card.png" 
-              alt="About" 
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-white">
+            A developer who turns ideas<br />
+            into <span className="relative inline-block text-[#FF5E3A] pb-2">real experiences.</span>
+          </h2>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="relative w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center mb-16">
+
+          {/* Text Description */}
+          <div className="order-2 lg:order-1 text-lg text-muted-foreground leading-relaxed space-y-6">
+            {portfolioData.about.description.map((paragraph: string, index: number) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+
+          {/* Image */}
+          <div className="order-1 lg:order-2 relative w-full max-w-[320px] md:max-w-[400px] lg:max-w-[500px] mx-auto pointer-events-auto flex items-center justify-center transition-transform duration-700 hover:scale-[1.02]">
+            <Image
+              src={portfolioData.about.image}
+              alt="About"
               width={700}
               height={850}
               priority={false}
-              className="w-full h-auto object-contain shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] rounded-3xl"
+              className="w-full h-auto object-contain rounded-3xl"
             />
+          </div>
+        </div>
+
+        {/* Tags Row */}
+        <div className="relative w-[100vw] -ml-[50vw] left-1/2 md:w-full md:ml-0 md:left-auto overflow-hidden md:overflow-visible">
+          {/* Fading edges for marquee on mobile */}
+          <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#040506] to-transparent z-10 md:hidden pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#040506] to-transparent z-10 md:hidden pointer-events-none" />
+          
+          <div className="flex w-max md:w-full md:flex-wrap md:justify-center animate-[marquee_15s_linear_infinite] md:animate-none hover:[animation-play-state:paused]">
+            <div className="flex gap-4 pr-4 md:pr-0 md:gap-4">
+              {portfolioData.about.tags.map((badge: any, index: number) => (
+                <Badge key={index} badge={badge} />
+              ))}
+            </div>
+            {/* Second Set (Duplicate for seamless scroll, hidden on md) */}
+            <div className="flex gap-4 pr-4 md:hidden" aria-hidden="true">
+              {portfolioData.about.tags.map((badge: any, index: number) => (
+                <Badge key={`dup-${index}`} badge={badge} />
+              ))}
+            </div>
           </div>
         </div>
       </Container>
