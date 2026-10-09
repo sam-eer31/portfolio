@@ -9,7 +9,7 @@ export function Interests() {
   const data = portfolioData.interests;
 
   return (
-    <section id="interests" className={`${SECTION_SPACING} relative overflow-hidden`}>
+    <section id="interests" className={`${SECTION_SPACING} relative overflow-hidden`} aria-labelledby="interests-heading">
       <style dangerouslySetInnerHTML={{__html: `
         .interests-zoom { zoom: 0.45; }
         @media (min-width: 400px) { .interests-zoom { zoom: 0.6; } }
@@ -26,7 +26,7 @@ export function Interests() {
           
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-400">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-purple-400" aria-hidden="true">
               <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
             </svg>
             <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
@@ -35,7 +35,7 @@ export function Interests() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white mb-6 relative z-10">
+          <h2 id="interests-heading" className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white mb-6 relative z-10">
             Things That Keep Me <span className="relative inline-block text-purple-500 pb-2">
               Inspired
             </span>

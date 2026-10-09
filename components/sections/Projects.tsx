@@ -7,7 +7,7 @@ export function Projects() {
   const projects = portfolioData.projects;
 
   return (
-    <section id="projects" className={`${SECTION_SPACING} relative overflow-hidden`}>
+    <section id="projects" className={`${SECTION_SPACING} relative overflow-hidden`} aria-labelledby="projects-heading">
       {/* Faded Grid Background */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden"
@@ -16,6 +16,7 @@ export function Projects() {
         <svg
           className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.15] z-0"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           <defs>
             <pattern id="project-grid" width="48" height="48" patternUnits="userSpaceOnUse">
@@ -31,7 +32,7 @@ export function Projects() {
         <div className="text-center mb-6 md:mb-10 relative flex flex-col items-center">
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-rose-400">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-rose-400" aria-hidden="true">
               <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
             </svg>
             <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
@@ -40,9 +41,28 @@ export function Projects() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white relative z-10">
+          <h2 id="projects-heading" className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white relative z-10">
             Projects I&apos;m <span className="relative inline-block text-rose-500 pb-2">proud of.</span>
           </h2>
+        </div>
+
+        {/* Semantic list of all projects for search engines and assistive technology */}
+        <div className="sr-only">
+          <h3>Featured Projects by Sameer Shahid Siddiqui</h3>
+          <ul>
+            {projects.map((project) => (
+              <li key={project.title}>
+                <h4>{project.title}</h4>
+                <p>{project.description}</p>
+                {project.tags && <p>Technologies: {project.tags.join(", ")}</p>}
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    View {project.title} live project
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <Carousel3D projects={projects} />

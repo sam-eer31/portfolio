@@ -10,11 +10,14 @@ export function HamburgerToggle({ isOpen, toggle }: HamburgerToggleProps) {
     <button
       onClick={toggle}
       className="p-2 -mr-2 w-12 h-12 flex flex-col justify-center items-center focus:outline-none group"
-      aria-label="Toggle Menu"
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+      aria-controls="mobile-nav-menu"
     >
       <svg 
         viewBox="0 0 32 32" 
         className={`h-full w-full transition-transform duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${isOpen ? '-rotate-45' : ''}`}
+        aria-hidden="true"
       >
         <path 
           className="transition-all duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] stroke-white group-hover:stroke-[#FF5E3A]"

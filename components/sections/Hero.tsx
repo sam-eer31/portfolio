@@ -1,6 +1,5 @@
 import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
-import Link from "next/link";
 import { getImageProps } from "next/image";
 import heroBgDesktop from "../../public/backgrounds/hero-bg.webp";
 import heroBgMobile from "../../public/backgrounds/hero-p-bg.webp";
@@ -12,20 +11,15 @@ import { SECTION_SPACING } from "../../lib/constants";
 export function Hero() {
   return (
     <section className={`relative flex items-center overflow-hidden ${SECTION_SPACING}`}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
-        .font-handwriting { font-family: 'Caveat', cursive; }
-      `}</style>
-
       {/* Static Background Image masked to flawlessly blend into the site background */}
       <div 
         className="absolute inset-0 z-0"
         style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)' }}
       >
         {(() => {
-          const common = { alt: "Hero Background", fill: true, priority: true, sizes: "100vw" };
+          const common = { alt: "Hero Background - Sameer Shahid Siddiqui Portfolio", fill: true, priority: true, sizes: "100vw" };
           const { props: { srcSet: desktop, ...rest } } = getImageProps({ ...common, src: heroBgDesktop });
-          const { props: { srcSet: mobile, ...mobileRest } } = getImageProps({ ...common, src: heroBgMobile });
+          const { props: { srcSet: mobile } } = getImageProps({ ...common, src: heroBgMobile });
 
           return (
             <picture className="absolute inset-0 w-full h-full">
@@ -35,7 +29,9 @@ export function Hero() {
               <img
                 {...rest}
                 className="object-cover object-center w-full h-full"
-                alt="Hero Background"
+                alt="Hero Background - Sameer Shahid Siddiqui Portfolio"
+                fetchPriority="high"
+                decoding="async"
               />
             </picture>
           );
@@ -60,11 +56,12 @@ export function Hero() {
               <p className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] text-white/60 uppercase">
                 {portfolioData.hero.role}
               </p>
-              <div className="w-1.5 h-1.5 rounded-full bg-[#F97316] shadow-[0_0_8px_#F97316]"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#F97316] shadow-[0_0_8px_#F97316]" aria-hidden="true" />
             </div>
 
             <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-serif font-bold tracking-normal leading-[1.05] text-center md:text-left">
               {portfolioData.hero.greeting} <span className="text-[#ff5e3a]">{portfolioData.hero.name}</span>
+              <span className="sr-only"> Shahid Siddiqui - Frontend Developer</span>
             </h1>
 
             <p className="text-lg text-white/80 leading-relaxed max-w-xl pt-3 text-center md:text-justify">
@@ -74,13 +71,13 @@ export function Hero() {
 
           {/* Buttons */}
           <div className="flex justify-center md:justify-start gap-3 md:gap-4 pt-4">
-            <a href={portfolioData.hero.buttons.primary.link}>
+            <a href={portfolioData.hero.buttons.primary.link} aria-label="View Projects">
               <Button className="h-[42px] md:h-[48px] rounded-[57px] px-5 md:px-8 text-xs md:text-sm font-semibold text-black bg-white hover:bg-slate-100 transition-all whitespace-nowrap">
                 {portfolioData.hero.buttons.primary.text}
-                <svg className="ml-1.5 md:ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17l9.2-9.2M17 17V7H7" /></svg>
+                <svg className="ml-1.5 md:ml-2 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17l9.2-9.2M17 17V7H7" /></svg>
               </Button>
             </a>
-            <a href={portfolioData.hero.buttons.secondary.link}>
+            <a href={portfolioData.hero.buttons.secondary.link} aria-label="Learn more About Me">
               <Button variant="outline" className="h-[42px] md:h-[48px] rounded-full px-5 md:px-8 text-xs md:text-sm font-semibold border-white/20 text-white hover:bg-white/5 transition-all bg-transparent whitespace-nowrap">
                 {portfolioData.hero.buttons.secondary.text}
               </Button>

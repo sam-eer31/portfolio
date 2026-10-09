@@ -7,7 +7,7 @@ export function Contact() {
   const { email, github, linkedin, phone, location, whatsapp } = portfolioData.personalInfo;
 
   return (
-    <section id="contact" className={`${SECTION_SPACING} relative overflow-hidden`}>
+    <section id="contact" className={`${SECTION_SPACING} relative overflow-hidden`} aria-labelledby="contact-heading">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] sm:h-[500px] bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-[#3b82f6]/15 to-transparent opacity-50 z-0 pointer-events-none" />
       
@@ -16,7 +16,7 @@ export function Contact() {
         className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-[0.05]"
         style={{ WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 70%)' }}
       >
-        <svg className="absolute w-[200%] h-[200%] sm:w-[150%] sm:h-[150%] text-white" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute w-[200%] h-[200%] sm:w-[150%] sm:h-[150%] text-white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <pattern id="contact-grid" width="40" height="40" patternUnits="userSpaceOnUse">
               <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
@@ -31,7 +31,7 @@ export function Contact() {
         <div className="text-center mb-8 md:mb-12 relative flex flex-col items-center">
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#3b82f6]">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#3b82f6]" aria-hidden="true">
               <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
             </svg>
             <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
@@ -40,7 +40,7 @@ export function Contact() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white relative z-10">
+          <h2 id="contact-heading" className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white relative z-10">
             Let&apos;s connect and<br />
             <span className="relative inline-block text-[#3b82f6] pb-2">grow together.</span>
           </h2>
@@ -72,9 +72,13 @@ export function Contact() {
             {/* Contact Details */}
             <div className="space-y-6">
               {/* Email */}
-              <a href={`mailto:${email}`} className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
+              <a
+                href={`mailto:${email}`}
+                aria-label={`Send email to ${email}`}
+                className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group"
+              >
                 <div className="shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#3b82f6]/20 group-hover:border-[#3b82f6]/50 group-hover:text-[#3b82f6] transition-all duration-300">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -86,9 +90,13 @@ export function Contact() {
 
               {/* Phone */}
               {phone && (
-                <div className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
+                <a
+                  href={`tel:${phone.replace(/\s+/g, '')}`}
+                  aria-label={`Call ${phone}`}
+                  className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group"
+                >
                   <div className="shrink-0 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#3b82f6]/20 group-hover:border-[#3b82f6]/50 group-hover:text-[#3b82f6] transition-all duration-300">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
@@ -96,7 +104,7 @@ export function Contact() {
                     <p className="text-sm text-gray-500">Phone</p>
                     <p className="font-medium break-words">{phone}</p>
                   </div>
-                </div>
+                </a>
               )}
 
               {/* Location */}

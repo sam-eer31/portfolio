@@ -28,3 +28,7 @@ export const imageDropShadows = [
 
 
 export const SECTION_SPACING = "py-8 md:py-12";
+
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.itssameer.me";
+

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Container } from "../layout/Container";
 import portfolioData from "../../data/portfolio.json";
 
@@ -30,7 +30,6 @@ const iconSlugs: Record<string, string> = {
   "Ollama": "https://ollama.com/public/ollama-nav.png"
 };
 
-
 export function Skills() {
   const skills = portfolioData.skills;
   const [activeIndex, setActiveIndex] = useState(Math.floor(skills.length / 2));
@@ -39,6 +38,7 @@ export function Skills() {
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -54,7 +54,18 @@ export function Skills() {
     };
   }, []);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const handleNav = useCallback((direction: "left" | "right") => {
+    if (direction === "left") {
+      setActiveIndex((prev) => Math.max(0, prev - 1));
+    } else {
+      setActiveIndex((prev) => Math.min(skills.length - 1, prev + 1));
+    }
+  }, [skills.length]);
+
+  const handleNavRef = useRef(handleNav);
+  useEffect(() => {
+    handleNavRef.current = handleNav;
+  }, [handleNav]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -68,45 +79,6 @@ export function Skills() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [skills.length]);
 
-  const handleNav = (direction: "left" | "right") => {
-    if (direction === "left") {
-      setActiveIndex((prev) => Math.max(0, prev - 1));
-    } else {
-      setActiveIndex((prev) => Math.min(skills.length - 1, prev + 1));
-    }
-  };
-
-  const handleWheel = (e: React.WheelEvent) => {
-    if (wheelTimeout.current) return;
-
-    // Slight threshold to prevent accidental triggers
-    if (e.deltaY > 20 || e.deltaX > 20) {
-      handleNav("right");
-      wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
-    } else if (e.deltaY < -20 || e.deltaX < -20) {
-      handleNav("left");
-      wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
-    }
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const distance = touchStartX.current - touchEndX.current;
-    if (distance > 50) {
-      handleNav("right");
-    } else if (distance < -50) {
-      handleNav("left");
-    }
-  };
-
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -114,10 +86,10 @@ export function Skills() {
     const onWheel = (e: WheelEvent) => {
       if (wheelTimeout.current) return;
       if (e.deltaY > 20 || e.deltaX > 20) {
-        handleNav("right");
+        handleNavRef.current("right");
         wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
       } else if (e.deltaY < -20 || e.deltaX < -20) {
-        handleNav("left");
+        handleNavRef.current("left");
         wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
       }
     };
@@ -134,9 +106,9 @@ export function Skills() {
     const onTouchEnd = () => {
       const distance = touchStartX.current - touchEndX.current;
       if (distance > 50) {
-        handleNav("right");
+        handleNavRef.current("right");
       } else if (distance < -50) {
-        handleNav("left");
+        handleNavRef.current("left");
       }
     };
 
@@ -169,7 +141,7 @@ export function Skills() {
   }, []);
 
   return (
-    <section id="skills" className={`${SECTION_SPACING} relative overflow-hidden`}>
+    <section id="skills" className={`${SECTION_SPACING} relative overflow-hidden`} aria-labelledby="skills-heading">
       {/* Faded Dot Background */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden"
@@ -178,6 +150,7 @@ export function Skills() {
         <svg
           className="absolute w-[150%] h-[150%] max-w-none text-accent opacity-[0.25] z-0"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
           <defs>
             <pattern id="skill-dot" width="32" height="32" patternUnits="userSpaceOnUse">
@@ -188,18 +161,12 @@ export function Skills() {
         </svg>
       </div>
       
-      <style>{`
-        @keyframes drift {
-           from { transform: translate3d(-1%, -1%, 0) scale(1); }
-           to { transform: translate3d(1%, 1%, 0) scale(1.015); }
-        }
-      `}</style>
       <Container className="relative z-10">
         {/* Header Section */}
         <div className="text-center mb-6 md:mb-10 relative flex flex-col items-center">
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-white/5 bg-white/[0.02] mb-6">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-emerald-400">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-emerald-400" aria-hidden="true">
               <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor" />
             </svg>
             <span className="text-xs font-medium tracking-[0.3em] text-gray-400 uppercase">
@@ -208,7 +175,7 @@ export function Skills() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white mb-6 relative z-10">
+          <h2 id="skills-heading" className="text-4xl md:text-5xl lg:text-[56px] font-bold tracking-normal text-white mb-6 relative z-10">
             Tools I use to <span className="relative inline-block text-emerald-500 pb-2">turn ideas into reality.</span>
           </h2>
           
@@ -216,6 +183,18 @@ export function Skills() {
           <p className="text-gray-400 text-sm md:text-base lg:text-lg max-w-2xl mx-auto font-light leading-relaxed">
             I enjoy working across the modern frontend ecosystem, constantly learning and exploring new tools to create better experiences.
           </p>
+        </div>
+
+        {/* Semantic list of all skills for SEO and accessibility */}
+        <div className="sr-only">
+          <h3>Technical Skills &amp; Technologies</h3>
+          <ul>
+            {skills.map((skill) => (
+              <li key={skill.name}>
+                <strong>{skill.name}</strong>: {skill.description} ({skill.projects} projects)
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Slider Container */}
@@ -226,7 +205,6 @@ export function Skills() {
           >
             {skills.map((skill, index) => {
               const slug = iconSlugs[skill.name];
-              // Fallback to git or some other icon if slug is missing, but here we just return null
               if (!slug) return null;
 
               const distance = index - activeIndex;
@@ -281,4 +259,3 @@ export function Skills() {
     </section>
   );
 }
-

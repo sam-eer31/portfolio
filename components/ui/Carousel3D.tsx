@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { ProjectCard, Project } from "../cards/ProjectCard";
 import { CarouselNavigation } from "./CarouselNavigation";
 
@@ -16,6 +16,7 @@ export function Carousel3D({ projects }: Carousel3DProps) {
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -31,7 +32,18 @@ export function Carousel3D({ projects }: Carousel3DProps) {
     };
   }, []);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const handleNav = useCallback((direction: "left" | "right") => {
+    if (direction === "left") {
+      setRotationIndex((prev) => prev - 1);
+    } else {
+      setRotationIndex((prev) => prev + 1);
+    }
+  }, []);
+
+  const handleNavRef = useRef(handleNav);
+  useEffect(() => {
+    handleNavRef.current = handleNav;
+  }, [handleNav]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,43 +57,6 @@ export function Carousel3D({ projects }: Carousel3DProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleNav = (direction: "left" | "right") => {
-    if (direction === "left") {
-      setRotationIndex((prev) => prev - 1);
-    } else {
-      setRotationIndex((prev) => prev + 1);
-    }
-  };
-
-  const handleWheel = (e: React.WheelEvent) => {
-    if (wheelTimeout.current) return;
-    if (e.deltaY > 20 || e.deltaX > 20) {
-      handleNav("right");
-      wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
-    } else if (e.deltaY < -20 || e.deltaX < -20) {
-      handleNav("left");
-      wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
-    }
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const distance = touchStartX.current - touchEndX.current;
-    if (distance > 50) {
-      handleNav("right");
-    } else if (distance < -50) {
-      handleNav("left");
-    }
-  };
-
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -89,10 +64,10 @@ export function Carousel3D({ projects }: Carousel3DProps) {
     const onWheel = (e: WheelEvent) => {
       if (wheelTimeout.current) return;
       if (e.deltaY > 20 || e.deltaX > 20) {
-        handleNav("right");
+        handleNavRef.current("right");
         wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
       } else if (e.deltaY < -20 || e.deltaX < -20) {
-        handleNav("left");
+        handleNavRef.current("left");
         wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null; }, 300);
       }
     };
@@ -109,9 +84,9 @@ export function Carousel3D({ projects }: Carousel3DProps) {
     const onTouchEnd = () => {
       const distance = touchStartX.current - touchEndX.current;
       if (distance > 50) {
-        handleNav("right");
+        handleNavRef.current("right");
       } else if (distance < -50) {
-        handleNav("left");
+        handleNavRef.current("left");
       }
     };
 
@@ -224,7 +199,6 @@ export function Carousel3D({ projects }: Carousel3DProps) {
           })}
         </div>
       </div>
-
 
       <CarouselNavigation 
         onPrev={() => handleNav("left")}

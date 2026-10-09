@@ -22,6 +22,8 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
     ? "invert"
     : "";
 
+  const isRemoteOrSvg = slug.startsWith("http") || slug.endsWith(".svg");
+
   return (
     <div
       className={`w-full h-full select-none group transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? 'cursor-default' : 'cursor-pointer'}`}
@@ -42,20 +44,23 @@ export function SkillCard({ skill, slug, isActive, style, onClick }: SkillCardPr
             {/* Icon */}
             <div className="w-14 h-14 md:w-16 md:h-16 mb-4 md:mb-5 flex items-center justify-center drop-shadow-2xl transition-transform duration-300 group-hover:scale-110 bg-[#13151A]/80 rounded-2xl p-2 md:p-3 border border-white/5 relative">
               {slug.startsWith("http") || slug.startsWith("/") ? (
-                <img
+                <Image
                   src={slug}
-                  alt={skill.name}
-                  className={`absolute inset-0 w-full h-full p-2 object-contain ${invertClass}`}
+                  alt={`${skill.name} icon`}
+                  fill
+                  unoptimized={isRemoteOrSvg}
+                  className={`p-2 object-contain ${invertClass}`}
                   draggable={false}
+                  sizes="64px"
                 />
               ) : (
                 <Image
                   src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}`}
-                  alt={skill.name}
+                  alt={`${skill.name} icon`}
                   fill
                   className={`p-2 object-contain ${invertClass}`}
                   draggable={false}
-                  sizes="80px"
+                  sizes="64px"
                 />
               )}
             </div>
