@@ -33,7 +33,8 @@ const caveat = Caveat({
 
 const siteTitle = "Sameer Shahid Siddiqui | Frontend Developer Portfolio";
 const siteDescription =
-  "Official portfolio of Sameer Shahid Siddiqui — Frontend Developer specializing in React, Next.js, TypeScript, and AI-assisted development. Explore projects, interactive UI work, and technical skills.";
+  "Official portfolio of Sameer Shahid Siddiqui — Frontend Developer specializing in React, Next.js, and TypeScript. Explore projects and interactive UI work.";
+
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
