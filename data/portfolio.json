@@ -11,10 +11,10 @@
     "website": "https://www.itssameer.me"
   },
   "hero": {
-    "role": "FRONTEND DEVELOPER",
+    "role": "Problem-Solving",
     "greeting": "Hi, I'm",
     "name": "Sameer",
-    "description": "Frontend Developer focused on building modern, responsive, and interactive web interfaces. Experienced in creating polished UI experiences with animations, responsive layouts, and real-time interactions.",
+    "description": "Exploring data, uncovering insights, and connecting technology with business decisions to solve real-world problems.",
     "buttons": {
       "primary": {
         "text": "View My Work",
@@ -31,15 +31,15 @@
         "label": "CGPA"
       },
       {
-        "value": "2+",
+        "value": "10+",
         "label": "Major Projects"
       }
     ]
   },
   "about": {
     "description": [
-      "I am a Frontend Developer focused on building modern, responsive, and interactive web interfaces with React, Next.js, TypeScript, and Tailwind CSS.",
-      "Experienced in creating polished UI experiences with animations, responsive layouts, rich components, and real-time interactions using AI-assisted development for faster implementation and iteration."
+      "I am a Computer Science undergraduate specializing in Artificial Intelligence and Data Science, with experience in software development, Python programming, web technologies, and AI-assisted development.",
+      "Skilled in building interactive applications, developing data-driven solutions, and working with databases and modern development tools. Passionate about solving real-world problems through technology and continuously expanding my technical skills."
     ],
     "image": "/about/about-card.webp",
     "tags": [

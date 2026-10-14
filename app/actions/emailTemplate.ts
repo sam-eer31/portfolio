@@ -41,9 +41,9 @@ export function getContactEmailHtml(name: string, email: string, message: string
           <!-- INTRO -->
           <tr>
             <td align="left" style="padding:42px 4px 30px 4px;">
-              <div style="display:inline-block; margin-bottom:15px; padding:6px 10px; border:1px solid #292d31; border-radius:999px; background:#0c0e10; color:#8d969f; font-size:9px; line-height:1; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;">New Message</div>
-              <h1 style="margin:0 0 12px 0; color:#f7f8f9; font-size:29px; line-height:1.18; font-weight:700; letter-spacing:-0.9px;">You have a new<br>contact request.</h1>
-              <p style="margin:0; max-width:470px; color:#747d87; font-size:14px; line-height:1.7;">Someone reached out through your portfolio. Here’s everything they sent you.</p>
+              <div style="display:inline-block; margin-bottom:15px; padding:6px 10px; border:1px solid #292d31; border-radius:999px; background:#0c0e10; color:#8d969f; font-size:9px; line-height:1; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;">New Inquiry</div>
+              <h1 style="margin:0 0 12px 0; color:#f7f8f9; font-size:28px; line-height:1.2; font-weight:700; letter-spacing:-0.8px;">New Contact Message</h1>
+              <p style="margin:0; max-width:470px; color:#747d87; font-size:14px; line-height:1.7;">Received via itssameer.me contact form.</p>
             </td>
           </tr>
 

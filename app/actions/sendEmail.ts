@@ -42,10 +42,10 @@ export async function sendEmail(formData: FormData) {
   try {
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact Form <onboarding@resend.dev>',
+      from: 'Portfolio <contact@itssameer.me>',
       to: ['sameershahidsiddiqui365@gmail.com'],
       replyTo: email,
-      subject: `✨ New Inquiry from ${name} | Portfolio Contact`,
+      subject: `Portfolio Inquiry: ${name}`,
       html: getContactEmailHtml(name, email, message),
     });
 
